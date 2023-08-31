@@ -9,6 +9,15 @@ module.exports = {
     '@vue/eslint-config-typescript',
     '@vue/eslint-config-prettier/skip-formatting'
   ],
+  rules: {
+    "vue/no-unused-components": "error",
+    "vue/no-undef-components": ["error", {
+      "ignorePatterns": ['custom(\\-\\w+)+']
+    }],
+    "vue/multi-word-component-names": ["error", {
+      "ignores": ['Header']
+    }]
+  },
   parserOptions: {
     ecmaVersion: 'latest'
   }

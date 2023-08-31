@@ -13,18 +13,18 @@ const router = createRouter({
       children: [
         {
           path: '',
-          component: MainPageVue,
-          name: 'home'
-        },
-        {
-          path: 'sign-up',
-          component: SignUpPageVue,
-          name: 'sign-up'
+          name: 'home',
+          component: MainPageVue
         },
         {
           path: 'sign-in',
-          component: SignInPageVue,
-          name: 'sign-in'
+          name: 'sign-in',
+          component: SignInPageVue
+        },
+        {
+          path: 'sign-up',
+          name: 'sign-up',
+          component: SignUpPageVue
         }
       ]
     }

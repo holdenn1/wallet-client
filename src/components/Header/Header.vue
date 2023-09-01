@@ -5,7 +5,7 @@
 <script setup lang="ts"></script>
 
 <style lang="scss" scoped>
-.header{
+.header {
   position: absolute;
   top: 0;
   left: 0;

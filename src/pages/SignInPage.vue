@@ -8,7 +8,7 @@
 </template>
 
 <script setup lang="ts">
-import MainButton from '@/components/UI/buttons/MainButton.vue'
+import MainButton from 'ui/buttons/MainButton.vue'
 import { RouterLink } from 'vue-router'
 </script>
 

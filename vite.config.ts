@@ -1,6 +1,6 @@
 import vue from '@vitejs/plugin-vue'
 import { defineConfig } from 'vite'
-import eslintPlugin from "@nabla/vite-plugin-eslint";
+import eslintPlugin from '@nabla/vite-plugin-eslint'
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -8,6 +8,13 @@ export default defineConfig({
   resolve: {
     alias: {
       '@': '/src',
+      components: '/src/components',
+      navigation: '/src/components/navigation',
+      forms: '/src/components/forms',
+      ui: '/src/components/UI',
+      icons: '/src/assets/icons',
+      slices: '/src/store/slices',
+      actions: '/src/store/actions'
     }
   }
 })

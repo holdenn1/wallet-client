@@ -8,7 +8,7 @@
 </template>
 
 <script setup lang="ts">
-import MainPageNavigation from '@/components/navigation/MainPageNavigation.vue'
+import MainPageNavigation from 'navigation/MainPageNavigation.vue'
 </script>
 
 <style lang="scss" scoped>

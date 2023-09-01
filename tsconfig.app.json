@@ -10,7 +10,14 @@
     "composite": true,
     "baseUrl": ".",
     "paths": {
-      "@/*": ["./src/*"]
+      "@/*": ["./src/*"],
+      "components/*": ["./src/components/*"],
+      "forms/*": ["./src/components/forms/*"],
+      "navigation/*": ["./src/components/navigation/*"],
+      "ui/*": ["./src/components/UI/*"],
+      "icons/*": ["./src/assets/icons/*"],
+      "slices/*": ["./src/store/actions/*"],
+      "actions/*": ["./src/store/actions/*"]
     }
   }
 }

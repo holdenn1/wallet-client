@@ -1,5 +1,8 @@
 <template>
   <form @submit="onSubmit">
+
+    <ProgressForm :active-step="currentStepIdx + 1"/>
+
     <FormStep>
       <CustomFormInput
         :value="values.firstName"
@@ -64,6 +67,7 @@
 
 <script setup lang="ts">
 import FormStep from './FormStep.vue'
+import ProgressForm from './ProgressForm.vue'
 import CustomFormInput from 'ui/inputs/CustomFormInput.vue'
 import RegistrationFormNavigate from 'navigation/RegistrationFormNavigate.vue'
 

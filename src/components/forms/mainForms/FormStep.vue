@@ -1,5 +1,5 @@
 <template>
-  <div v-if="shouldShow">
+  <div class="form-step" v-if="shouldShow">
     <slot />
   </div>
 </template>
@@ -17,4 +17,10 @@ const formStepIdx = inject<Ref<number>>('CURRENT_STEP_INDEX')
 const shouldShow = computed(() => currentIdx === formStepIdx?.value)
 </script>
 
-<style scoped></style>
+<style lang="scss" scoped>
+.form-step {
+  width: 100%;
+  max-height: 300px;
+  margin-bottom: 10px;
+}
+</style>

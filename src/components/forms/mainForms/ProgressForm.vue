@@ -37,6 +37,7 @@ watch(activeStep, () => {
 @import '@/styles/mixins/d-flex-ctr.scss';
 .progress {
   position: relative;
+  margin-bottom: 20px;
   .progress-bar {
     position: absolute;
     background: #2a75ca;
@@ -68,8 +69,8 @@ watch(activeStep, () => {
     .step {
       border: 3px solid lightgray;
       border-radius: 100%;
-      width: 35px;
-      height: 35px;
+      width: 45px;
+      height: 45px;
       background-color: #fff;
       @include flexCenter;
       position: relative;

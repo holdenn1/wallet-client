@@ -23,7 +23,7 @@ import { useField } from 'vee-validate'
 
 const props = defineProps<{
   type: string
-  value?: string
+  value: string
   name: string
   label?: string
   placeholder: string
@@ -45,8 +45,10 @@ const {
 <style lang="scss" scoped>
 @import '@/styles/mixins/d-flex-col.scss';
 .form-input {
-  @include contentFlexColumn;
+  width: 100%;
+
   .label-input {
+    display: block;
     font-size: 18px;
     font-weight: 500;
     color: black;
@@ -54,12 +56,29 @@ const {
   }
   .input {
     padding: 10px 8px;
-    width: 220px;
+    width: 100%;
     margin-bottom: 10px;
-    border-radius: 12px;
-    border: 1px solid black;
+    border-top: none;
+    border-right: none;
+    border-left: none;
+    border-bottom: 0.5px solid rgb(78, 78, 78);
+
     &:focus {
-      border: 1px solid black;
+      outline: none;
+      border-top: none;
+      border-right: none;
+      border-left: none;
+      border-bottom: 1px solid rgb(0, 0, 0);
+    }
+
+    &:-webkit-autofill,
+    &:-webkit-autofill:hover,
+    &:-webkit-autofill:focus,
+    &:-webkit-autofill:active {
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: #000000;
+      transition: background-color 5000s ease-in-out 0s;
+      box-shadow: inset 0 0 20px 20px #ffffff29;
     }
   }
   .error {

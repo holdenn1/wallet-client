@@ -1,7 +1,6 @@
 <template>
-  <form @submit="onSubmit">
-
-    <ProgressForm :active-step="currentStepIdx + 1"/>
+  <form class="sign-up-form" @submit="onSubmit">
+    <ProgressForm :active-step="currentStepIdx + 1" />
 
     <FormStep>
       <CustomFormInput
@@ -76,7 +75,7 @@ import { ref, computed, provide } from 'vue'
 
 import validationSchema from '@/utils/validate/registrationValidateSchema'
 
-const currentStepIdx = ref(0)
+const currentStepIdx = ref(2)
 const stepCounter = ref(0)
 
 provide('STEP_COUNTER', stepCounter)
@@ -118,4 +117,10 @@ function goToPrev() {
 }
 </script>
 
-<style scoped></style>
+<style lang="scss" scoped>
+.sign-up-form {
+  width: 720px;
+  max-height: 380px;
+  margin: 0 20px;
+}
+</style>

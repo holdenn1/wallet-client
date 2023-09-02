@@ -23,7 +23,7 @@ import { useField } from 'vee-validate'
 
 const props = defineProps<{
   type: string
-  value: string
+  value: string | undefined
   name: string
   label?: string
   placeholder: string

@@ -20,7 +20,8 @@ const shouldShow = computed(() => currentIdx === formStepIdx?.value)
 <style lang="scss" scoped>
 .form-step {
   width: 100%;
-  max-height: 300px;
+  height: 300px;
   margin-bottom: 10px;
+  overflow: hidden;
 }
 </style>

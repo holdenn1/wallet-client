@@ -17,7 +17,6 @@
         label="Last name"
         placeholder="Input your last name"
       />
-
       <CustomFormInput
         :value="values.birthDay"
         name="birthDay"
@@ -28,13 +27,7 @@
     </FormStep>
 
     <FormStep>
-      <CustomFormInput
-        :value="values.email"
-        name="email"
-        type="email"
-        label="Email"
-        placeholder="Input your email"
-      />
+      <CustomFormInput :value="values.email" name="email" type="email" label="Email" placeholder="Input your email" />
       <CustomFormInput
         :value="values.password"
         name="password"
@@ -52,22 +45,17 @@
       />
     </FormStep>
 
-    <FormStep>
-      <input type="file" />
-    </FormStep>
+    <FormStep><UploadAvatarStep @upload-avatar="(file) => (uploadedAvatar.avatar = file)" /></FormStep>
 
-    <RegistrationFormNavigate
-      :go-to-prev="goToPrev"
-      :has-previous="hasPrevious"
-      :is-last-step="isLastStep"
-    />
+    <RegistrationFormNavigate :go-to-prev="goToPrev" :has-previous="hasPrevious" :is-last-step="isLastStep" />
   </form>
 </template>
 
 <script setup lang="ts">
-import FormStep from './FormStep.vue'
+import FormStep from './steps/FormStep.vue'
 import ProgressForm from './ProgressForm.vue'
 import CustomFormInput from 'ui/inputs/CustomFormInput.vue'
+import UploadAvatarStep from './steps/UploadAvatarStep.vue'
 import RegistrationFormNavigate from 'navigation/RegistrationFormNavigate.vue'
 
 import { useForm } from 'vee-validate'
@@ -75,8 +63,9 @@ import { ref, computed, provide } from 'vue'
 
 import validationSchema from '@/utils/validate/registrationValidateSchema'
 
-const currentStepIdx = ref(2)
+const currentStepIdx = ref(0)
 const stepCounter = ref(0)
+const uploadedAvatar = ref<{ avatar: File | null }>({ avatar: null })
 
 provide('STEP_COUNTER', stepCounter)
 provide('CURRENT_STEP_INDEX', currentStepIdx)
@@ -104,8 +93,14 @@ const onSubmit = handleSubmit((values, { resetForm }) => {
 
     return
   }
-  console.log(values)
-  resetForm()
+  if (uploadedAvatar.value.avatar) {
+    console.log({ ...values, avatar: uploadedAvatar.value.avatar })
+    currentStepIdx.value = 0
+    uploadedAvatar.value.avatar = null
+    resetForm()
+  } else {
+    console.log('check fils')
+  }
 })
 
 function goToPrev() {

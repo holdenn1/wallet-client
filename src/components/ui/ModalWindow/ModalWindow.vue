@@ -1,8 +1,7 @@
 <template>
   <div
     class="window-wrapper"
-    :class="{ 'modal-active': main.isModalVisible }"
-    @click="setModalVisible(!main.isModalVisible)"
+    :class="{ 'modal-active': main.isModalVisible && !main.continueAuth }"
   >
     <div
       @click.stop
@@ -19,9 +18,7 @@ import { useMainStore } from '@/store/mainStore'
 import { storeToRefs } from 'pinia'
 
 const mainStore = useMainStore()
-
 const { main } = storeToRefs(mainStore)
-const { setModalVisible } = mainStore
 </script>
 
 <style lang="scss" scoped>
@@ -42,11 +39,11 @@ const { setModalVisible } = mainStore
     height: 50vh;
     max-width: 720px;
     animation-name: hide-modal;
-    animation-duration: 0.3s;
+    animation-duration: 0.4s;
     animation-timing-function: ease-in-out;
     animation-iteration-count: 1;
     animation-fill-mode: forwards;
-
+    overflow: hidden;
     @keyframes hide-modal {
       0% {
         transform: scale(1, 1);
@@ -80,6 +77,7 @@ const { setModalVisible } = mainStore
     animation-timing-function: ease-in-out;
     animation-iteration-count: 1;
     animation-fill-mode: forwards;
+    overflow: hidden;
     @keyframes show-modal {
       0% {
         transform: scale(0, 0);

@@ -1,28 +1,27 @@
 <template>
-  <div class="sign-up-page-wrapper">
-    <button type="button" @click="setModalVisible(!main.isModalVisible)">click</button>
-  </div>
-  <ModalWindow>sdsaadsd</ModalWindow>
-  <div v-if="false" class="sign-up-page-wrapper"><SignUp /></div>
+  <ModalWindow
+    ><AuthGreeting google-btn-text="Sign up with Google" email-btn-text="Sign up with Email"
+  /></ModalWindow>
+  <AuthWrapper>
+    <SignUp />
+  </AuthWrapper>
 </template>
 
 <script setup lang="ts">
-import ModalWindow from 'ui/ModalWindow/ModalWindow.vue'
 import SignUp from 'forms/mainForms/SignUp.vue'
+import ModalWindow from 'ui/ModalWindow/ModalWindow.vue'
+import AuthWrapper from 'ui/wrappers/AuthWrapper.vue'
+import AuthGreeting from 'components/greetings/AuthGreeting.vue'
+
+import { onMounted } from 'vue'
 import { useMainStore } from '@/store/mainStore'
-import { storeToRefs } from 'pinia'
 
 const mainStore = useMainStore()
 
-const { main } = storeToRefs(mainStore)
-const { setModalVisible } = mainStore
+onMounted(() => {
+  mainStore.setModalVisible(true)
+  mainStore.setContinueAuth(false)
+})
 </script>
 
-<style lang="scss" scoped>
-@import '@/styles/mixins/d-flex-ctr.scss';
-.sign-up-page-wrapper {
-  width: 100vw;
-  height: 100vh;
-  @include flexCenter;
-}
-</style>
+<style lang="scss" scoped></style>

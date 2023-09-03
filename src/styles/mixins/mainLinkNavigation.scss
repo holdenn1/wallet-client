@@ -1,0 +1,14 @@
+@import './d-flex-ctr.scss';
+@import './main-button.scss';
+
+@mixin mainLinkNavigation($bg, $bg-hover, $b-shadow-col) {
+  @include flexCenter;
+  @include mainButton($bg, $bg-hover);
+  width: 200px;
+  box-shadow: 1px 1px 6px 2px $bg-hover;
+  transition: 0.5s;
+
+  &:hover {
+    box-shadow: 2px 2px 12px 5px $bg-hover;
+  }
+}

@@ -4,11 +4,16 @@ import { ref } from 'vue'
 export const useMainStore = defineStore('main', () => {
   const main = ref<{
     isModalVisible: boolean
-  }>({ isModalVisible: false })
+    continueAuth: boolean
+  }>({ isModalVisible: false, continueAuth: false })
 
   function setModalVisible(visible: boolean) {
     main.value.isModalVisible = visible
   }
 
-  return { main, setModalVisible }
+  function setContinueAuth(isContinue: boolean) {
+    main.value.continueAuth = isContinue
+  }
+
+  return { main, setModalVisible, setContinueAuth }
 })

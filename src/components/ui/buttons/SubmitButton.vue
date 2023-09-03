@@ -9,6 +9,6 @@
 <style lang="scss" scoped>
 @import '@/styles/mixins/main-button.scss';
 .btn-submit {
-  @include mainButton(#3939bd, 500, #262690);
+  @include mainButton(#3939bd, #262690);
 }
 </style>

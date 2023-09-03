@@ -1,9 +1,9 @@
-@mixin mainButton($bg, $fw, $bg-hover) {
+@mixin mainButton($bg, $bg-hover) {
   width: 180px;
   height: 42px;
   font-size: 16px;
   border: none;
-  font-weight: $fw;
+  font-weight: 600;
   border-radius: 12px;
   background-color: $bg;
   color: white;

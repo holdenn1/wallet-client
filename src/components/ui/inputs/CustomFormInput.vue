@@ -26,7 +26,7 @@ const props = defineProps<{
   value: string | undefined
   name: string
   label?: string
-  placeholder: string
+  placeholder?: string
 }>()
 
 const name = toRef(props, 'name')

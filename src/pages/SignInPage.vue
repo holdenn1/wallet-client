@@ -1,15 +1,16 @@
 <template>
-  <div>
-    sign-in
-    <RouterLink :to="{ name: 'home' }">
-      <MainButton title="Home" type="to-registration" :handle-click="() => console.log(2)" />
-    </RouterLink>
-  </div>
+  <div class="sign-in-page-wrapper"><SignIn /></div>
 </template>
 
 <script setup lang="ts">
-import MainButton from 'ui/buttons/MainButton.vue'
-import { RouterLink } from 'vue-router'
+import SignIn from 'forms/mainForms/SignIn.vue'
 </script>
 
-<style scoped></style>
+<style lang="scss" scoped>
+@import '@/styles/mixins/d-flex-ctr.scss';
+.sign-in-page-wrapper {
+  width: 100vw;
+  height: 100vh;
+  @include flexCenter;
+}
+</style>

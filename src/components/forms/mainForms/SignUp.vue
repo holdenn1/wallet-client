@@ -17,13 +17,7 @@
         label="Last name"
         placeholder="Input your last name"
       />
-      <CustomFormInput
-        :value="values.birthDay"
-        name="birthDay"
-        type="date"
-        label="Last name"
-        placeholder="Input your last name"
-      />
+      <CustomFormInput :value="values.birthDay" name="birthDay" type="date" label="Birthday" />
     </FormStep>
 
     <FormStep>

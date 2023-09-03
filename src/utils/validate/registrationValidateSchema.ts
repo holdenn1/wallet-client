@@ -1,18 +1,21 @@
 import * as yup from 'yup'
 import differenceInYears from 'date-fns/differenceInYears'
 
+const birthDayValidation = (value: Date | null | undefined | string) => {
+  if (value) {
+    return differenceInYears(new Date(), new Date(value)) >= 18
+  }
+  return true
+}
+
 export default [
   yup.object({
     firstName: yup.string().required('First name is a required field'),
     lastName: yup.string().required('Last name is a required field'),
     birthDay: yup
-      .date()
-      .nullable()
-      .test('birthDay', 'Should be greater than 18', function (value) {
-        if (value) {
-          return differenceInYears(new Date(), new Date(value)) >= 18
-        }
-      })
+      .string()
+      .required('Birthday is required field')
+      .test('birthDay', 'Should be greater than 18', birthDayValidation)
   }),
   yup.object({
     email: yup.string().required('Email is required field').email('Invalid email address'),

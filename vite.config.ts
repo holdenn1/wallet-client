@@ -13,8 +13,7 @@ export default defineConfig({
       forms: '/src/components/forms',
       ui: '/src/components/UI',
       icons: '/src/assets/icons',
-      slices: '/src/store/slices',
-      actions: '/src/store/actions'
+    
     }
   }
 })

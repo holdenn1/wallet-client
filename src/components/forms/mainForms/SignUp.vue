@@ -17,11 +17,17 @@
         label="Last name"
         placeholder="Input your last name"
       />
-      <CustomFormInput :value="values.birthDay" name="birthDay" type="date" label="Birthday" />
+      <CustomFormInput :value="values.age" name="birthDay" type="date" label="Birthday" />
     </FormStep>
 
     <FormStep>
-      <CustomFormInput :value="values.email" name="email" type="email" label="Email" placeholder="Input your email" />
+      <CustomFormInput
+        :value="values.email"
+        name="email"
+        type="email"
+        label="Email"
+        placeholder="Input your email"
+      />
       <CustomFormInput
         :value="values.password"
         name="password"
@@ -39,9 +45,15 @@
       />
     </FormStep>
 
-    <FormStep><UploadAvatarStep @upload-avatar="(file) => (uploadedAvatar.avatar = file)" /></FormStep>
+    <FormStep
+      ><UploadAvatarStep @upload-avatar="(file) => (uploadedAvatar.avatar = file)"
+    /></FormStep>
 
-    <RegistrationFormNavigate :go-to-prev="goToPrev" :has-previous="hasPrevious" :is-last-step="isLastStep" />
+    <RegistrationFormNavigate
+      :go-to-prev="goToPrev"
+      :has-previous="hasPrevious"
+      :is-last-step="isLastStep"
+    />
   </form>
 </template>
 
@@ -69,6 +81,14 @@ const currentSchema = computed(() => {
 })
 
 const { values, handleSubmit } = useForm({
+  initialValues: {
+    firstName: '',
+    lastName: '',
+    age: '',
+    email: '',
+    password: '',
+    confirmPassword: ''
+  },
   validationSchema: currentSchema,
   keepValuesOnUnmount: true
 })

@@ -12,7 +12,7 @@ export default [
   yup.object({
     firstName: yup.string().required('First name is a required field'),
     lastName: yup.string().required('Last name is a required field'),
-    birthDay: yup
+    age: yup
       .string()
       .required('Birthday is required field')
       .test('birthDay', 'Should be greater than 18', birthDayValidation)

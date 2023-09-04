@@ -7,7 +7,11 @@
 
 <script setup lang="ts">
 import Header from 'components/Header/Header.vue'
-import { RouterView } from 'vue-router'
+import { RouterView, useRouter } from 'vue-router'
+import globalRouter from '@/router/globalRouter'
+
+const router = useRouter()
+globalRouter.router = router
 </script>
 
 <style lang="scss" scoped>

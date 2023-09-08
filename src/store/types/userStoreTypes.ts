@@ -1,13 +1,21 @@
-
 export type User = {
   id: null
-  firstName: ''
-  lastName: ''
-  email: ''
+  firstName: string
+  lastName: string
+  email: string
   photo: null
-  age: ''
+  age: string
+  cash: string
 }
 
 export type InitialValuesUserStore = {
   user: User | null
+}
+
+export type AuthResponse = {
+  data: {
+    user: User
+    accessToken: string
+    refreshToken: string
+  }
 }

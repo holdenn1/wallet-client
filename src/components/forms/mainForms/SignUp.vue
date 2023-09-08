@@ -17,7 +17,7 @@
         label="Last name"
         placeholder="Input your last name"
       />
-      <CustomFormInput :value="values.age" name="birthDay" type="date" label="Birthday" />
+      <CustomFormInput :value="values.age" name="age" type="date" label="Birthday" />
     </FormStep>
 
     <FormStep>
@@ -46,7 +46,7 @@
     </FormStep>
 
     <FormStep
-      ><UploadAvatarStep @upload-avatar="(file) => (uploadedAvatar.avatar = file)"
+      ><UploadAvatarStep @upload-avatar="(file) => (uploadedAvatar.photo = file)"
     /></FormStep>
 
     <RegistrationFormNavigate
@@ -64,14 +64,20 @@ import CustomFormInput from 'ui/inputs/CustomFormInput.vue'
 import UploadAvatarStep from './steps/UploadAvatarStep.vue'
 import RegistrationFormNavigate from 'navigation/RegistrationFormNavigate.vue'
 
-import { useForm } from 'vee-validate'
 import { ref, computed, provide } from 'vue'
+import { useForm } from 'vee-validate'
+import { useRouter } from 'vue-router'
 
 import validationSchema from '@/utils/validate/registrationValidateSchema'
+import type { InitialValues, RegistrationData } from './types'
+import { useUserStore } from '@/store/userStore'
+
+const userStore = useUserStore()
+const router = useRouter()
 
 const currentStepIdx = ref(0)
 const stepCounter = ref(0)
-const uploadedAvatar = ref<{ avatar: File | null }>({ avatar: null })
+const uploadedAvatar = ref<{ photo: File | null }>({ photo: null })
 
 provide('STEP_COUNTER', stepCounter)
 provide('CURRENT_STEP_INDEX', currentStepIdx)
@@ -80,7 +86,7 @@ const currentSchema = computed(() => {
   return validationSchema[currentStepIdx.value]
 })
 
-const { values, handleSubmit } = useForm({
+const { values, handleSubmit } = useForm<InitialValues>({
   initialValues: {
     firstName: '',
     lastName: '',
@@ -101,17 +107,23 @@ const hasPrevious = computed(() => {
   return currentStepIdx.value > 0
 })
 
-const onSubmit = handleSubmit((values, { resetForm }) => {
+const onSubmit = handleSubmit(async (values, { resetForm }) => {
   if (!isLastStep.value) {
     currentStepIdx.value++
-
     return
   }
-  if (uploadedAvatar.value.avatar) {
-    console.log({ ...values, avatar: uploadedAvatar.value.avatar })
-    currentStepIdx.value = 0
-    uploadedAvatar.value.avatar = null
-    resetForm()
+  if (uploadedAvatar.value.photo) {
+    const { confirmPassword, ...data }: RegistrationData = {
+      ...values,
+      photo: uploadedAvatar.value.photo
+    }
+    await userStore.registrationUser(data)
+    if (userStore.userState.user) {
+      router.push({name: 'wallet'})
+      currentStepIdx.value = 0
+      uploadedAvatar.value.photo = null
+      resetForm()
+    }
   } else {
     console.log('check fils')
   }

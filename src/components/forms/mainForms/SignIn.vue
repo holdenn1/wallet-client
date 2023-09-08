@@ -1,6 +1,12 @@
 <template>
   <form class="sign-in-form" @submit="onSubmit">
-    <CustomFormInput :value="values.email" name="email" type="email" label="Email" placeholder="Input your email" />
+    <CustomFormInput
+      :value="values.email"
+      name="email"
+      type="email"
+      label="Email"
+      placeholder="Input your email"
+    />
     <CustomFormInput
       :value="values.password"
       name="password"
@@ -20,15 +26,26 @@ import SubmitButton from 'ui/buttons/SubmitButton.vue'
 
 import { useForm } from 'vee-validate'
 import validationSchema from '@/utils/validate/authValidateSchema'
+import { useUserStore } from '@/store/userStore'
+import { useRouter } from 'vue-router'
+
+const userStore = useUserStore()
+const router = useRouter()
 
 const { values, handleSubmit } = useForm({
+  initialValues: {
+    email: '',
+    password: ''
+  },
   validationSchema
 })
 
-const onSubmit = handleSubmit((values, { resetForm }) => {
-  console.log(values)
-
-  resetForm()
+const onSubmit = handleSubmit(async (values, { resetForm }) => {
+  await userStore.loginUser(values)
+  if (userStore.userState.user) {
+    router.push({ name: 'wallet' })
+    resetForm()
+  }
 })
 </script>
 

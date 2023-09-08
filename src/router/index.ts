@@ -2,6 +2,7 @@ import AppVue from '@/App.vue'
 import MainPageVue from '@/pages/MainPage.vue'
 import SignInPageVue from '@/pages/SignInPage.vue'
 import SignUpPageVue from '@/pages/SignUpPage.vue'
+import WalletPageVue from '@/pages/WalletPage.vue'
 import { createRouter, createWebHashHistory } from 'vue-router'
 
 const router = createRouter({
@@ -25,6 +26,11 @@ const router = createRouter({
           path: 'sign-up',
           name: 'sign-up',
           component: SignUpPageVue
+        },
+        {
+          path: 'wallet',
+          name: 'wallet',
+          component: WalletPageVue
         }
       ]
     }

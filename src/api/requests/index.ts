@@ -6,8 +6,21 @@ import type { LoginUserData, RegistrationUserData } from './types'
 
 export const googleAuth = () => instance.get('auth/google')
 
-export const registrationUserRequest = (data: RegistrationUserData) =>
-  instance.post('auth/registration', data)
+export const registrationUserRequest = (data: RegistrationUserData) => {
+  const registrationData = new FormData()
+  registrationData.append('firstName', data.firstName)
+  registrationData.append('lastName', data.lastName)
+  registrationData.append('email', data.email)
+  registrationData.append('age', data.age)
+  registrationData.append('password', data.password)
+  registrationData.append('photo', data.photo)
+
+  return instance.post('auth/registration', registrationData, {
+    headers: {
+      'Content-Type': 'multipart/form-data'
+    }
+  })
+}
 
 export const loginUserRequest = (data: LoginUserData) => instance.post('auth/login', data)
 
@@ -28,3 +41,14 @@ export const refreshTokensLogin = (refreshToken: string) =>
 
 export const verifyUser = (userId: string, token: string) =>
   instance.get(`auth/verify/${userId}/${token}`)
+
+export const uploadAvatar = (cover: File) => {
+  const formData = new FormData()
+  formData.append('cover', cover)
+
+  return instance.post('user/upload-cover', formData, {
+    headers: {
+      'Content-Type': 'multipart/form-data'
+    }
+  })
+}

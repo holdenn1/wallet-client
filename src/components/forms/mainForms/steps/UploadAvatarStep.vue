@@ -4,8 +4,8 @@
     <img class="avatar" :src="avatarPreview ?? userAvatar" alt="" />
     <h4 class="avatar-title">Upload a profile photo</h4>
     <p class="avatar-text">
-      Choose an image that best represents you and matches your style. We recommend uploading a photo of your face or an
-      image that best characterizes you.
+      Choose an image that best represents you and matches your style. We recommend uploading a
+      photo of your face or an image that best characterizes you.
     </p>
   </div>
 </template>
@@ -13,6 +13,7 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import userAvatar from 'icons/user-avatar.png'
+
 
 const emit = defineEmits<{
   (e: 'uploadAvatar', value: File): void
@@ -22,14 +23,18 @@ const avatarPreview = ref()
 const reader = new FileReader()
 
 const handleFileInputChange = async (event: Event) => {
-  const fileInput = event.target as HTMLInputElement
-  const file = fileInput.files && fileInput.files[0]
-  if (file) {
-    emit('uploadAvatar', file)
-    reader.readAsDataURL(file)
-    reader.onload = () => {
-      avatarPreview.value = reader.result
+  try {
+    const fileInput = event.target as HTMLInputElement
+    const file = fileInput.files && fileInput.files[0]
+    if (file) {
+      emit('uploadAvatar', file)
+      reader.readAsDataURL(file)
+      reader.onload = () => {
+        avatarPreview.value = reader.result
+      }
     }
+  } catch (e) {
+    console.error(e)
   }
 }
 </script>

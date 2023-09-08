@@ -12,8 +12,7 @@ export default defineConfig({
       navigation: '/src/components/navigation',
       forms: '/src/components/forms',
       ui: '/src/components/UI',
-      icons: '/src/assets/icons',
-    
+      icons: '/src/assets/icons'
     }
   }
 })

@@ -1,16 +1,19 @@
 <template>
   <div class="main-page-navigation-wrapper">
-    <RouterLink :to="{ name: 'sign-in' }" class="navigate-to-login">
-      Return to the account
-    </RouterLink>
-    <RouterLink :to="{ name: 'sign-up' }" class="navigate-to-registration">
-      Create an account
-    </RouterLink>
+      <RouterLink :to="{ name: 'sign-in' }" class="navigate-to-login">
+        Login to the account
+      </RouterLink>
+      <RouterLink :to="{ name: 'sign-up' }" class="navigate-to-registration">
+        {{ userStore.userState.user ? 'Continue registration' : 'Create an account' }}
+      </RouterLink>
   </div>
 </template>
 
 <script setup lang="ts">
+import { useUserStore } from '@/store/userStore'
 import { RouterLink } from 'vue-router'
+
+const userStore = useUserStore()
 </script>
 
 <style lang="scss" scoped>

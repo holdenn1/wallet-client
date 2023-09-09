@@ -11,6 +11,7 @@
 
 <script setup lang="ts">
 import { ref, watch, toRefs } from 'vue'
+
 import type { VNodeRef } from 'vue'
 
 const props = defineProps<{ activeStep: number }>()

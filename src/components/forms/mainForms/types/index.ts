@@ -1,7 +1,7 @@
 export type InitialValues = {
   firstName: ''
   lastName: ''
-  age: ''
+  birthday: ''
   email: ''
   password: ''
   confirmPassword: ''

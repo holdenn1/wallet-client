@@ -43,7 +43,6 @@ const {
 </script>
 
 <style lang="scss" scoped>
-@import '@/styles/mixins/d-flex-col.scss';
 .form-input {
   width: 100%;
 

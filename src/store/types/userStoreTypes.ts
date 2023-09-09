@@ -4,12 +4,14 @@ export type User = {
   lastName: string
   email: string
   photo: null
-  age: string
+  birthday: string
   cash: string
+  isEmailConfirmed: boolean
 }
 
 export type InitialValuesUserStore = {
   user: User | null
+  isContinueAuth: boolean
 }
 
 export type AuthResponse = {

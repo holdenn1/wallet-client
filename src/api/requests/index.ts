@@ -11,7 +11,7 @@ export const registrationUserRequest = (data: RegistrationUserData) => {
   registrationData.append('firstName', data.firstName)
   registrationData.append('lastName', data.lastName)
   registrationData.append('email', data.email)
-  registrationData.append('age', data.age)
+  registrationData.append('birthday', data.birthday)
   registrationData.append('password', data.password)
   registrationData.append('photo', data.photo)
 
@@ -38,9 +38,6 @@ export const refreshTokensLogin = (refreshToken: string) =>
   instance.get('auth/refresh-login', {
     headers: { authorization: `Bearer ${refreshToken}` }
   } as AxiosRequestConfig)
-
-export const verifyUser = (userId: string, token: string) =>
-  instance.get(`auth/verify/${userId}/${token}`)
 
 export const uploadAvatar = (cover: File) => {
   const formData = new FormData()

@@ -1,13 +1,14 @@
 import { ref } from 'vue'
 import { defineStore } from 'pinia'
-import { loginUserRequest, registrationUserRequest } from '@/api/requests'
+import { loginUserRequest, logoutUserRequest, registrationUserRequest } from '@/api/requests'
 
 import type { AuthResponse, InitialValuesUserStore } from './types/userStoreTypes'
 import type { RegistrationUserData, LoginUserData } from '@/api/requests/types'
 
 export const useUserStore = defineStore('user', () => {
   const userState = ref<InitialValuesUserStore>({
-    user: null
+    user: null,
+    isContinueAuth: false
   })
 
   async function registrationUser(data: RegistrationUserData) {
@@ -34,6 +35,7 @@ export const useUserStore = defineStore('user', () => {
 
       if (user) {
         userState.value.user = user
+        userState.value.isContinueAuth = false
         localStorage.setItem('accessToken', accessToken)
         localStorage.setItem('refreshToken', refreshToken)
       }
@@ -41,5 +43,24 @@ export const useUserStore = defineStore('user', () => {
       console.error(e)
     }
   }
-  return { userState, registrationUser, loginUser }
+
+  async function logoutUser() {
+    try {
+      const accessToken = localStorage.getItem('accessToken')
+      if (accessToken) {
+        await logoutUserRequest(accessToken)
+        localStorage.clear()
+        userState.value.user = null
+        userState.value.isContinueAuth = false
+      }
+    } catch (e) {
+      console.error(e)
+    }
+  }
+
+  function setContinueAuth(isContinue: boolean) {
+    userState.value.isContinueAuth = isContinue
+  }
+
+  return { userState, registrationUser, loginUser, logoutUser, setContinueAuth }
 })

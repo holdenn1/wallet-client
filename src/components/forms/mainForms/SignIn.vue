@@ -24,9 +24,10 @@
 import CustomFormInput from 'ui/inputs/CustomFormInput.vue'
 import SubmitButton from 'ui/buttons/SubmitButton.vue'
 
-import { useForm } from 'vee-validate'
 import validationSchema from '@/utils/validate/authValidateSchema'
 import { useUserStore } from '@/store/userStore'
+
+import { useForm } from 'vee-validate'
 import { useRouter } from 'vue-router'
 
 const userStore = useUserStore()
@@ -42,8 +43,9 @@ const { values, handleSubmit } = useForm({
 
 const onSubmit = handleSubmit(async (values, { resetForm }) => {
   await userStore.loginUser(values)
-  if (userStore.userState.user) {
+  if (userStore.userState.user?.isEmailConfirmed) {
     router.push({ name: 'wallet' })
+    userStore.setContinueAuth(false)
     resetForm()
   }
 })

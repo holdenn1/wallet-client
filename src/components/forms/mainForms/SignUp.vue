@@ -17,7 +17,7 @@
         label="Last name"
         placeholder="Input your last name"
       />
-      <CustomFormInput :value="values.age" name="age" type="date" label="Birthday" />
+      <CustomFormInput :value="values.birthday" name="birthday" type="date" label="Birthday" />
     </FormStep>
 
     <FormStep>
@@ -64,16 +64,15 @@ import CustomFormInput from 'ui/inputs/CustomFormInput.vue'
 import UploadAvatarStep from './steps/UploadAvatarStep.vue'
 import RegistrationFormNavigate from 'navigation/RegistrationFormNavigate.vue'
 
-import { ref, computed, provide } from 'vue'
-import { useForm } from 'vee-validate'
-import { useRouter } from 'vue-router'
-
 import validationSchema from '@/utils/validate/registrationValidateSchema'
-import type { InitialValues, RegistrationData } from './types'
 import { useUserStore } from '@/store/userStore'
 
+import { ref, computed, provide } from 'vue'
+import { useForm } from 'vee-validate'
+
+import type { InitialValues, RegistrationData } from './types'
+
 const userStore = useUserStore()
-const router = useRouter()
 
 const currentStepIdx = ref(0)
 const stepCounter = ref(0)
@@ -90,7 +89,7 @@ const { values, handleSubmit } = useForm<InitialValues>({
   initialValues: {
     firstName: '',
     lastName: '',
-    age: '',
+    birthday: '',
     email: '',
     password: '',
     confirmPassword: ''
@@ -119,9 +118,10 @@ const onSubmit = handleSubmit(async (values, { resetForm }) => {
     }
     await userStore.registrationUser(data)
     if (userStore.userState.user) {
-      router.push({name: 'wallet'})
       currentStepIdx.value = 0
       uploadedAvatar.value.photo = null
+      userStore.setContinueAuth(false)
+
       resetForm()
     }
   } else {

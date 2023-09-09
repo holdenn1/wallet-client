@@ -1,12 +1,12 @@
 <template>
   <div
     class="window-wrapper"
-    :class="{ 'modal-active': main.isModalVisible && !main.continueAuth }"
+    :class="{ 'modal-active': mainState.isModalVisible && !userState.isContinueAuth }"
   >
     <div
       @click.stop
       class="window-content"
-      :class="{ 'modal-content-active': main.isModalVisible }"
+      :class="{ 'modal-content-active': mainState.isModalVisible }"
     >
       <slot />
     </div>
@@ -15,10 +15,13 @@
 
 <script setup lang="ts">
 import { useMainStore } from '@/store/mainStore'
+import { useUserStore } from '@/store/userStore';
 import { storeToRefs } from 'pinia'
 
 const mainStore = useMainStore()
-const { main } = storeToRefs(mainStore)
+const userSore = useUserStore()
+const { mainState } = storeToRefs(mainStore)
+const { userState } = storeToRefs(userSore)
 </script>
 
 <style lang="scss" scoped>

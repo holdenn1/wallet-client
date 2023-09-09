@@ -13,4 +13,6 @@ defineProps<{ type: string; title: string; handleClick(): void }>()
 .btn-type-previous {
   @include mainButton(#5293db, #3a76b8);
 }
+
+
 </style>

@@ -2,7 +2,7 @@ export type RegistrationUserData = {
   firstName: string
   lastName: string
   photo: File
-  age: string
+  birthday: string
   email: string
   password: string
 }

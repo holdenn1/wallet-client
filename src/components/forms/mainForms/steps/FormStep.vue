@@ -6,6 +6,7 @@
 
 <script setup lang="ts">
 import { computed, inject, ref } from 'vue'
+
 import type { Ref } from 'vue'
 
 const initialInx = ref(0)

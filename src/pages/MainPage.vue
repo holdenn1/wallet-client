@@ -5,7 +5,7 @@
 </template>
 
 <script setup lang="ts">
-import MainPageGreeting from 'components/greetings/MainPageGreeting.vue'
+import MainPageGreeting from 'components/notifications/MainPageGreeting.vue'
 </script>
 
 <style lang="scss" scoped>

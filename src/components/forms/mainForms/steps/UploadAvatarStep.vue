@@ -11,8 +11,9 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
 import userAvatar from 'icons/user-avatar.png'
+
+import { ref } from 'vue'
 
 
 const emit = defineEmits<{
@@ -40,10 +41,10 @@ const handleFileInputChange = async (event: Event) => {
 </script>
 
 <style lang="scss" scoped>
-@import '@/styles/mixins/d-flex-col.scss';
+@import '@/styles/mixins/d-flex-col-al.scss';
 .upload-avatar-wrapper {
   height: 100%;
-  @include contentFlexColumn;
+  @include contentFlexColumnAl;
   position: relative;
 
   .avatar-input {

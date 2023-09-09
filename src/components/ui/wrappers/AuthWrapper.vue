@@ -1,13 +1,16 @@
 <template>
-  <div :class="{ 'is-continue-auth': mainStore.main.continueAuth }" class="sign-up-page-wrapper">
+  <div
+    :class="{ 'is-continue-auth': userStore.userState.isContinueAuth || userStore.userState.user }"
+    class="sign-up-page-wrapper"
+  >
     <slot />
   </div>
 </template>
 
 <script setup lang="ts">
-import { useMainStore } from '@/store/mainStore'
+import { useUserStore } from '@/store/userStore'
 
-const mainStore = useMainStore()
+const userStore = useUserStore()
 </script>
 
 <style lang="scss" scoped>

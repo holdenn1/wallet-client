@@ -49,3 +49,5 @@ export const uploadAvatar = (cover: File) => {
     }
   })
 }
+
+export const getUserDataWithGoogleAuth = () => instance.get('auth/google/redirect')

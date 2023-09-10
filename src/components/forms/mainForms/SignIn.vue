@@ -45,7 +45,6 @@ const onSubmit = handleSubmit(async (values, { resetForm }) => {
   await userStore.loginUser(values)
   if (userStore.userState.user?.isEmailConfirmed) {
     router.push({ name: 'wallet' })
-    userStore.setContinueAuth(false)
     resetForm()
   }
 })

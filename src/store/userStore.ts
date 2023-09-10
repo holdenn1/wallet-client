@@ -19,6 +19,7 @@ export const useUserStore = defineStore('user', () => {
 
       if (user) {
         userState.value.user = user
+        userState.value.isContinueAuth = false
         localStorage.setItem('accessToken', accessToken)
         localStorage.setItem('refreshToken', refreshToken)
       }
@@ -51,7 +52,6 @@ export const useUserStore = defineStore('user', () => {
         await logoutUserRequest(accessToken)
         localStorage.clear()
         userState.value.user = null
-        userState.value.isContinueAuth = false
       }
     } catch (e) {
       console.error(e)
@@ -62,5 +62,9 @@ export const useUserStore = defineStore('user', () => {
     userState.value.isContinueAuth = isContinue
   }
 
-  return { userState, registrationUser, loginUser, logoutUser, setContinueAuth }
+  function aboutAuth() {
+    userState.value.user = null
+  }
+
+  return { userState, registrationUser, loginUser, logoutUser, setContinueAuth, aboutAuth }
 })

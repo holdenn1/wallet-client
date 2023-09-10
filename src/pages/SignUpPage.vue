@@ -21,13 +21,24 @@ import ConfirmEmailAddress from 'components/notifications/ConfirmEmailAddress.vu
 import { useMainStore } from '@/store/mainStore'
 import { useUserStore } from '@/store/userStore'
 
-import { onMounted } from 'vue'
+import { onMounted, watch } from 'vue'
 import { storeToRefs } from 'pinia'
+import { useLink, RouterLink } from 'vue-router'
+
+//@ts-ignore
+const { route } = useLink({ ...RouterLink.props })
 
 const mainStore = useMainStore()
 const userStore = useUserStore()
 
 const { userState } = storeToRefs(userStore)
+
+
+watch(route, async () => {
+  if (userState.value.user) {
+    userStore.aboutAuth()
+  }
+})
 
 onMounted(() => {
   mainStore.setModalVisible(true)

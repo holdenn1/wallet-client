@@ -7,7 +7,9 @@
       </h4>
     </div>
     <div class="auth-navigate-wrapper">
-      <button type="button" class="navigate-to-google">{{ googleBtnText }}</button>
+      <a :href="googleRedirect" class="navigate-to-google">
+        {{ googleBtnText }}
+      </a>
       <button type="button" class="navigate-to-auth" @click="() => userStore.setContinueAuth(true)">
         {{ emailBtnText }}
       </button>
@@ -24,13 +26,15 @@
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue'
-import { useLink, RouterLink } from 'vue-router'
 import { useUserStore } from '@/store/userStore'
+
+import { useLink, RouterLink } from 'vue-router'
+import { computed } from 'vue'
 
 defineProps<{ googleBtnText: string; emailBtnText: string }>()
 
 const userStore = useUserStore()
+const googleRedirect = 'http://localhost:7000/auth/google/redirect'
 
 //@ts-ignore
 const { route } = useLink({ ...RouterLink.props })
@@ -38,8 +42,6 @@ const { route } = useLink({ ...RouterLink.props })
 const navigateLink = computed(() => {
   return route.value.name === 'sign-up' ? 'sign-in' : 'sign-up'
 })
-
-
 </script>
 
 <style lang="scss" scoped>

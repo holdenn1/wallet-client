@@ -111,6 +111,7 @@ const onSubmit = handleSubmit(async (values, { resetForm }) => {
     currentStepIdx.value++
     return
   }
+
   if (uploadedAvatar.value.photo) {
     const { confirmPassword, ...data }: RegistrationData = {
       ...values,
@@ -120,8 +121,6 @@ const onSubmit = handleSubmit(async (values, { resetForm }) => {
     if (userStore.userState.user) {
       currentStepIdx.value = 0
       uploadedAvatar.value.photo = null
-      userStore.setContinueAuth(false)
-
       resetForm()
     }
   } else {

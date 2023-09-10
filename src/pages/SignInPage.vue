@@ -18,15 +18,27 @@ import ModalWindow from 'ui/ModalWindow/ModalWindow.vue'
 import AuthGreeting from 'components/notifications/AuthGreeting.vue'
 import ConfirmEmailAddress from 'components/notifications/ConfirmEmailAddress.vue'
 
-import { onMounted } from 'vue'
 import { useMainStore } from '@/store/mainStore'
 import { useUserStore } from '@/store/userStore'
+
+import { onMounted , watch} from 'vue'
 import { storeToRefs } from 'pinia'
+import { useLink, RouterLink } from 'vue-router'
+
 
 const mainStore = useMainStore()
 const userStore = useUserStore()
 
 const { userState } = storeToRefs(userStore)
+
+//@ts-ignore
+const { route } = useLink({ ...RouterLink.props })
+
+watch(route, () => {
+  if (userState.value.user) {
+    userStore.aboutAuth()
+  }
+})
 
 onMounted(() => {
   mainStore.setModalVisible(true)

@@ -7,18 +7,29 @@
       </h4>
     </div>
     <div class="auth-navigate-wrapper">
-      <a :href="googleRedirect" class="navigate-to-google">
-        {{ googleBtnText }}
+      <a
+        @click="mainStore.setModalVisible(false)"
+        :href="GOOGL_REDIRECT"
+        class="navigate-to-google"
+      >
+        {{ buttonsText.googleBtnText }}
       </a>
-      <button type="button" class="navigate-to-auth" @click="() => userStore.setContinueAuth(true)">
-        {{ emailBtnText }}
-      </button>
+      <RouterLink
+        @click="mainStore.setModalVisible(false)"
+        :to="{ path: navigateLink }"
+        class="navigate-to-auth"
+      >
+        {{ buttonsText.emailBtnText }}
+      </RouterLink>
     </div>
     <div class="is-has-account-wrapper">
       <h4 class="is-has-account-text">
         Already have an <span style="color: rgb(45, 72, 190); font-weight: 600">account</span>?
-        <RouterLink :to="{ name: navigateLink }" style="font-weight: 600">
-          {{ navigateLink === 'sign-up' ? 'Sign up' : 'Sign in' }}
+        <RouterLink
+          :to="`${navigateLink === 'sign-up' ? 'sign-in' : 'sign-up'}`"
+          style="font-weight: 600"
+        >
+          {{ navigateLink === 'sign-in' ? 'Sign up' : 'Sign in' }}
         </RouterLink>
       </h4>
     </div>
@@ -26,21 +37,23 @@
 </template>
 
 <script setup lang="ts">
-import { useUserStore } from '@/store/userStore'
-
-import { useLink, RouterLink } from 'vue-router'
+import { RouterLink } from 'vue-router'
 import { computed } from 'vue'
+import { useMainStore } from '@/store/mainStore'
 
-defineProps<{ googleBtnText: string; emailBtnText: string }>()
+const GOOGL_REDIRECT = 'http://localhost:7000/auth/google/redirect'
 
-const userStore = useUserStore()
-const googleRedirect = 'http://localhost:7000/auth/google/redirect'
+const props = defineProps<{
+  buttonsText: {
+    googleBtnText: string
+    emailBtnText: string
+  }
+}>()
 
-//@ts-ignore
-const { route } = useLink({ ...RouterLink.props })
+const mainStore = useMainStore()
 
 const navigateLink = computed(() => {
-  return route.value.name === 'sign-up' ? 'sign-in' : 'sign-up'
+  return props.buttonsText.emailBtnText.includes('up') ? 'sign-up' : 'sign-in'
 })
 </script>
 

@@ -1,23 +1,78 @@
 <template>
-  <div class="main-page-greeting">
+  <div
+    @click.stop
+    class="main-page-greeting"
+    :class="{ 'main-page-greeting-active': mainStore.mainState.isModalVisible }"
+  >
     <h3 class="main-page-greeting__text">Welcome to the wallet</h3>
-    <MainPageNavigation />
+    <div class="main-page-navigation-wrapper">
+      <button type="button" @click="handleLoginModal" class="navigate-to-login">
+        Login to the account
+      </button>
+      <button type="button" @click="handleRegistrationModal" class="navigate-to-registration">
+        Create an account
+      </button>
+    </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import MainPageNavigation from 'navigation/MainPageNavigation.vue'
+import { useMainStore } from '@/store/mainStore'
+
+const emit = defineEmits<{
+  (e: 'login'): void
+  (e: 'registration'): void
+}>()
+
+const mainStore = useMainStore()
+
+const handleLoginModal = () => {
+  mainStore.setModalVisible(true)
+  emit('login')
+}
+
+const handleRegistrationModal = () => {
+  mainStore.setModalVisible(true)
+  emit('registration')
+}
 </script>
 
 <style lang="scss" scoped>
+@import '@/styles/mixins/mainLinkNavigation.scss';
+@import '@/styles/mixins/d-flex-ctr.scss';
+
 .main-page-greeting {
   padding: 20px;
   box-sizing: border-box;
+  opacity: 1;
+  transition: 1.2s;
+
   &__text {
     font-size: 38px;
     font-weight: 600;
     text-align: center;
     margin-bottom: 30px;
   }
+  .main-page-navigation-wrapper {
+    @include flexCenter;
+    @media screen and (max-width: 460px) {
+      flex-direction: column;
+    }
+    .navigate-to-login {
+      @include mainLinkNavigation(#0e38a9, rgb(31, 31, 199), rgb(57, 57, 190));
+    }
+    .navigate-to-registration {
+      @include mainLinkNavigation(
+        hsl(243deg 67.66% 42.36%),
+        hsl(243, 76%, 40%),
+        hsl(243, 76%, 40%)
+      );
+    }
+  }
+}
+
+.main-page-greeting-active {
+  opacity: 0;
+  transition-duration: 0.4s;
 }
 </style>

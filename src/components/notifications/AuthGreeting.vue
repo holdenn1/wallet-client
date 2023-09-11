@@ -41,7 +41,7 @@ import { RouterLink } from 'vue-router'
 import { computed } from 'vue'
 import { useMainStore } from '@/store/mainStore'
 
-const GOOGL_REDIRECT = 'http://localhost:7000/auth/google/redirect'
+const GOOGL_REDIRECT = 'http://localhost:7000/auth/google/'
 
 const props = defineProps<{
   buttonsText: {

@@ -15,22 +15,12 @@ import ConfirmEmailAddress from 'components/notifications/ConfirmEmailAddress.vu
 
 import { useUserStore } from '@/store/userStore'
 
+import { onMounted } from 'vue'
 import { storeToRefs } from 'pinia'
-import { onMounted, watch } from 'vue'
-import { useLink, RouterLink } from 'vue-router'
 
 const userStore = useUserStore()
 
 const { userState } = storeToRefs(userStore)
-
-//@ts-ignore
-const { route } = useLink({ ...RouterLink.props })
-
-watch(route, () => {
-  if (userState.value.user) {
-    userStore.aboutAuth()
-  }
-})
 
 onMounted(() => {
   userStore.setContinueAuth(true)

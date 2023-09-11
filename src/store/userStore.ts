@@ -2,7 +2,7 @@ import { ref } from 'vue'
 import { defineStore } from 'pinia'
 import { loginUserRequest, logoutUserRequest, registrationUserRequest } from '@/api/requests'
 
-import type { AuthResponse, InitialValuesUserStore } from './types/userStoreTypes'
+import type { AuthResponse, InitialValuesUserStore, User } from './types/userStoreTypes'
 import type { RegistrationUserData, LoginUserData } from '@/api/requests/types'
 
 export const useUserStore = defineStore('user', () => {
@@ -62,9 +62,13 @@ export const useUserStore = defineStore('user', () => {
     userState.value.isContinueAuth = isContinue
   }
 
+  function setUser(user: User) {
+    userState.value.user = user
+  }
+
   function aboutAuth() {
     userState.value.user = null
   }
 
-  return { userState, registrationUser, loginUser, logoutUser, setContinueAuth, aboutAuth }
+  return { userState, registrationUser, loginUser, logoutUser, setContinueAuth, aboutAuth, setUser }
 })

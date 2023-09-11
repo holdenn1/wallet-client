@@ -15,7 +15,6 @@ import userAvatar from 'icons/user-avatar.png'
 
 import { ref } from 'vue'
 
-
 const emit = defineEmits<{
   (e: 'uploadAvatar', value: File): void
 }>()

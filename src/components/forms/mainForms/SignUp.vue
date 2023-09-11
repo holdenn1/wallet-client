@@ -70,7 +70,7 @@ import { useUserStore } from '@/store/userStore'
 import { ref, computed, provide } from 'vue'
 import { useForm } from 'vee-validate'
 
-import type { InitialValues, RegistrationData } from './types'
+import { type InitialValuesSignUpForm, type RegistrationData } from './types'
 
 const userStore = useUserStore()
 
@@ -85,15 +85,7 @@ const currentSchema = computed(() => {
   return validationSchema[currentStepIdx.value]
 })
 
-const { values, handleSubmit } = useForm<InitialValues>({
-  initialValues: {
-    firstName: '',
-    lastName: '',
-    birthday: '',
-    email: '',
-    password: '',
-    confirmPassword: ''
-  },
+const { values, handleSubmit } = useForm<InitialValuesSignUpForm>({
   validationSchema: currentSchema,
   keepValuesOnUnmount: true
 })

@@ -7,6 +7,8 @@ import type { LoginUserData, RegistrationUserData } from './types'
 export const googleAuth = () => instance.get('auth/google')
 
 export const registrationUserRequest = (data: RegistrationUserData) => {
+  console.log(data)
+
   const registrationData = new FormData()
   registrationData.append('firstName', data.firstName)
   registrationData.append('lastName', data.lastName)

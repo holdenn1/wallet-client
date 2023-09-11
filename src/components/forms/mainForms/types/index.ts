@@ -1,4 +1,4 @@
-export type InitialValues = {
+export type InitialValuesSignUpForm = {
   firstName: ''
   lastName: ''
   birthday: ''
@@ -7,6 +7,6 @@ export type InitialValues = {
   confirmPassword: ''
 }
 
-export type RegistrationData = InitialValues & {
+export type RegistrationData = InitialValuesSignUpForm & {
   photo: File
 }

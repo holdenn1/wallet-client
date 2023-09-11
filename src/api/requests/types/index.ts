@@ -1,10 +1,7 @@
-export type RegistrationUserData = {
-  firstName: string
-  lastName: string
+import type { InitialValuesSignUpForm } from '@/components/forms/mainForms/types'
+
+export type RegistrationUserData = Omit<InitialValuesSignUpForm, 'confirmPassword'> & {
   photo: File
-  birthday: string
-  email: string
-  password: string
 }
 export type LoginUserData = {
   email: string

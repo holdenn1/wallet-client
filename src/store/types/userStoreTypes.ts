@@ -4,7 +4,7 @@ export type User = {
   lastName: string
   email: string
   photo: null
-  birthday: string
+  birthday: string | null
   cash: string
   isEmailConfirmed: boolean
 }
@@ -20,4 +20,12 @@ export type AuthResponse = {
     accessToken: string
     refreshToken: string
   }
+}
+
+export type GoogleParseData = {
+  
+    user: User
+    accessToken: string
+    refreshToken: string
+  
 }

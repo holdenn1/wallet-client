@@ -1,11 +1,22 @@
 import { ref } from 'vue'
 import { defineStore } from 'pinia'
-import { loginUserRequest, logoutUserRequest, registrationUserRequest } from '@/api/requests'
+import {
+  loginUserRequest,
+  logoutUserRequest,
+  refreshTokensLogin,
+  registrationUserRequest
+} from '@/api/requests'
 
-import type { AuthResponse, InitialValuesUserStore, User } from './types/userStoreTypes'
+import type {
+  AuthResponse,
+  InitialValuesUserStore,
+  RefreshTokensLoginResponse
+} from './types/userStoreTypes'
 import type { RegistrationUserData, LoginUserData } from '@/api/requests/types'
+import { useRouter } from 'vue-router'
 
 export const useUserStore = defineStore('user', () => {
+  const router = useRouter()
   const userState = ref<InitialValuesUserStore>({
     user: null,
     isContinueAuth: false
@@ -52,8 +63,30 @@ export const useUserStore = defineStore('user', () => {
         await logoutUserRequest(accessToken)
         localStorage.clear()
         userState.value.user = null
+        router.push('/')
       }
     } catch (e) {
+      console.error(e)
+    }
+  }
+
+  async function checkAuth() {
+    try {
+      const refreshToken = localStorage.getItem('refreshToken')
+      if (!refreshToken) {
+        throw new Error()
+      }
+      const {
+        data: { user, tokens }
+      }: RefreshTokensLoginResponse = await refreshTokensLogin(refreshToken)
+
+      console.log(tokens.refreshToken)
+      localStorage.setItem('accessToken', tokens.accessToken)
+      localStorage.setItem('refreshToken', tokens.refreshToken)
+      userState.value.user = user
+      router.push('/wallet')
+    } catch (e) {
+      router.push('/')
       console.error(e)
     }
   }
@@ -62,13 +95,17 @@ export const useUserStore = defineStore('user', () => {
     userState.value.isContinueAuth = isContinue
   }
 
-  function setUser(user: User) {
-    userState.value.user = user
-  }
-
   function aboutAuth() {
     userState.value.user = null
   }
 
-  return { userState, registrationUser, loginUser, logoutUser, setContinueAuth, aboutAuth, setUser }
+  return {
+    userState,
+    registrationUser,
+    loginUser,
+    logoutUser,
+    setContinueAuth,
+    aboutAuth,
+    checkAuth
+  }
 })

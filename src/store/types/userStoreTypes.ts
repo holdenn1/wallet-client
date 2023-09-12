@@ -23,9 +23,18 @@ export type AuthResponse = {
 }
 
 export type GoogleParseData = {
-  
     user: User
     accessToken: string
     refreshToken: string
-  
 }
+
+export type RefreshTokensLoginResponse = {
+  data: {
+    user: User;
+    tokens: {
+      refreshToken: string;
+      accessToken: string;
+    };
+  };
+};
+

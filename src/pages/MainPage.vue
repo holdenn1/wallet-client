@@ -13,8 +13,9 @@ import ModalWindow from 'ui/ModalWindow/ModalWindow.vue'
 import AuthGreeting from 'components/notifications/AuthGreeting.vue'
 import MainPageGreeting from 'components/notifications/MainPageGreeting.vue'
 
-import { ref, computed } from 'vue'
 import { useMainStore } from '@/store/mainStore'
+
+import { ref, computed } from 'vue'
 
 const modalType = ref<'login' | 'registration' | ''>('')
 

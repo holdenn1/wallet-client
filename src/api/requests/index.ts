@@ -4,7 +4,6 @@ import type { LoginUserData, RegistrationUserData } from './types'
 
 /* user's requests */
 
-export const googleAuth = () => instance.get('auth/google')
 
 export const registrationUserRequest = (data: RegistrationUserData) => {
   console.log(data)
@@ -32,12 +31,12 @@ export const logoutUserRequest = (accessToken: string) =>
   })
 
 export const refreshRequest = (refreshToken: string) =>
-  instance.get('auth/refresh', {
+  instance.get('auth/token/refresh', {
     headers: { authorization: `Bearer ${refreshToken}` }
   } as AxiosRequestConfig)
 
 export const refreshTokensLogin = (refreshToken: string) =>
-  instance.get('auth/refresh-login', {
+  instance.get('auth/token/refresh/refresh-login', {
     headers: { authorization: `Bearer ${refreshToken}` }
   } as AxiosRequestConfig)
 
@@ -52,4 +51,4 @@ export const uploadAvatar = (cover: File) => {
   })
 }
 
-export const getUserDataWithGoogleAuth = () => instance.get('auth/google/redirect')
+export const getUser = () => instance.get('user/get-user')

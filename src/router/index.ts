@@ -1,8 +1,8 @@
-import AppVue from '@/App.vue'
 import MainPageVue from '@/pages/MainPage.vue'
 import SignInPageVue from '@/pages/SignInPage.vue'
 import SignUpPageVue from '@/pages/SignUpPage.vue'
 import WalletPageVue from '@/pages/WalletPage.vue'
+import MainLayout from 'components/Layout/MainLayout.vue'
 import { createRouter, createWebHashHistory } from 'vue-router'
 
 const router = createRouter({
@@ -10,7 +10,7 @@ const router = createRouter({
   routes: [
     {
       path: '/',
-      component: AppVue,
+      component: MainLayout,
       children: [
         {
           path: '',

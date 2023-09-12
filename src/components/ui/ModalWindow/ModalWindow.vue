@@ -14,6 +14,7 @@
 import { useMainStore } from '@/store/mainStore'
 import { storeToRefs } from 'pinia'
 
+
 const mainStore = useMainStore()
 const { mainState } = storeToRefs(mainStore)
 </script>

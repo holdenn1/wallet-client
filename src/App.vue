@@ -1,22 +1,18 @@
 <template>
-  <Header />
-  <div class="main-wrapper">
-    <RouterView />
-  </div>
+  <router-view />
 </template>
 
 <script setup lang="ts">
-import Header from 'components/Header/Header.vue'
-
 import globalRouter from '@/router/globalRouter'
+import { useUserStore } from '@/store/userStore'
 
 import { onMounted } from 'vue'
-import { RouterView, useRouter } from 'vue-router'
+import { useRouter } from 'vue-router'
 
-import type { GoogleParseData } from './store/types/userStoreTypes'
-import { useUserStore } from './store/userStore'
+import type { GoogleParseData } from '@/store/types/userStoreTypes'
 
 const userStore = useUserStore()
+
 const router = useRouter()
 globalRouter.router = router
 
@@ -30,20 +26,23 @@ onMounted(() => {
     const decodedData = decodeURIComponent(userData)
     const cleanedData = decodedData.replace(/^j:/, '')
 
-    const { user, accessToken, refreshToken }: GoogleParseData = JSON.parse(cleanedData)
+    const { accessToken, refreshToken }: GoogleParseData = JSON.parse(cleanedData)
 
-    if (user) {
-      userStore.setUser(user)
+    if (accessToken && refreshToken) {
+      const cookieName = 'userData'
+
       localStorage.setItem('accessToken', accessToken)
       localStorage.setItem('refreshToken', refreshToken)
+      document.cookie = cookieName + '=;expires=Thu, 01 Jan 1970 00:00:00 GMT;path=/'
     }
+  }
+
+  if (localStorage.getItem('refreshToken')) {
+    userStore.checkAuth()
+  } else {
+    userStore.logoutUser()
   }
 })
 </script>
 
-<style lang="scss" scoped>
-.main-wrapper {
-  width: 100vw;
-  height: 100vh;
-}
-</style>
+<style lang="scss" scoped></style>

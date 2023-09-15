@@ -80,7 +80,6 @@ export const useUserStore = defineStore('user', () => {
         data: { user, tokens }
       }: RefreshTokensLoginResponse = await refreshTokensLogin(refreshToken)
 
-      console.log(tokens.refreshToken)
       localStorage.setItem('accessToken', tokens.accessToken)
       localStorage.setItem('refreshToken', tokens.refreshToken)
       userState.value.user = user
@@ -95,17 +94,12 @@ export const useUserStore = defineStore('user', () => {
     userState.value.isContinueAuth = isContinue
   }
 
-  function aboutAuth() {
-    userState.value.user = null
-  }
-
   return {
     userState,
     registrationUser,
     loginUser,
     logoutUser,
     setContinueAuth,
-    aboutAuth,
     checkAuth
   }
 })

@@ -7,6 +7,11 @@ export type InitialValuesSignUpForm = {
   confirmPassword: ''
 }
 
+export type InitialValuesSignInForm = {
+  email: ''
+  password: ''
+}
+
 export type RegistrationData = InitialValuesSignUpForm & {
   photo: File
 }

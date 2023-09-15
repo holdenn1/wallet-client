@@ -30,14 +30,12 @@ import { useUserStore } from '@/store/userStore'
 import { useForm } from 'vee-validate'
 import { useRouter } from 'vue-router'
 
+import type { InitialValuesSignInForm } from './types'
+
 const userStore = useUserStore()
 const router = useRouter()
 
-const { values, handleSubmit } = useForm({
-  initialValues: {
-    email: '',
-    password: ''
-  },
+const { values, handleSubmit } = useForm<InitialValuesSignInForm>({
   validationSchema
 })
 

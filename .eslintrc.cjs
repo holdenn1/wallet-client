@@ -14,7 +14,7 @@ module.exports = {
     'vue/no-undef-components': [
       'error',
       {
-        ignorePatterns: ['custom(\\-\\w+)+', 'router-view']
+        ignorePatterns: ['custom(\\-\\w+)+', 'router(\\-\\w+)+']
       }
     ],
     'vue/multi-word-component-names': [

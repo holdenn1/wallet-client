@@ -1,6 +1,6 @@
 <template>
   <div class="main-page-wrapper" @click="mainStore.setModalVisible(false)">
-    <ModalWindow><AuthGreeting :buttons-text="modalBtnTexts" /></ModalWindow>
+    <ModalWindow><AuthGreeting :auth-buttons-text="modalBtnTexts" /></ModalWindow>
     <MainPageGreeting
       @login="() => (modalType = 'login')"
       @registration="() => (modalType = 'registration')"
@@ -21,18 +21,9 @@ const modalType = ref<'login' | 'registration' | ''>('')
 
 const mainStore = useMainStore()
 
-const modalBtnTexts = computed(() => {
-  if (modalType.value === 'login') {
-    return {
-      googleBtnText: 'Sign in with Google',
-      emailBtnText: 'Sign in with Email'
-    }
-  }
-  return {
-    googleBtnText: 'Sign up with Google',
-    emailBtnText: 'Sign up with Email'
-  }
-})
+const modalBtnTexts = computed(() =>
+  modalType.value === 'login' ? 'Sign in with Email' : 'Sign up with Email'
+)
 </script>
 
 <style lang="scss" scoped>

@@ -51,4 +51,3 @@ export const uploadAvatar = (cover: File) => {
   })
 }
 
-export const getUser = () => instance.get('user/get-user')

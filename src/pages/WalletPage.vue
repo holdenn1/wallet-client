@@ -5,20 +5,14 @@
 </template>
 
 <script setup lang="ts">
-import { getUser } from '@/api/requests'
 import { useUserStore } from '@/store/userStore'
 
-import { onMounted } from 'vue'
 const userStore = useUserStore()
 
 const handleLogoutUser = async () => {
   await userStore.logoutUser()
 }
 
-onMounted(async () => {
-  const user = await getUser()
-  console.log(user)
-})
 </script>
 
 <style lang="scss" scoped>

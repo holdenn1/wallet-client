@@ -12,48 +12,44 @@
         :href="GOOGL_REDIRECT"
         class="navigate-to-google"
       >
-        {{ buttonsText.googleBtnText }}
+        Continue with Google
       </a>
-      <RouterLink
+      <router-link
         @click="mainStore.setModalVisible(false)"
         :to="{ path: navigateLink }"
         class="navigate-to-auth"
       >
-        {{ buttonsText.emailBtnText }}
-      </RouterLink>
+        {{ authButtonsText }}
+      </router-link>
     </div>
     <div class="is-has-account-wrapper">
       <h4 class="is-has-account-text">
         Already have an <span style="color: rgb(45, 72, 190); font-weight: 600">account</span>?
-        <RouterLink
+        <router-link
           :to="`${navigateLink === 'sign-up' ? 'sign-in' : 'sign-up'}`"
           style="font-weight: 600"
         >
           {{ navigateLink === 'sign-in' ? 'Sign up' : 'Sign in' }}
-        </RouterLink>
+        </router-link>
       </h4>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { RouterLink } from 'vue-router'
 import { computed } from 'vue'
 import { useMainStore } from '@/store/mainStore'
 
 const GOOGL_REDIRECT = 'http://localhost:7000/auth/google/'
 
 const props = defineProps<{
-  buttonsText: {
-    googleBtnText: string
-    emailBtnText: string
-  }
+  authButtonsText: string
 }>()
 
 const mainStore = useMainStore()
 
 const navigateLink = computed(() => {
-  return props.buttonsText.emailBtnText.includes('up') ? 'sign-up' : 'sign-in'
+  return props.authButtonsText.includes('up') ? 'sign-up' : 'sign-in'
 })
 </script>
 

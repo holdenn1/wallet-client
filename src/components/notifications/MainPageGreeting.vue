@@ -7,10 +7,10 @@
     <h3 class="main-page-greeting__text">Welcome to the wallet</h3>
     <div class="main-page-navigation-wrapper">
       <button type="button" @click="handleLoginModal" class="navigate-to-login">
-        Login to the account
+        <font-awesome-icon icon="right-to-bracket" /> <span>Login to the account</span>
       </button>
       <button type="button" @click="handleRegistrationModal" class="navigate-to-registration">
-        Create an account
+        <font-awesome-icon icon="user-plus" /> <span>Create an account</span>
       </button>
     </div>
   </div>
@@ -60,6 +60,13 @@ const handleRegistrationModal = () => {
     }
     .navigate-to-login {
       @include mainLinkNavigation(#0e38a9, rgb(31, 31, 199), rgb(57, 57, 190));
+      width: 220px;
+      span {
+        padding-left: 10px;
+        font-size: inherit;
+        font-weight: inherit;
+        color: inherit;
+      }
     }
     .navigate-to-registration {
       @include mainLinkNavigation(
@@ -67,6 +74,13 @@ const handleRegistrationModal = () => {
         hsl(243, 76%, 40%),
         hsl(243, 76%, 40%)
       );
+      width: 220px;
+      span {
+        padding-left: 10px;
+        font-size: inherit;
+        font-weight: inherit;
+        color: inherit;
+      }
     }
   }
 }

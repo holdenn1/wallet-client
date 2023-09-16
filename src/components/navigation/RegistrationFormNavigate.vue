@@ -1,7 +1,13 @@
 <template>
   <div class="registration-form-navigate">
-    <MainButton v-if="hasPrevious" type="previous" :title="'Previous'" :handleClick="goToPrev" />
-    <SubmitButton>{{ isLastStep ? 'Submit' : 'Next' }}</SubmitButton>
+    <MainButton v-if="hasPrevious" type="previous" :handleClick="goToPrev">
+      <font-awesome-icon icon="circle-arrow-left" /> <span style="margin-left: 10px">Previous</span>
+    </MainButton>
+    <SubmitButton>
+      <span style="margin-right: 10px">{{ isLastStep ? 'Submit' : 'Next' }}</span>
+      <font-awesome-icon v-if="isLastStep" icon="right-to-bracket" />
+      <font-awesome-icon v-else icon="circle-arrow-right" />
+    </SubmitButton>
   </div>
 </template>
 

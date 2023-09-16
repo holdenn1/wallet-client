@@ -1,26 +1,9 @@
 <template>
-  <div class="main-page-wrapper">
-    <button type="button" @click="handleLogoutUser">logout</button>
-  </div>
+  <WalletLayout />
 </template>
 
 <script setup lang="ts">
-import { useUserStore } from '@/store/userStore'
-
-const userStore = useUserStore()
-
-const handleLogoutUser = async () => {
-  await userStore.logoutUser()
-}
-
+import WalletLayout from 'components/Layouts/WalletLayout.vue'
 </script>
 
-<style lang="scss" scoped>
-@import '@/styles/mixins/d-flex-ctr.scss';
-
-.main-page-wrapper {
-  width: 100%;
-  height: 100%;
-  @include flexCenter;
-}
-</style>
+<style scoped></style>

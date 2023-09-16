@@ -63,7 +63,7 @@ export const useUserStore = defineStore('user', () => {
         await logoutUserRequest(accessToken)
         localStorage.clear()
         userState.value.user = null
-        router.push('/')
+        router.push({ path: '/' })
       }
     } catch (e) {
       console.error(e)
@@ -83,9 +83,9 @@ export const useUserStore = defineStore('user', () => {
       localStorage.setItem('accessToken', tokens.accessToken)
       localStorage.setItem('refreshToken', tokens.refreshToken)
       userState.value.user = user
-      router.push('/wallet')
+      router.push({ name: 'wallet' })
     } catch (e) {
-      router.push('/')
+      router.push({ path: '/' })
       console.error(e)
     }
   }

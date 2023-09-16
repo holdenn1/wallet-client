@@ -15,7 +15,10 @@
       placeholder="Input your password"
     />
     <div class="submit-btn-wrapper">
-      <SubmitButton>Submit</SubmitButton>
+      <SubmitButton>
+        <span style="margin-right: 10px">Submit</span>
+        <font-awesome-icon icon="right-to-bracket" />
+      </SubmitButton>
     </div>
   </form>
 </template>

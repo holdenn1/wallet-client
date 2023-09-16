@@ -12,14 +12,16 @@
         :href="GOOGL_REDIRECT"
         class="navigate-to-google"
       >
-        Continue with Google
+        <font-awesome-icon :icon="['fab', 'google']" />
+        <span style="padding-left: 10px">Continue with Google</span>
       </a>
       <router-link
         @click="mainStore.setModalVisible(false)"
         :to="{ path: navigateLink }"
         class="navigate-to-auth"
       >
-        {{ authButtonsText }}
+        <font-awesome-icon icon="envelope" />
+        <span style="padding-left: 10px"> {{ authButtonsText }}</span>
       </router-link>
     </div>
     <div class="is-has-account-wrapper">
@@ -81,10 +83,14 @@ const navigateLink = computed(() => {
   }
   .auth-navigate-wrapper {
     display: flex;
-    justify-content: space-around;
+    justify-content: space-evenly;
     align-items: center;
+    @media screen and (max-width: 560px) {
+      flex-direction: column;
+    }
     .navigate-to-google {
       @include mainLinkNavigation(#0e38a9, rgb(31, 31, 199), rgb(57, 57, 190));
+      width: 220px;
     }
     .navigate-to-auth {
       @include mainLinkNavigation(
@@ -92,6 +98,7 @@ const navigateLink = computed(() => {
         hsl(243, 76%, 40%),
         hsl(243, 76%, 40%)
       );
+      width: 220px;
     }
   }
   .is-has-account-wrapper {

@@ -22,7 +22,7 @@ instance.interceptors.request.use(
   },
   (err) => {
     if (err.response.data.statusCode == 401) {
-      globalRouter.router?.push('/sign-in')
+      globalRouter.router?.push({ name: 'sign-in' })
     }
     return Promise.reject(err)
   }
@@ -44,7 +44,7 @@ instance.interceptors.response.use(
           const refreshToken = localStorage.getItem('refreshToken')
 
           if (!refreshToken) {
-            globalRouter.router?.push('/sign-in')
+            globalRouter.router?.push({ name: 'sign-in' })
             return Promise.reject(err)
           }
 
@@ -63,7 +63,7 @@ instance.interceptors.response.use(
       }
     } catch (e) {
       if (err.response.data.statusCode == 401) {
-        globalRouter.router?.push('/sign-in')
+        globalRouter.router?.push({ name: 'sign-in' })
       }
       localStorage.clear()
       return Promise.reject(err)

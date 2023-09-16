@@ -2,7 +2,7 @@ import MainPageVue from '@/pages/MainPage.vue'
 import SignInPageVue from '@/pages/SignInPage.vue'
 import SignUpPageVue from '@/pages/SignUpPage.vue'
 import WalletPageVue from '@/pages/WalletPage.vue'
-import MainLayout from 'components/Layout/MainLayout.vue'
+import MainLayout from 'components/Layouts/MainLayout.vue'
 import NotFound from 'components/errors/NotFound.vue'
 import { createRouter, createWebHashHistory } from 'vue-router'
 

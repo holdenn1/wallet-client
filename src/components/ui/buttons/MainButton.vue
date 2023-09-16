@@ -1,11 +1,11 @@
 <template>
   <button type="button" :class="`btn-type-${type}`" @click="handleClick">
-    {{ title }}
+    <slot />
   </button>
 </template>
 
 <script setup lang="ts">
-defineProps<{ type: string; title: string; handleClick(): void }>()
+defineProps<{ type: string; handleClick(): void }>()
 </script>
 
 <style lang="scss" scoped>
@@ -13,6 +13,4 @@ defineProps<{ type: string; title: string; handleClick(): void }>()
 .btn-type-previous {
   @include mainButton(#5293db, #3a76b8);
 }
-
-
 </style>

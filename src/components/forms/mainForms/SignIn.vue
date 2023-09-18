@@ -16,8 +16,8 @@
     />
     <div class="submit-btn-wrapper">
       <SubmitButton>
-        <span style="margin-right: 10px">Submit</span>
-        <font-awesome-icon icon="right-to-bracket" />
+        <span>Submit</span>
+        <font-awesome-icon icon="right-to-bracket" style="margin-left: 10px" />
       </SubmitButton>
     </div>
   </form>

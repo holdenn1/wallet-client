@@ -5,7 +5,7 @@
       <p class="confirm-email-text">
         We sent you a message to
         <a href="https://mail.google.com/">
-          <span style="font-weight: 600; color: hsl(242, 61%, 48%)">{{ email }}</span>
+          <span>{{ email }}</span>
         </a>
         with a link to confirm your account, please go to confirm your mail to continue using the
         application
@@ -42,6 +42,10 @@ defineProps<{ email: string | undefined }>()
     margin-bottom: 20px;
     @media screen and (max-width: 455px) {
       font-size: 28px;
+    }
+    span {
+      font-weight: 600;
+      color: hsl(242, 61%, 48%);
     }
   }
 

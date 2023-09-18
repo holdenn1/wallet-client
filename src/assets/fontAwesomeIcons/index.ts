@@ -4,14 +4,22 @@ import {
   faRightToBracket,
   faUserPlus,
   faCircleArrowRight,
-  faCircleArrowLeft
+  faCircleArrowLeft,
+  faCirclePlus,
+  faCalendarMinus,
+  faArrowRightFromBracket,
+  faSliders
 } from '@fortawesome/free-solid-svg-icons'
 
 export default [
   faEnvelope,
+  faCirclePlus,
   faRightToBracket,
+  faCalendarMinus,
   faUserPlus,
   faCircleArrowRight,
   faCircleArrowLeft,
-  faGoogle
+  faGoogle,
+  faSliders,
+  faArrowRightFromBracket
 ]

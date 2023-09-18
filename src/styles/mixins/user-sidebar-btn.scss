@@ -1,0 +1,6 @@
+@mixin userSidebarBtn($w, $h) {
+  width: $w;
+  height: $h;
+  border: 1px solid hsl(240, 5%, 66%);
+  border-radius: 12px;
+}

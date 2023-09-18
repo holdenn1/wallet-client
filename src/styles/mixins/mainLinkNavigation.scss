@@ -4,7 +4,7 @@
 @mixin mainLinkNavigation($bg, $bg-hover, $b-shadow-col) {
   @include flexCenter;
   @include mainButton($bg, $bg-hover);
-  width: 200px;
+  width: 210px;
   box-shadow: 1px 1px 6px 2px $bg-hover;
   transition: 0.5s;
 

@@ -60,12 +60,8 @@ const handleRegistrationModal = () => {
     }
     .navigate-to-login {
       @include mainLinkNavigation(#0e38a9, rgb(31, 31, 199), rgb(57, 57, 190));
-      width: 220px;
       span {
         padding-left: 10px;
-        font-size: inherit;
-        font-weight: inherit;
-        color: inherit;
       }
     }
     .navigate-to-registration {
@@ -74,12 +70,8 @@ const handleRegistrationModal = () => {
         hsl(243, 76%, 40%),
         hsl(243, 76%, 40%)
       );
-      width: 220px;
       span {
         padding-left: 10px;
-        font-size: inherit;
-        font-weight: inherit;
-        color: inherit;
       }
     }
   }

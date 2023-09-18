@@ -12,21 +12,21 @@
         :href="GOOGL_REDIRECT"
         class="navigate-to-google"
       >
-        <font-awesome-icon :icon="['fab', 'google']" />
-        <span style="padding-left: 10px">Continue with Google</span>
+        <font-awesome-icon :icon="['fab', 'google']" style="padding-right: 10px" />
+        <span>Continue with Google</span>
       </a>
       <router-link
         @click="mainStore.setModalVisible(false)"
         :to="{ path: navigateLink }"
         class="navigate-to-auth"
       >
-        <font-awesome-icon icon="envelope" />
-        <span style="padding-left: 10px"> {{ authButtonsText }}</span>
+        <font-awesome-icon icon="envelope" style="padding-right: 10px" />
+        <span> {{ authButtonsText }}</span>
       </router-link>
     </div>
     <div class="is-has-account-wrapper">
       <h4 class="is-has-account-text">
-        Already have an <span style="color: rgb(45, 72, 190); font-weight: 600">account</span>?
+        Already have an <span>account</span>?
         <router-link
           :to="`${navigateLink === 'sign-up' ? 'sign-in' : 'sign-up'}`"
           style="font-weight: 600"
@@ -90,7 +90,6 @@ const navigateLink = computed(() => {
     }
     .navigate-to-google {
       @include mainLinkNavigation(#0e38a9, rgb(31, 31, 199), rgb(57, 57, 190));
-      width: 220px;
     }
     .navigate-to-auth {
       @include mainLinkNavigation(
@@ -98,7 +97,6 @@ const navigateLink = computed(() => {
         hsl(243, 76%, 40%),
         hsl(243, 76%, 40%)
       );
-      width: 220px;
     }
   }
   .is-has-account-wrapper {
@@ -106,6 +104,10 @@ const navigateLink = computed(() => {
     .is-has-account-text {
       text-align: center;
       font-size: 20px;
+      span {
+        color: rgb(45, 72, 190);
+        font-weight: 600;
+      }
     }
   }
 }

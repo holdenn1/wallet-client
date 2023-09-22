@@ -43,10 +43,6 @@ defineProps<{ email: string | undefined }>()
     @media screen and (max-width: 455px) {
       font-size: 28px;
     }
-    span {
-      font-weight: 600;
-      color: hsl(242, 61%, 48%);
-    }
   }
 
   .confirm-email-text {
@@ -54,6 +50,10 @@ defineProps<{ email: string | undefined }>()
     font-size: 28px;
     @media screen and (max-width: 455px) {
       font-size: 22px;
+    }
+    span {
+      font-weight: 600;
+      color: hsl(242, 61%, 48%);
     }
   }
 }

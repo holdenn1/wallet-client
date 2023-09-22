@@ -1,5 +1,7 @@
 import { ref } from 'vue'
 import { defineStore } from 'pinia'
+import { useToastify } from 'vue-toastify-3'
+
 import {
   loginUserRequest,
   logoutUserRequest,
@@ -10,19 +12,27 @@ import {
 import type {
   AuthResponse,
   InitialValuesUserStore,
-  RefreshTokensLoginResponse
+  LoginUserActionProps,
+  RefreshTokensLoginResponse,
+  RegistrationUserActionProps
 } from './types/userStoreTypes'
-import type { RegistrationUserData, LoginUserData } from '@/api/requests/types'
 import { useRouter } from 'vue-router'
+import { AxiosError } from 'axios'
 
 export const useUserStore = defineStore('user', () => {
   const router = useRouter()
+  const { toastify } = useToastify()
   const userState = ref<InitialValuesUserStore>({
-    user: null,
-    isContinueAuth: false
+    user: null
   })
 
-  async function registrationUser(data: RegistrationUserData) {
+  async function registrationUser({
+    data,
+    currentStepIdx,
+    isShowEmailConfirmMessage,
+    uploadedAvatar,
+    resetForm
+  }: RegistrationUserActionProps) {
     try {
       const {
         data: { user, accessToken, refreshToken }
@@ -30,16 +40,24 @@ export const useUserStore = defineStore('user', () => {
 
       if (user) {
         userState.value.user = user
-        userState.value.isContinueAuth = false
         localStorage.setItem('accessToken', accessToken)
         localStorage.setItem('refreshToken', refreshToken)
+        currentStepIdx.value = 0
+        uploadedAvatar.value.photo = null
+        resetForm()
+        isShowEmailConfirmMessage.value = true
       }
     } catch (e) {
-      console.error(e)
+      if (e instanceof AxiosError) {
+        toastify('error', e.response?.data?.message || 'An error occurred')
+        console.error(e)
+      } else {
+        console.error(e)
+      }
     }
   }
 
-  async function loginUser(data: LoginUserData) {
+  async function loginUser({ data, isShowEmailConfirmMessage, resetForm }: LoginUserActionProps) {
     try {
       const {
         data: { user, accessToken, refreshToken }
@@ -47,12 +65,22 @@ export const useUserStore = defineStore('user', () => {
 
       if (user) {
         userState.value.user = user
-        userState.value.isContinueAuth = false
         localStorage.setItem('accessToken', accessToken)
         localStorage.setItem('refreshToken', refreshToken)
+        resetForm()
+        if (user.isEmailConfirmed) {
+          router.push({ name: 'wallet' })
+        } else {
+          isShowEmailConfirmMessage.value = true
+        }
       }
     } catch (e) {
-      console.error(e)
+      if (e instanceof AxiosError) {
+        toastify('error', e.response?.data?.message || 'An error occurred')
+        console.error(e)
+      } else {
+        console.error(e)
+      }
     }
   }
 
@@ -66,6 +94,7 @@ export const useUserStore = defineStore('user', () => {
         router.push({ path: '/' })
       }
     } catch (e) {
+      toastify('error', 'An error occurred')
       console.error(e)
     }
   }
@@ -90,16 +119,11 @@ export const useUserStore = defineStore('user', () => {
     }
   }
 
-  function setContinueAuth(isContinue: boolean) {
-    userState.value.isContinueAuth = isContinue
-  }
-
   return {
     userState,
     registrationUser,
     loginUser,
     logoutUser,
-    setContinueAuth,
     checkAuth
   }
 })

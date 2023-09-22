@@ -1,4 +1,5 @@
 <template>
+  <Toastify/>
   <Header />
   <div class="main-wrapper">
     <router-view/>

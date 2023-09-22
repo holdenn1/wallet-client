@@ -1,10 +1,11 @@
 <template>
   <AuthWrapper>
-    <SignUp v-if="!!userState.isContinueAuth" />
-    <ConfirmEmailAddress
-      v-if="!userState.user?.isEmailConfirmed && !userState.isContinueAuth"
-      :email="userState.user?.email"
-    />
+    <SignUp v-slot="{ isShowEmailConfirmMessage }"> 
+      <ConfirmEmailAddress
+        v-if="isShowEmailConfirmMessage"
+        :email="userStore.userState.user?.email"
+      />
+    </SignUp>
   </AuthWrapper>
 </template>
 
@@ -15,17 +16,7 @@ import ConfirmEmailAddress from 'components/notifications/ConfirmEmailAddress.vu
 
 import { useUserStore } from '@/store/userStore'
 
-import { onMounted } from 'vue'
-import { storeToRefs } from 'pinia'
-
 const userStore = useUserStore()
-
-const { userState } = storeToRefs(userStore)
-
-onMounted(() => {
-  userStore.setContinueAuth(true)
-})
-
 </script>
 
 <style lang="scss" scoped></style>

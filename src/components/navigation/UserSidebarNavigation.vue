@@ -6,7 +6,7 @@
         style="color: hsl(242, 61%, 48%); padding-right: 8px"
       />Settings
     </button>
-    <button class="logout">
+    <button class="logout" type="button" @click="userStore.logoutUser">
       <font-awesome-icon
         icon="fa-arrow-right-from-bracket"
         style="color: hsl(242, 61%, 48%); padding-right: 8px"
@@ -15,7 +15,12 @@
   </div>
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { useUserStore } from '@/store/userStore';
+
+
+const userStore = useUserStore()
+</script>
 
 <style lang="scss" scoped>
 @import '@/styles/mixins/user-sidebar-btn.scss';

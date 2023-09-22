@@ -1,5 +1,5 @@
 <template>
-  <form class="sign-in-form" @submit="onSubmit">
+  <form class="sign-in-form" @submit="onSubmit" v-if="!isShowEmailConfirmMessage">
     <CustomFormInput
       :value="values.email"
       name="email"
@@ -21,6 +21,7 @@
       </SubmitButton>
     </div>
   </form>
+  <slot :isShowEmailConfirmMessage="isShowEmailConfirmMessage"></slot>
 </template>
 
 <script setup lang="ts">
@@ -30,24 +31,20 @@ import SubmitButton from 'ui/buttons/SubmitButton.vue'
 import validationSchema from '@/utils/validate/authValidateSchema'
 import { useUserStore } from '@/store/userStore'
 
+import { ref } from 'vue'
 import { useForm } from 'vee-validate'
-import { useRouter } from 'vue-router'
 
 import type { InitialValuesSignInForm } from './types'
 
+const isShowEmailConfirmMessage = ref<boolean>(false)
 const userStore = useUserStore()
-const router = useRouter()
 
 const { values, handleSubmit } = useForm<InitialValuesSignInForm>({
   validationSchema
 })
 
 const onSubmit = handleSubmit(async (values, { resetForm }) => {
-  await userStore.loginUser(values)
-  if (userStore.userState.user?.isEmailConfirmed) {
-    router.push({ name: 'wallet' })
-    resetForm()
-  }
+  await userStore.loginUser({ data: values, resetForm, isShowEmailConfirmMessage })
 })
 </script>
 

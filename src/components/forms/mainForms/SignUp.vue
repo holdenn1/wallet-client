@@ -1,5 +1,5 @@
 <template>
-  <form class="sign-up-form" @submit="onSubmit">
+  <form class="sign-up-form" @submit="onSubmit" v-if="!isShowEmailConfirmMessage">
     <ProgressForm :active-step="currentStepIdx + 1" />
 
     <FormStep>
@@ -46,7 +46,9 @@
     </FormStep>
 
     <FormStep
-      ><UploadAvatarStep @upload-avatar="(file) => (uploadedAvatar.photo = file)"
+      ><UploadAvatarStep
+        @upload-avatar="(file) => (uploadedAvatar.photo = file)"
+        :uploaded-avatar="uploadedAvatar"
     /></FormStep>
 
     <RegistrationFormNavigate
@@ -55,6 +57,7 @@
       :is-last-step="isLastStep"
     />
   </form>
+  <slot :isShowEmailConfirmMessage="isShowEmailConfirmMessage"></slot>
 </template>
 
 <script setup lang="ts">
@@ -68,15 +71,18 @@ import validationSchema from '@/utils/validate/registrationValidateSchema'
 import { useUserStore } from '@/store/userStore'
 
 import { ref, computed, provide } from 'vue'
+import { useToastify } from 'vue-toastify-3'
 import { useForm } from 'vee-validate'
 
 import { type InitialValuesSignUpForm, type RegistrationData } from './types'
 
 const userStore = useUserStore()
+const { toastify } = useToastify()
 
 const currentStepIdx = ref(0)
 const stepCounter = ref(0)
 const uploadedAvatar = ref<{ photo: File | null }>({ photo: null })
+const isShowEmailConfirmMessage = ref<boolean>(false)
 
 provide('STEP_COUNTER', stepCounter)
 provide('CURRENT_STEP_INDEX', currentStepIdx)
@@ -109,14 +115,15 @@ const onSubmit = handleSubmit(async (values, { resetForm }) => {
       ...values,
       photo: uploadedAvatar.value.photo
     }
-    await userStore.registrationUser(data)
-    if (userStore.userState.user) {
-      currentStepIdx.value = 0
-      uploadedAvatar.value.photo = null
-      resetForm()
-    }
+    await userStore.registrationUser({
+      data,
+      currentStepIdx,
+      uploadedAvatar,
+      isShowEmailConfirmMessage,
+      resetForm
+    })
   } else {
-    console.log('check fils')
+    toastify('warning', 'Avatar is required field')
   }
 })
 

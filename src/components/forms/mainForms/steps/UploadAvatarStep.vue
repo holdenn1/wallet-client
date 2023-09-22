@@ -13,14 +13,32 @@
 <script setup lang="ts">
 import userAvatar from 'icons/user-avatar.png'
 
-import { ref } from 'vue'
+import { ref, onMounted, toRefs } from 'vue'
 
 const emit = defineEmits<{
   (e: 'uploadAvatar', value: File): void
 }>()
 
+const props = defineProps<{
+  uploadedAvatar: {
+    photo: File | null
+  }
+}>()
+
+const { uploadedAvatar } = toRefs(props)
+
 const avatarPreview = ref()
 const reader = new FileReader()
+
+onMounted(() => {
+  if (uploadedAvatar.value.photo) {
+    reader.readAsDataURL(uploadedAvatar.value.photo)
+    reader.onload = () => {
+      avatarPreview.value = reader.result
+    
+    }
+  }
+})
 
 const handleFileInputChange = async (event: Event) => {
   try {
@@ -31,6 +49,7 @@ const handleFileInputChange = async (event: Event) => {
       reader.readAsDataURL(file)
       reader.onload = () => {
         avatarPreview.value = reader.result
+      
       }
     }
   } catch (e) {

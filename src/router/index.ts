@@ -2,6 +2,7 @@ import MainPageVue from '@/pages/MainPage.vue'
 import SignInPageVue from '@/pages/SignInPage.vue'
 import SignUpPageVue from '@/pages/SignUpPage.vue'
 import WalletPageVue from '@/pages/WalletPage.vue'
+import RecoverPasswordPage from '@/pages/RecoverPasswordPage.vue'
 import MainLayout from 'components/Layouts/MainLayout.vue'
 import NotFound from 'components/errors/NotFound.vue'
 import { createRouter, createWebHashHistory } from 'vue-router'
@@ -27,6 +28,11 @@ const router = createRouter({
           path: 'sign-up',
           name: 'sign-up',
           component: SignUpPageVue
+        },
+        {
+          path: 'recover-password/:userId',
+          name: 'recover-password',
+          component: RecoverPasswordPage
         },
         {
           path: 'wallet',

@@ -61,6 +61,7 @@ const {
     border-right: none;
     border-left: none;
     border-bottom: 0.5px solid rgb(78, 78, 78);
+    background-color: inherit;
 
     &:focus {
       outline: none;

@@ -57,15 +57,15 @@
       :is-last-step="isLastStep"
     />
   </form>
-  <slot :isShowEmailConfirmMessage="isShowEmailConfirmMessage"></slot>
+  <ConfirmEmailAddress v-if="isShowEmailConfirmMessage" :email="userStore.userState.user?.email" />
 </template>
 
 <script setup lang="ts">
 import FormStep from './steps/FormStep.vue'
 import ProgressForm from './ProgressForm.vue'
-import CustomFormInput from 'ui/inputs/CustomFormInput.vue'
 import UploadAvatarStep from './steps/UploadAvatarStep.vue'
 import RegistrationFormNavigate from 'navigation/RegistrationFormNavigate.vue'
+import ConfirmEmailAddress from 'components/notifications/ConfirmEmailAddress.vue'
 
 import validationSchema from '@/utils/validate/registrationValidateSchema'
 import { useUserStore } from '@/store/userStore'

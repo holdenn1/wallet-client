@@ -65,10 +65,10 @@ export const useUserStore = defineStore('user', () => {
 
       if (user) {
         userState.value.user = user
-        localStorage.setItem('accessToken', accessToken)
-        localStorage.setItem('refreshToken', refreshToken)
         resetForm()
         if (user.isEmailConfirmed) {
+          localStorage.setItem('accessToken', accessToken)
+          localStorage.setItem('refreshToken', refreshToken)
           router.push({ name: 'wallet' })
         } else {
           isShowEmailConfirmMessage.value = true

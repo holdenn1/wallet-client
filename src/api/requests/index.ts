@@ -4,9 +4,7 @@ import type { LoginUserData, RegistrationUserData } from './types'
 
 /* user's requests */
 
-
 export const registrationUserRequest = (data: RegistrationUserData) => {
-
   const registrationData = new FormData()
   registrationData.append('firstName', data.firstName)
   registrationData.append('lastName', data.lastName)
@@ -50,3 +48,8 @@ export const uploadAvatar = (cover: File) => {
   })
 }
 
+export const sendMessageForRecoverPassword = (userEmail: { email: string }) =>
+  instance.post('auth/send/message/recover-password', userEmail)
+
+export const recoverUserPassword = (userEmail: { userId: string; password: string }) =>
+  instance.post('auth/recover/user-password', userEmail)

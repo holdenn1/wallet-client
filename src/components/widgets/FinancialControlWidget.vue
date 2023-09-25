@@ -12,8 +12,9 @@
       >
     </div>
     <div class="operation">
-      <div class="operation__type" style="width: 40px">
+      <font-awesome-icon icon="check" class="confirm-operation" size="2xl" />
 
+      <div class="operation__type" style="width: 40px">
         <font-awesome-icon
           v-show="operationType === 'cost'"
           icon="minus"
@@ -77,6 +78,13 @@ const operationType = ref<'income' | 'cost' | 'transfer'>('cost')
     align-items: center;
     color: white;
     padding: 0 12px;
+    position: relative;
+    .confirm-operation {
+      position: absolute;
+      top: 12px;
+      right: 30px;
+      cursor: pointer;
+    }
 
     &__currency {
       font-size: 22px;

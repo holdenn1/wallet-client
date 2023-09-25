@@ -17,12 +17,6 @@ module.exports = {
         ignorePatterns: ['custom(\\-\\w+)+', 'router(\\-\\w+)+', 'font-awesome-icon', 'Toastify']
       }
     ],
-    'vue/multi-word-component-names': [
-      'error',
-      {
-        ignores: ['Header']
-      }
-    ]
   },
   parserOptions: {
     ecmaVersion: 'latest'

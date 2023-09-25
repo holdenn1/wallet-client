@@ -7,6 +7,8 @@ import {
   faCircleArrowLeft,
   faCirclePlus,
   faCalendarMinus,
+  faCheck,
+  faEllipsisVertical,
   faArrowRightFromBracket,
   faSliders,
   faMinus,
@@ -23,6 +25,8 @@ export default [
   faCircleArrowLeft,
   faGoogle,
   faSliders,
+  faCheck,
+  faEllipsisVertical,
   faMinus,
   faPlus,
   faArrowRightFromBracket

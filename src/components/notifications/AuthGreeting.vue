@@ -28,6 +28,7 @@
       <h4 class="is-has-account-text">
         Already have an <span>account</span>?
         <router-link
+          @click="mainStore.setModalVisible(false)"
           :to="`${navigateLink === 'sign-up' ? 'sign-in' : 'sign-up'}`"
           style="font-weight: 600"
         >

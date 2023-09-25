@@ -51,5 +51,5 @@ export const uploadAvatar = (cover: File) => {
 export const sendMessageForRecoverPassword = (userEmail: { email: string }) =>
   instance.post('auth/send/message/recover-password', userEmail)
 
-export const recoverUserPassword = (userEmail: { userId: string; password: string }) =>
-  instance.post('auth/recover/user-password', userEmail)
+export const recoverUserPassword = (userData: { token: string; password: string }) =>
+  instance.post('auth/recover/user-password', userData)

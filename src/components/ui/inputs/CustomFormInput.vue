@@ -43,6 +43,7 @@ const {
 </script>
 
 <style lang="scss" scoped>
+@import '@/styles/mixins/input.scss';
 .form-input {
   width: 100%;
 
@@ -54,32 +55,7 @@ const {
     margin-bottom: 10px;
   }
   .input {
-    padding: 10px 8px;
-    width: 100%;
-    margin-bottom: 10px;
-    border-top: none;
-    border-right: none;
-    border-left: none;
-    border-bottom: 0.5px solid rgb(78, 78, 78);
-    background-color: inherit;
-
-    &:focus {
-      outline: none;
-      border-top: none;
-      border-right: none;
-      border-left: none;
-      border-bottom: 1px solid rgb(0, 0, 0);
-    }
-
-    &:-webkit-autofill,
-    &:-webkit-autofill:hover,
-    &:-webkit-autofill:focus,
-    &:-webkit-autofill:active {
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: #000000;
-      transition: background-color 5000s ease-in-out 0s;
-      box-shadow: inset 0 0 20px 20px #ffffff29;
-    }
+    @include input;
   }
   .error {
     text-align: center;

@@ -16,4 +16,22 @@ defineProps<{ type: string; handleClick(): void }>()
 .btn-type-button {
   @include mainButton(#1660b4, #3a76b8);
 }
+
+.btn-type-money-operation{
+  @include mainButton(inherit, hsl(199, 64%, 42%));
+  width: 100%;
+  height: 60px;
+  transition: 0.7s;
+  margin: 0;
+  border-radius: 0;
+}
+
+.btn-type-money-category{
+  @include mainButton(inherit, hsl(199, 64%, 42%));
+  width: 100%;
+  height: 60px;
+  transition: 0.7s;
+  margin: 0;
+  border-radius: 0;
+}
 </style>

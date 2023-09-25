@@ -12,8 +12,8 @@
 </template>
 
 <script setup lang="ts">
+import BillsWidget from './UserBills.vue'
 import preAvatar from '@/assets/icons/user-avatar.png'
-import BillsWidget from 'components/widgets/BillsWidget.vue'
 import UserSidebarNavigation from 'navigation/UserSidebarNavigation.vue'
 </script>
 

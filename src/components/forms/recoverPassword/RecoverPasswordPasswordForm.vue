@@ -53,9 +53,9 @@ const { values, handleSubmit } = useForm({
 
 const onSubmit = handleSubmit(async (values, { resetForm }) => {
   try {
-    if (typeof route.params.userId === 'string') {
+    if (typeof route.query.token === 'string') {
       const data = await recoverUserPassword({
-        userId: route.params.userId,
+        token: route.query.token,
         password: values.password
       })
 

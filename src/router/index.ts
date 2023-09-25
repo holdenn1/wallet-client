@@ -4,6 +4,8 @@ import SignUpPageVue from '@/pages/SignUpPage.vue'
 import WalletPageVue from '@/pages/WalletPage.vue'
 import RecoverPasswordPage from '@/pages/RecoverPasswordPage.vue'
 import MainLayout from 'components/Layouts/MainLayout.vue'
+import Widgets from 'components/widgets/Widgets.vue'
+
 import NotFound from 'components/errors/NotFound.vue'
 import { createRouter, createWebHashHistory } from 'vue-router'
 
@@ -30,14 +32,21 @@ const router = createRouter({
           component: SignUpPageVue
         },
         {
-          path: 'recover-password/:userId',
+          path: 'recover-password',
           name: 'recover-password',
           component: RecoverPasswordPage
         },
         {
           path: 'wallet',
           name: 'wallet',
-          component: WalletPageVue
+          component: WalletPageVue,
+          children:[
+            {
+              path: 'widgets',
+              name: 'widgets',
+              component: Widgets
+            },
+          ]
         }
       ]
     },

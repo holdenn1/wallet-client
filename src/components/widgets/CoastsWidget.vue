@@ -7,5 +7,6 @@
 <style lang="scss" scoped>
 .coast-widget-wrapper {
   grid-area: costs;
+  
 }
 </style>

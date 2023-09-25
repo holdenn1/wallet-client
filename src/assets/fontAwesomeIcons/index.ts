@@ -8,7 +8,9 @@ import {
   faCirclePlus,
   faCalendarMinus,
   faArrowRightFromBracket,
-  faSliders
+  faSliders,
+  faMinus,
+  faPlus
 } from '@fortawesome/free-solid-svg-icons'
 
 export default [
@@ -21,5 +23,7 @@ export default [
   faCircleArrowLeft,
   faGoogle,
   faSliders,
+  faMinus,
+  faPlus,
   faArrowRightFromBracket
 ]

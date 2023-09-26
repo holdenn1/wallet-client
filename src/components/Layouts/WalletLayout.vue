@@ -23,13 +23,11 @@ import UserSidebar from 'components/sidebars/user-sidebar/UserSidebar.vue'
   height: calc(100vh - 60px);
   display: grid;
   grid-template-columns: minmax(310px, 1fr) minmax(310px, 1fr) minmax(260px, 320px);
-  grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr 1fr;
   gap: 0px 0px;
   grid-template-areas:
     'financial-control costs user-sidebar'
     'financial-control costs user-sidebar'
-    'financial-control costs user-sidebar'
-    'cost-structure costs user-sidebar'
     'cost-structure cash-flow user-sidebar'
     'cost-structure cash-flow user-sidebar';
 }

@@ -3,6 +3,7 @@ import SignInPageVue from '@/pages/SignInPage.vue'
 import SignUpPageVue from '@/pages/SignUpPage.vue'
 import WalletPageVue from '@/pages/WalletPage.vue'
 import RecoverPasswordPage from '@/pages/RecoverPasswordPage.vue'
+import DefaultWidgets from 'components/sidebars/widget-panel/DefaultWidgets.vue'
 import MainLayout from 'components/Layouts/MainLayout.vue'
 import Widgets from 'components/widgets/Widgets.vue'
 
@@ -40,12 +41,19 @@ const router = createRouter({
           path: 'wallet',
           name: 'wallet',
           component: WalletPageVue,
-          children:[
+          children: [
             {
               path: 'widgets',
               name: 'widgets',
-              component: Widgets
-            },
+              component: Widgets,
+              children: [
+                {
+                  path: '',
+                  name: 'default-widgets',
+                  component: DefaultWidgets
+                }
+              ]
+            }
           ]
         }
       ]

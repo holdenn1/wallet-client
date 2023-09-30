@@ -12,12 +12,26 @@ import {
   faArrowRightFromBracket,
   faSliders,
   faMinus,
-  faPlus
+  faPlus,
+  faUtensils,
+  faBagShopping,
+  faHouseUser,
+  faBus,
+  faCar,
+  faPerson,
+  faDesktop, faBars
 } from '@fortawesome/free-solid-svg-icons'
 
 export default [
   faEnvelope,
   faCirclePlus,
+  faUtensils,
+  faBagShopping,
+  faHouseUser,
+  faBus,
+  faCar,faBars,
+  faPerson,
+  faDesktop,
   faRightToBracket,
   faCalendarMinus,
   faUserPlus,

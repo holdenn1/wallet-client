@@ -40,7 +40,7 @@ const costs = [
 @import '@/styles/mixins/widgetTitle.scss';
 .cost-widget-wrapper {
   grid-area: costs;
-  padding: 14px;
+  padding: 20px;
   overflow-y: auto;
   overflow-x: hidden;
   @include scrollbar(4px, rgb(56, 56, 56));

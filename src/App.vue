@@ -6,8 +6,8 @@
 import globalRouter from '@/router/globalRouter'
 // import { useUserStore } from '@/store/userStore'
 
-// import { onMounted } from 'vue'
 import { useRouter } from 'vue-router'
+// import { onMounted } from 'vue'
 
 // import type { GoogleParseData } from '@/store/types/userStoreTypes'
 

@@ -1,7 +1,5 @@
 <template>
-  <div class="chart-bar-wrapper">
-    <Doughnut id="my-chart-id" :options="data.chartOptions" :data="data.chartData" />
-  </div>
+  <Doughnut id="my-chart-id" :options="data.chartOptions" :data="data.chartData" />
 </template>
 
 <script setup lang="ts">
@@ -12,7 +10,7 @@ ChartJS.register(ArcElement, Tooltip, Legend)
 
 const data = {
   chartData: {
-    labels: ['VueJs', 'EmberJs', 'ReactJs', 'AngularJs',],
+    labels: ['VueJs', 'EmberJs', 'ReactJs', 'AngularJs'],
     datasets: [
       {
         backgroundColor: ['#41B883', '#E46651', '#00D8FF', '#DD1B16'],
@@ -26,13 +24,4 @@ const data = {
 }
 </script>
 
-<style lang="scss" scoped>
-@import '@/styles/mixins/d-flex-ctr.scss';
-.chart-bar-wrapper {
-  width: 100%;
-  height: 100%;
-  padding: 20px;
-  @include flexCenter;
-
-}
-</style>
+<style scoped></style>

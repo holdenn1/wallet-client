@@ -1,5 +1,5 @@
 <template>
-  <div class="cash-flow-widget-wrapper">
+  <div class="cash-flow-widget">
     <h3 class="widget-title">Recent entries</h3>
     <p class="widget-description">The last 30 days</p>
 
@@ -29,7 +29,8 @@ import ProgressLine from 'ui/progressbar/ProgressLine.vue'
 
 <style lang="scss" scoped>
 @import '@/styles/mixins/widgetTitle.scss';
-.cash-flow-widget-wrapper {
+@import '@/styles/mixins/d-flex-js-sb-al-ctr.scss';
+.cash-flow-widget {
   grid-area: cash-flow;
   padding: 20px;
   @include widgetTitle;
@@ -40,9 +41,7 @@ import ProgressLine from 'ui/progressbar/ProgressLine.vue'
     overflow: hidden;
 
     &__progressbar-title {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
+      @include flex-js-sb-al-ctr;
     }
     &__income-progress-line-wrapper {
       margin-bottom: 20px;

@@ -7,6 +7,8 @@ import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js'
 import { Doughnut } from 'vue-chartjs'
 
 ChartJS.register(ArcElement, Tooltip, Legend)
+ChartJS.defaults.color = "#fff";
+ChartJS.defaults.font.style  = "normal";
 
 const data = {
   chartData: {
@@ -18,6 +20,7 @@ const data = {
       }
     ]
   },
+
   chartOptions: {
     responsive: true
   }

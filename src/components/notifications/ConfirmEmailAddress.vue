@@ -1,8 +1,8 @@
 <template>
-  <div class="confirm-email-step-wrapper">
+  <div class="confirm-email">
     <div>
-      <h3 class="confirm-email-title">Welcome to the Wallet!</h3>
-      <p class="confirm-email-text">
+      <h3 class="confirm-email__title">Welcome to the Wallet!</h3>
+      <p class="confirm-email__text">
         We sent you a message to
         <a href="https://mail.google.com/">
           <span>{{ email }}</span>
@@ -20,7 +20,7 @@ defineProps<{ email: string | undefined }>()
 
 <style lang="scss" scoped>
 @import '@/styles/mixins/d-flex-ctr.scss';
-.confirm-email-step-wrapper {
+.confirm-email {
   @include flexCenter;
   width: 50vw;
   height: 50vh;
@@ -36,7 +36,7 @@ defineProps<{ email: string | undefined }>()
     width: 31.875rem;
     height: 24.375rem;
   }
-  .confirm-email-title {
+  &__title {
     font-size: 32px;
     font-weight: 600;
     margin-bottom: 20px;
@@ -45,7 +45,7 @@ defineProps<{ email: string | undefined }>()
     }
   }
 
-  .confirm-email-text {
+  &__text {
     text-align: center;
     font-size: 28px;
     @media screen and (max-width: 455px) {

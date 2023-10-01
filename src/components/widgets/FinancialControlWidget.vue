@@ -1,5 +1,5 @@
 <template>
-  <div class="financial-control-widget-wrapper">
+  <div class="financial-control-widget">
     <div class="type-operation">
       <MainButton type="money-operation" :handle-click="() => (operationType = 'income')"
         >Income</MainButton
@@ -12,7 +12,7 @@
       >
     </div>
     <div class="operation">
-      <font-awesome-icon icon="check" class="confirm-operation" size="2xl" />
+      <font-awesome-icon icon="check" class="operation__confirm" size="2xl" />
 
       <div class="operation__type" style="width: 40px">
         <font-awesome-icon
@@ -51,7 +51,8 @@ const operationType = ref<'income' | 'cost' | 'transfer'>('cost')
 
 <style lang="scss" scoped>
 @import '@/styles/mixins/input.scss';
-.financial-control-widget-wrapper {
+@import '@/styles/mixins/d-flex-js-sb-al-ctr.scss';
+.financial-control-widget {
   grid-area: financial-control;
   background-color: hsl(199, 60%, 49%);
   display: flex;
@@ -73,16 +74,15 @@ const operationType = ref<'income' | 'cost' | 'transfer'>('cost')
     width: 100%;
     height: 100px;
     flex: 1 1 auto;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    @include flex-js-sb-al-ctr;
     color: white;
     padding: 0 12px;
     position: relative;
-    .confirm-operation {
+
+    &__confirm {
       position: absolute;
       top: 12px;
-      right: 30px;
+      right: 20px;
       cursor: pointer;
     }
 

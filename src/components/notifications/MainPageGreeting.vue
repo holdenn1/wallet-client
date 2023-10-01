@@ -5,11 +5,19 @@
     :class="{ 'main-page-greeting-active': mainStore.mainState.isModalVisible }"
   >
     <h3 class="main-page-greeting__text">Welcome to the wallet</h3>
-    <div class="main-page-navigation-wrapper">
-      <button type="button" @click="handleLoginModal" class="navigate-to-login">
+    <div class="main-page-navigation">
+      <button
+        type="button"
+        @click="handleLoginModal"
+        class="main-page-navigation__navigate-to-login"
+      >
         <font-awesome-icon icon="right-to-bracket" /> <span>Login to the account</span>
       </button>
-      <button type="button" @click="handleRegistrationModal" class="navigate-to-registration">
+      <button
+        type="button"
+        @click="handleRegistrationModal"
+        class="main-page-navigation__navigate-to-registration"
+      >
         <font-awesome-icon icon="user-plus" /> <span>Create an account</span>
       </button>
     </div>
@@ -53,18 +61,18 @@ const handleRegistrationModal = () => {
     text-align: center;
     margin-bottom: 30px;
   }
-  .main-page-navigation-wrapper {
+  .main-page-navigation {
     @include flexCenter;
     @media screen and (max-width: 460px) {
       flex-direction: column;
     }
-    .navigate-to-login {
+    &__navigate-to-login {
       @include mainLinkNavigation(#0e38a9, rgb(31, 31, 199), rgb(57, 57, 190));
       span {
         padding-left: 10px;
       }
     }
-    .navigate-to-registration {
+    &__navigate-to-registration {
       @include mainLinkNavigation(
         hsl(243deg 67.66% 42.36%),
         hsl(243, 76%, 40%),

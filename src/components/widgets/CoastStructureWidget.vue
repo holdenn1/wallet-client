@@ -1,5 +1,5 @@
 <template>
-  <div class="coast-structure-widget-wrapper">
+  <div class="coast-structure-widget">
     <ChartBar />
   </div>
 </template>
@@ -11,9 +11,11 @@ import ChartBar from 'ui/progressbar/ChartBar.vue'
 <style lang="scss" scoped>
 @import '@/styles/mixins/d-flex-ctr.scss';
 
-.coast-structure-widget-wrapper {
+.coast-structure-widget {
   grid-area: cost-structure;
   padding: 20px;
+  background-color: hsl(199, 60%, 49%);
   @include flexCenter;
+  overflow: hidden;
 }
 </style>

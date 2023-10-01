@@ -1,12 +1,12 @@
 <template>
-  <div class="user-navigation-wrapper">
-    <button class="user-settings">
+  <div class="user-navigation">
+    <button class="user-navigation__settings-btn">
       <font-awesome-icon
         icon="fa-sliders"
         style="color: hsl(242, 61%, 48%); padding-right: 8px"
       />Settings
     </button>
-    <button class="logout" type="button" @click="userStore.logoutUser">
+    <button class="user-navigation__logout-btn" type="button" @click="userStore.logoutUser">
       <font-awesome-icon
         icon="fa-arrow-right-from-bracket"
         style="color: hsl(242, 61%, 48%); padding-right: 8px"
@@ -16,8 +16,7 @@
 </template>
 
 <script setup lang="ts">
-import { useUserStore } from '@/store/userStore';
-
+import { useUserStore } from '@/store/userStore'
 
 const userStore = useUserStore()
 </script>
@@ -25,7 +24,7 @@ const userStore = useUserStore()
 <style lang="scss" scoped>
 @import '@/styles/mixins/user-sidebar-btn.scss';
 
-.user-navigation-wrapper {
+.user-navigation {
   width: 100%;
   height: calc(100vh - 352px);
   display: flex;
@@ -33,7 +32,7 @@ const userStore = useUserStore()
   justify-content: flex-end;
   align-items: center;
   padding: 20px;
-  .user-settings {
+  &__settings-btn {
     @include userSidebarBtn(240px, 42px);
     margin-bottom: 20px;
     transition: 0.5s;
@@ -41,7 +40,7 @@ const userStore = useUserStore()
       background-color: hsl(240, 15%, 81%);
     }
   }
-  .logout {
+  &__logout-btn {
     @include userSidebarBtn(240px, 42px);
     transition: 0.5s;
     &:hover {

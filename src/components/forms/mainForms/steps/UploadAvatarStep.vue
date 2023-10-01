@@ -1,9 +1,9 @@
 <template>
-  <div class="upload-avatar-wrapper">
-    <input class="avatar-input" type="file" @change="handleFileInputChange($event)" />
-    <img class="avatar" :src="avatarPreview ?? userAvatar" alt="" />
-    <h4 class="avatar-title">Upload a profile photo</h4>
-    <p class="avatar-text">
+  <div class="upload-avatar">
+    <input class="upload-avatar__input" type="file" @change="handleFileInputChange($event)" />
+    <img class="upload-avatar__avatar" :src="avatarPreview ?? userAvatar" alt="" />
+    <h4 class="upload-avatar__title">Upload a profile photo</h4>
+    <p class="upload-avatar__text">
       Choose an image that best represents you and matches your style. We recommend uploading a
       photo of your face or an image that best characterizes you.
     </p>
@@ -35,7 +35,6 @@ onMounted(() => {
     reader.readAsDataURL(uploadedAvatar.value.photo)
     reader.onload = () => {
       avatarPreview.value = reader.result
-    
     }
   }
 })
@@ -49,7 +48,6 @@ const handleFileInputChange = async (event: Event) => {
       reader.readAsDataURL(file)
       reader.onload = () => {
         avatarPreview.value = reader.result
-      
       }
     }
   } catch (e) {
@@ -59,13 +57,13 @@ const handleFileInputChange = async (event: Event) => {
 </script>
 
 <style lang="scss" scoped>
-@import '@/styles/mixins/d-flex-col-al.scss';
-.upload-avatar-wrapper {
+@import '@/styles/mixins/d-flex-col-al-ctr.scss';
+.upload-avatar {
   height: 100%;
-  @include contentFlexColumnAl;
+  @include d-flex-col-al-ctr;
   position: relative;
 
-  .avatar-input {
+  &__input {
     position: absolute;
     top: 0;
     left: 50%;
@@ -77,19 +75,19 @@ const handleFileInputChange = async (event: Event) => {
     background-color: red;
     cursor: pointer;
   }
-  .avatar {
+  &__avatar {
     border-radius: 100%;
     width: 96px;
     height: 96px;
     margin-bottom: 10px;
     object-fit: cover;
   }
-  .avatar-title {
+  &__title {
     font-size: 20px;
     font-weight: 500;
     margin-bottom: 20px;
   }
-  .avatar-text {
+  &__text {
     font-size: 18px;
     text-align: center;
   }

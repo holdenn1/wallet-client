@@ -18,8 +18,6 @@ import UserSidebarNavigation from 'navigation/UserSidebarNavigation.vue'
 </script>
 
 <style lang="scss" scoped>
-@import '@/styles/mixins/d-flex-col-js.scss';
-
 .user-sidebar-wrapper {
   grid-area: user-sidebar;
   background-color: hsl(240, 12%, 97%);

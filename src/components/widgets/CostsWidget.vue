@@ -1,5 +1,5 @@
 <template>
-  <div class="cost-widget-wrapper">
+  <div class="cost-widget">
     <font-awesome-icon icon="ellipsis-vertical" class="cost-menu" size="2xl" />
     <h3 class="widget-title">Recent entries</h3>
     <p class="widget-description">The last 30 days</p>
@@ -38,7 +38,8 @@ const costs = [
 <style lang="scss" scoped>
 @import '@/styles/mixins/scrollbar.scss';
 @import '@/styles/mixins/widgetTitle.scss';
-.cost-widget-wrapper {
+@import '@/styles/mixins/d-flex-js-sb-al-ctr.scss';
+.cost-widget {
   grid-area: costs;
   padding: 20px;
   overflow-y: auto;
@@ -56,9 +57,7 @@ const costs = [
     &__item {
       width: 100%;
       height: 60px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
+      @include flex-js-sb-al-ctr;
       margin-bottom: 10px;
       border-bottom: 1px solid rgb(172, 172, 172);
       cursor: pointer;

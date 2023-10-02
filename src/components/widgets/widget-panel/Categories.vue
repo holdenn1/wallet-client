@@ -1,10 +1,10 @@
 <!-- eslint-disable vue/multi-word-component-names -->
 <template>
-  <CostCategoriesMenu />
+  <CategoriesMenu />
 </template>
 
 <script setup lang="ts">
-import CostCategoriesMenu from 'widgetMenus/financialControl/CostCategoriesMenu.vue'
+import CategoriesMenu from 'widgetMenus/financialControl/CategoriesMenu.vue'
 </script>
 
 <style scoped></style>

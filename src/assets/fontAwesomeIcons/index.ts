@@ -19,7 +19,14 @@ import {
   faBus,
   faCar,
   faPerson,
-  faDesktop, faBars
+  faDesktop,
+  faBars,
+  faBaby,
+  faRotateLeft,
+  faDollarSign,
+  faSackDollar,
+  faGift,
+  faMoneyBills
 } from '@fortawesome/free-solid-svg-icons'
 
 export default [
@@ -29,7 +36,8 @@ export default [
   faBagShopping,
   faHouseUser,
   faBus,
-  faCar,faBars,
+  faCar,
+  faBars,
   faPerson,
   faDesktop,
   faRightToBracket,
@@ -43,5 +51,11 @@ export default [
   faEllipsisVertical,
   faMinus,
   faPlus,
-  faArrowRightFromBracket
+  faArrowRightFromBracket,
+  faBaby,
+  faRotateLeft,
+  faDollarSign,
+  faSackDollar,
+  faGift,
+  faMoneyBills
 ]

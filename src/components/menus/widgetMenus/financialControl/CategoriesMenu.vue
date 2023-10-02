@@ -4,7 +4,7 @@
       <router-link :to="{ name: 'default-widgets' }">
         <font-awesome-icon icon="circle-arrow-left" class="return-icon" size="2xl" />
       </router-link>
-      <h3 class="cost-categories-menu__title">All Categories</h3>
+      <h3 class="cost-categories-menu__title">{{ categoryText }} Categories</h3>
     </div>
     <div class="categories-list">
       <div
@@ -22,7 +22,12 @@
 </template>
 
 <script setup lang="ts">
-const categories = [
+import { computed } from 'vue'
+import { useRoute } from 'vue-router'
+
+const route = useRoute()
+
+const costCategories = [
   {
     id: 1,
     icon: 'fa-utensils',
@@ -72,6 +77,57 @@ const categories = [
     text: 'Other'
   }
 ]
+
+const incomeCategories = [
+  {
+    id: 1,
+    icon: 'fa-arrow-right-from-bracket',
+    backgroundColor: 'background-color: rgb(245, 17, 17);',
+    text: 'Food'
+  },
+  {
+    id: 2,
+    icon: 'fa-baby',
+    backgroundColor: 'background-color: rgb(17, 180, 245);',
+    text: 'Shopping'
+  },
+  {
+    id: 3,
+    icon: 'fa-rotate-left',
+    backgroundColor: 'background-color: rgb(245, 127, 17);',
+    text: 'Home'
+  },
+  {
+    id: 4,
+    icon: 'fa-dollar-sign',
+    backgroundColor: 'background-color: rgb(114, 114, 114);',
+    text: 'Public transport'
+  },
+  {
+    id: 5,
+    icon: 'fa-gift',
+    backgroundColor: 'background-color: rgb(199, 13, 245);',
+    text: 'Personal transport'
+  },
+  {
+    id: 6,
+    icon: 'fa-money-bills',
+    backgroundColor: 'background-color: rgb(13, 67, 245);',
+    text: 'Leisure'
+  }
+]
+
+const categories = computed(() => {
+  if (route.query.type === 'cost') return costCategories
+  if (route.query.type === 'income') return incomeCategories
+  return null
+})
+
+const categoryText = computed(() => {
+  if (route.query.type === 'cost') return 'Cost'
+  if (route.query.type === 'income') return 'Income'
+  return null
+})
 </script>
 
 <style lang="scss" scoped>
@@ -105,7 +161,7 @@ const categories = [
   .categories-list {
     width: 100%;
     height: calc(100vh - 120px);
-    padding: 10px ;
+    padding: 10px;
     overflow-x: hidden;
     overflow-y: auto;
     @include scrollbar(4px, rgb(48, 48, 48));

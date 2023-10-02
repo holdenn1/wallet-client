@@ -11,7 +11,7 @@
       >Cost</router-link
     >
     <router-link
-      :to="{ name: 'categories', query: { type: 'transfer' } }"
+      :to="{ name: 'default-widgets', query: { type: 'transfer' } }"
       class="type-operation__money-operation"
       >Money transfer</router-link
     >

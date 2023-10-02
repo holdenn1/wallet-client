@@ -21,15 +21,15 @@
       </div>
       <span class="operation__currency">UAH</span>
     </div>
-    <div class="operation__categories">
-      <FinancialCategories />
+    <div class="operation-account">
+      <router-link :to="{ name: 'default-widgets' }" class="operation-account__account-link"
+        >Account</router-link
+      >
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import FinancialCategories from './FinancialCategories.vue'
-
 import { useRoute } from 'vue-router'
 
 const route = useRoute()
@@ -37,6 +37,8 @@ const route = useRoute()
 
 <style lang="scss" scoped>
 @import '@/styles/mixins/input.scss';
+@import '@/styles/mixins/main-button.scss';
+@import '@/styles/mixins/d-flex-ctr.scss';
 .operation {
   border-top: 1px solid hsl(199, 76%, 34%);
   border-bottom: 1px solid hsl(199, 76%, 34%);
@@ -56,6 +58,22 @@ const route = useRoute()
     padding: 0 12px;
   }
 
+  .operation-account {
+    width: 100%;
+    height: 60px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    &__account-link {
+      @include mainButton(inherit, hsl(199, 64%, 42%));
+      @include flexCenter;
+      width: 100%;
+      height: 60px;
+      transition: 0.7s;
+      margin: 0;
+      border-radius: 0;
+    }
+  }
   &__confirm {
     position: absolute;
     top: 12px;

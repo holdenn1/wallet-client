@@ -3,7 +3,8 @@ import SignInPageVue from '@/pages/SignInPage.vue'
 import SignUpPageVue from '@/pages/SignUpPage.vue'
 import WalletPageVue from '@/pages/WalletPage.vue'
 import RecoverPasswordPage from '@/pages/RecoverPasswordPage.vue'
-import DefaultWidgets from 'components/sidebars/widget-panel/DefaultWidgets.vue'
+import DefaultWidgets from 'components/widgets/widget-panel/DefaultWidgets.vue'
+import Categories from 'components/widgets/widget-panel/Categories.vue'
 import MainLayout from 'components/Layouts/MainLayout.vue'
 import Widgets from 'components/widgets/Widgets.vue'
 
@@ -51,6 +52,11 @@ const router = createRouter({
                   path: '',
                   name: 'default-widgets',
                   component: DefaultWidgets
+                },
+                {
+                  path: 'categories',
+                  name: 'categories',
+                  component: Categories
                 }
               ]
             }

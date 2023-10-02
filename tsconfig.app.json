@@ -15,7 +15,8 @@
       "forms/*": ["./src/components/forms/*"],
       "navigation/*": ["./src/components/navigation/*"],
       "ui/*": ["./src/components/UI/*"],
-      "icons/*": ["./src/assets/icons/*"]
+      "icons/*": ["./src/assets/icons/*"],
+      "widgetMenus/*": ["./src/components/menus/widgetMenus/*"]
     }
   }
 }

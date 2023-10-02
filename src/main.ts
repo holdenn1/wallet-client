@@ -2,6 +2,8 @@ import App from './App.vue'
 import './styles/index.scss'
 import 'vue-toastify-3/style.css'
 import CustomFormInput from 'ui/inputs/CustomFormInput.vue'
+import CustomMainButton from 'ui/buttons/MainButton.vue'
+
 import router from './router'
 
 import { createApp } from 'vue'
@@ -22,5 +24,6 @@ library.add(...fontAwesomeIcons)
 
 app.component('font-awesome-icon', FontAwesomeIcon)
 app.component('CustomFormInput', CustomFormInput)
+app.component('CustomMainButton', CustomMainButton)
 
 app.mount('#app')

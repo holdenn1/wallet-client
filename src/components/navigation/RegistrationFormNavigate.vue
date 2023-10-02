@@ -1,8 +1,8 @@
 <template>
   <div class="registration-form-navigate">
-    <MainButton v-if="hasPrevious" type="previous" :handleClick="goToPrev">
+    <CustomMainButton v-if="hasPrevious" type="previous" :handleClick="goToPrev">
       <font-awesome-icon icon="circle-arrow-left" style="margin-right: 10px" /> <span>Previous</span>
-    </MainButton>
+    </CustomMainButton>
     <SubmitButton>
       <span style="margin-right: 10px">{{ isLastStep ? 'Submit' : 'Next' }}</span>
       <font-awesome-icon v-if="isLastStep" icon="right-to-bracket" />
@@ -12,7 +12,6 @@
 </template>
 
 <script setup lang="ts">
-import MainButton from 'ui/buttons/MainButton.vue'
 import SubmitButton from 'ui/buttons/SubmitButton.vue'
 defineProps<{
   hasPrevious: boolean

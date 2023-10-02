@@ -4,12 +4,11 @@
       We have sent a recovery email link to
       <a href="https://mail.google.com/">{{ email }}</a>
     </p>
-    <MainButton type="button" :handle-click="closeRecoverPasswordNotice">Close</MainButton>
+    <CustomMainButton type="button" :handle-click="closeRecoverPasswordNotice">Close</CustomMainButton>
   </div>
 </template>
 
 <script setup lang="ts">
-import MainButton from 'ui/buttons/MainButton.vue'
 
 import { useMainStore } from '@/store/mainStore'
 

@@ -9,8 +9,8 @@
 
 <script setup lang="ts">
 import CoastStructureWidget from './CoastStructureWidget.vue'
-import FinancialControlWidget from './FinancialControlWidget.vue'
-import WidgetPanel from 'components/sidebars/widget-panel/WidgetPanel.vue'
+import FinancialControlWidget from './financialControl/FinancialControlWidget.vue'
+import WidgetPanel from './widget-panel/WidgetPanel.vue'
 </script>
 
 <style lang="scss" scoped>

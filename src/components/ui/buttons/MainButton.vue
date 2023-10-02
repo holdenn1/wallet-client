@@ -26,12 +26,5 @@ defineProps<{ type: string; handleClick(): void }>()
   border-radius: 0;
 }
 
-.btn-type-money-category{
-  @include mainButton(inherit, hsl(199, 64%, 42%));
-  width: 100%;
-  height: 60px;
-  transition: 0.7s;
-  margin: 0;
-  border-radius: 0;
-}
+
 </style>

@@ -1,7 +1,7 @@
 <template>
-  <div class="user-sidebar-wrapper">
-    <div class="user-info">
-      <div class="user-info__container">
+  <div class="user-sidebar">
+    <div class="user-sidebar__user-info">
+      <div class="user-info">
         <img :src="preAvatar" alt="" class="user-info__avatar" />
         <h4 class="user-info__full-name">Lorem, ipsum.</h4>
       </div>
@@ -18,20 +18,17 @@ import UserSidebarNavigation from 'navigation/UserSidebarNavigation.vue'
 </script>
 
 <style lang="scss" scoped>
-.user-sidebar-wrapper {
+.user-sidebar {
   grid-area: user-sidebar;
   background-color: hsl(240, 12%, 97%);
   overflow: hidden;
 
   .user-info {
-    &__container {
-      width: 100%;
-      height: 130px;
-      display: flex;
-      align-items: center;
-      background-color: hsl(199, 60%, 49%);
-    }
-
+    width: 100%;
+    height: 130px;
+    display: flex;
+    align-items: center;
+    background-color: hsl(199, 60%, 49%);
     &__avatar {
       width: 80px;
       height: 80px;

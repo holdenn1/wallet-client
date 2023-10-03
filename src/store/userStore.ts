@@ -9,6 +9,9 @@ import {
   registrationUserRequest
 } from '@/api/requests'
 
+import { useRouter } from 'vue-router'
+import { AxiosError } from 'axios'
+
 import type {
   AuthResponse,
   InitialValuesUserStore,
@@ -16,8 +19,6 @@ import type {
   RefreshTokensLoginResponse,
   RegistrationUserActionProps
 } from './types/userStoreTypes'
-import { useRouter } from 'vue-router'
-import { AxiosError } from 'axios'
 
 export const useUserStore = defineStore('user', () => {
   const router = useRouter()

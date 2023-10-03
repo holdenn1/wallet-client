@@ -1,5 +1,5 @@
 <template>
-  <!-- <div class="activate-account-notice" v-if="!userStore.userState.user?.isEmailConfirmed">
+  <!-- ! <div class="activate-account-notice" v-if="!userStore.userState.user?.isEmailConfirmed">
     <p>Please confirm your account - <a  href="https://mail.google.com/">Click me</a> </p>
   </div> -->
   <div class="wallet-page-wrapper">

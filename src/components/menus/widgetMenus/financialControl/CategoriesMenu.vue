@@ -7,21 +7,38 @@
       <h3 class="cost-categories-menu__title">{{ categoryText }} Categories</h3>
     </div>
     <div class="categories-list">
-      <div
-        class="categories-list__item"
-        v-for="{ id, icon, backgroundColor, text } in categories"
+      <AccordionList
+        v-for="{ id, subcategories, ...rest } in categories"
         :key="id"
+        :category-text="categoryText"
       >
-        <div class="categories-list__icon-wrapper" :style="backgroundColor">
-          <font-awesome-icon :icon="icon" style="color: white" size="2xl" />
-        </div>
-        <span class="categories-list__text">{{ text }}</span>
-      </div>
+        <template v-slot:category>
+          <Category :category="rest" />
+        </template>
+        <template v-slot:subcategory>
+          <Category
+            v-for="{
+              id,
+              subcategoryBackgroundColor,
+              subcategoryIcon,
+              subcategoryText
+            } in subcategories"
+            :key="id"
+            :category="{
+              categoryBackgroundColor: subcategoryBackgroundColor,
+              categoryIcon: subcategoryIcon,
+              categoryText: subcategoryText
+            }"
+          />
+        </template>
+      </AccordionList>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
+import Category from './CategoryContent.vue'
+import AccordionList from 'ui/list/AccordionList.vue'
 import { computed } from 'vue'
 import { useRoute } from 'vue-router'
 
@@ -30,90 +47,214 @@ const route = useRoute()
 const costCategories = [
   {
     id: 1,
-    icon: 'fa-utensils',
-    backgroundColor: 'background-color: rgb(245, 17, 17);',
-    text: 'Food'
+    categoryIcon: 'fa-utensils',
+    subcategories: [
+      {
+        id: 1,
+        subcategoryIcon: 'fa-utensils',
+        subcategoryText: 'text w',
+        subcategoryBackgroundColor: 'background-color: rgb(245, 17, 17);'
+      },
+      {
+        id: 2,
+        subcategoryIcon: 'fa-utensils',
+        subcategoryText: 'text ewqeqwe',
+        subcategoryBackgroundColor: 'background-color: rgb(245, 17, 17);'
+      },
+      {
+        id: 3,
+        subcategoryIcon: 'fa-utensils',
+        subcategoryText: 'text rewrds f sdf ',
+        subcategoryBackgroundColor: 'background-color: rgb(245, 17, 17);'
+      }
+    ],
+    categoryBackgroundColor: 'background-color: rgb(245, 17, 17);',
+    categoryText: 'Food'
   },
   {
     id: 2,
-    icon: 'fa-bag-shopping',
-    backgroundColor: 'background-color: rgb(17, 180, 245);',
-    text: 'Shopping'
+    categoryIcon: 'fa-bag-shopping',
+    subcategories: [
+      {
+        id: '',
+        subcategoryIcon: '',
+        subcategoryText: '',
+        subcategoryBackgroundColor: 'background-color: rgb(245, 17, 17);'
+      }
+    ],
+    categoryBackgroundColor: 'background-color: rgb(17, 180, 245);',
+    categoryText: 'Shopping'
   },
   {
     id: 3,
-    icon: 'fa-house-user',
-    backgroundColor: 'background-color: rgb(245, 127, 17);',
-    text: 'Home'
+    categoryIcon: 'fa-house-user',
+    subcategories: [
+      {
+        id: '',
+        subcategoryIcon: '',
+        subcategoryText: '',
+        subcategoryBackgroundColor: 'background-color: rgb(245, 17, 17);'
+      }
+    ],
+    categoryBackgroundColor: 'background-color: rgb(245, 127, 17);',
+    categoryText: 'Home'
   },
   {
     id: 4,
-    icon: 'fa-bus',
-    backgroundColor: 'background-color: rgb(114, 114, 114);',
-    text: 'Public transport'
+    categoryIcon: 'fa-bus',
+    subcategories: [
+      {
+        id: '',
+        subcategoryIcon: '',
+        subcategoryText: '',
+        subcategoryBackgroundColor: 'background-color: rgb(245, 17, 17);'
+      }
+    ],
+    categoryBackgroundColor: 'background-color: rgb(114, 114, 114);',
+    categoryText: 'Public transport'
   },
   {
     id: 5,
-    icon: 'fa-car',
-    backgroundColor: 'background-color: rgb(199, 13, 245);',
-    text: 'Personal transport'
+    categoryIcon: 'fa-car',
+    subcategories: [
+      {
+        id: '',
+        subcategoryIcon: '',
+        subcategoryText: '',
+        subcategoryBackgroundColor: 'background-color: rgb(245, 17, 17);'
+      }
+    ],
+    categoryBackgroundColor: 'background-color: rgb(199, 13, 245);',
+    categoryText: 'Personal transport'
   },
   {
     id: 6,
-    icon: 'fa-person',
-    backgroundColor: 'background-color: rgb(13, 67, 245);',
-    text: 'Leisure'
+    categoryIcon: 'fa-person',
+    subcategories: [
+      {
+        id: '',
+        subcategoryIcon: '',
+        subcategoryText: '',
+        subcategoryBackgroundColor: 'background-color: rgb(245, 17, 17);'
+      }
+    ],
+    categoryBackgroundColor: 'background-color: rgb(13, 67, 245);',
+    categoryText: 'Leisure'
   },
   {
     id: 7,
-    icon: 'fa-desktop',
-    backgroundColor: 'background-color: rgb(39, 52, 235);',
-    text: 'Internet'
+    categoryIcon: 'fa-desktop',
+    subcategories: [
+      {
+        id: '',
+        subcategoryIcon: '',
+        subcategoryText: '',
+        subcategoryBackgroundColor: 'background-color: rgb(245, 17, 17);'
+      }
+    ],
+    categoryBackgroundColor: 'background-color: rgb(39, 52, 235);',
+    categoryText: 'Internet'
   },
   {
     id: 8,
-    icon: 'fa-bars',
-    backgroundColor: 'background-color: rgb(172, 92, 0);',
-    text: 'Other'
+    categoryIcon: 'fa-bars',
+    subcategories: [
+      {
+        id: '',
+        subcategoryIcon: '',
+        subcategoryText: '',
+        subcategoryBackgroundColor: 'background-color: rgb(245, 17, 17);'
+      }
+    ],
+    categoryBackgroundColor: 'background-color: rgb(172, 92, 0);',
+    categoryText: 'Other'
   }
 ]
 
 const incomeCategories = [
   {
     id: 1,
-    icon: 'fa-arrow-right-from-bracket',
-    backgroundColor: 'background-color: rgb(245, 17, 17);',
-    text: 'Food'
+    categoryIcon: 'fa-rotate-left',
+    subcategories: [
+      {
+        id: '',
+        subcategoryIcon: '',
+        subcategoryText: '',
+        subcategoryBackgroundColor: 'background-color: rgb(245, 17, 17);'
+      }
+    ],
+    categoryBackgroundColor: 'background-color: rgb(8 217 0);',
+    categoryText: 'Compensation'
   },
   {
     id: 2,
-    icon: 'fa-baby',
-    backgroundColor: 'background-color: rgb(17, 180, 245);',
-    text: 'Shopping'
+    categoryIcon: 'fa-baby',
+    subcategories: [
+      {
+        id: '',
+        subcategoryIcon: '',
+        subcategoryText: '',
+        subcategoryBackgroundColor: 'background-color: rgb(245, 17, 17);'
+      }
+    ],
+    categoryBackgroundColor: 'background-color: rgb(17, 180, 245);',
+    categoryText: 'Alimony'
   },
   {
     id: 3,
-    icon: 'fa-rotate-left',
-    backgroundColor: 'background-color: rgb(245, 127, 17);',
-    text: 'Home'
+    categoryIcon: 'fa-dollar-sign',
+    subcategories: [
+      {
+        id: '',
+        subcategoryIcon: '',
+        subcategoryText: '',
+        subcategoryBackgroundColor: 'background-color: rgb(245, 17, 17);'
+      }
+    ],
+    categoryBackgroundColor: 'background-color: rgb(245, 127, 17);',
+    categoryText: 'Rental income'
   },
   {
     id: 4,
-    icon: 'fa-dollar-sign',
-    backgroundColor: 'background-color: rgb(114, 114, 114);',
-    text: 'Public transport'
+    categoryIcon: 'fa-sack-dollar',
+    subcategories: [
+      {
+        id: '',
+        subcategoryIcon: '',
+        subcategoryText: '',
+        subcategoryBackgroundColor: 'background-color: rgb(245, 17, 17);'
+      }
+    ],
+    categoryBackgroundColor: 'background-color: rgb(210 176 6);',
+    categoryText: 'Salary'
   },
   {
     id: 5,
-    icon: 'fa-gift',
-    backgroundColor: 'background-color: rgb(199, 13, 245);',
-    text: 'Personal transport'
+    categoryIcon: 'fa-gift',
+    subcategories: [
+      {
+        id: '',
+        subcategoryIcon: '',
+        subcategoryText: '',
+        subcategoryBackgroundColor: 'background-color: rgb(245, 17, 17);'
+      }
+    ],
+    categoryBackgroundColor: 'background-color: rgb(199, 13, 245);',
+    categoryText: 'Gifts'
   },
   {
     id: 6,
-    icon: 'fa-money-bills',
-    backgroundColor: 'background-color: rgb(13, 67, 245);',
-    text: 'Leisure'
+    categoryIcon: 'fa-coins',
+    subcategories: [
+      {
+        id: '',
+        subcategoryIcon: '',
+        subcategoryText: '',
+        subcategoryBackgroundColor: 'background-color: rgb(245, 17, 17);'
+      }
+    ],
+    categoryBackgroundColor: 'background-color: rgb(13, 67, 245);',
+    categoryText: 'Selling'
   }
 ]
 
@@ -165,26 +306,6 @@ const categoryText = computed(() => {
     overflow-x: hidden;
     overflow-y: auto;
     @include scrollbar(4px, rgb(48, 48, 48));
-    &__item {
-      display: flex;
-      align-items: center;
-      margin-bottom: 12px;
-      cursor: pointer;
-    }
-    &__text {
-      margin-left: 20px;
-      font-weight: 500;
-    }
-    &__icon-wrapper {
-      width: 50px;
-      height: 50px;
-      border-radius: 100%;
-      cursor: pointer;
-      @include flexCenter;
-      &:last-child {
-        margin: 0;
-      }
-    }
   }
 }
 </style>

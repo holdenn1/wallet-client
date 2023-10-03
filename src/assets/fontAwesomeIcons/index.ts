@@ -25,6 +25,7 @@ import {
   faRotateLeft,
   faDollarSign,
   faSackDollar,
+  faCoins,
   faGift,
   faMoneyBills
 } from '@fortawesome/free-solid-svg-icons'
@@ -32,6 +33,7 @@ import {
 export default [
   faEnvelope,
   faCirclePlus,
+  faCoins,
   faUtensils,
   faBagShopping,
   faHouseUser,

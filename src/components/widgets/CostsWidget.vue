@@ -1,6 +1,6 @@
 <template>
-  <div class="cost-widget">
-    <font-awesome-icon icon="ellipsis-vertical" class="cost-menu" size="2xl" />
+  <div @click="() => isMenu = false" class="cost-widget">
+    <PopupWidgetMenu :is-menu="isMenu" @is-menu="() => (isMenu = !isMenu)" />
     <h3 class="widget-title">Recent entries</h3>
     <p class="widget-description">The last 30 days</p>
     <div class="costs">
@@ -22,6 +22,11 @@
 </template>
 
 <script setup lang="ts">
+import PopupWidgetMenu from 'components/menus/PopupWidgetMenu.vue'
+import { ref } from 'vue'
+
+const isMenu = ref<boolean>(false)
+
 const costs = [
   { id: 1, costType: 'Test 1', accountType: 'Account 1' },
   { id: 2, costType: 'Test 2', accountType: 'Account 2' },
@@ -46,12 +51,7 @@ const costs = [
   overflow-x: hidden;
   @include scrollbar(4px, rgb(56, 56, 56));
   position: relative;
-  .cost-menu {
-    position: absolute;
-    top: 16px;
-    right: 20px;
-    cursor: pointer;
-  }
+
   @include widgetTitle;
   .costs {
     &__item {

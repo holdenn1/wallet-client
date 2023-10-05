@@ -1,5 +1,6 @@
 <template>
-  <div class="cash-flow-widget">
+  <div  @click="() => isMenu = false" class="cash-flow-widget">
+    <PopupWidgetMenu :is-menu="isMenu" @is-menu="() => (isMenu = !isMenu)" />
     <h3 class="widget-title">Recent entries</h3>
     <p class="widget-description">The last 30 days</p>
 
@@ -25,6 +26,10 @@
 
 <script setup lang="ts">
 import ProgressLine from 'ui/progressbar/ProgressLine.vue'
+import PopupWidgetMenu from 'components/menus/PopupWidgetMenu.vue'
+import { ref } from 'vue'
+
+const isMenu = ref<boolean>(false)
 </script>
 
 <style lang="scss" scoped>

@@ -4,31 +4,23 @@
     <WidgetPanelHeader :header-title-text="`${categoryText} Categories`" />
     <div class="categories-list">
       <template v-if="route.query.type === 'cost'">
-        <AccordionList
-          v-for="{ id, subcategories, ...rest } in costCategories"
-          :key="id"
-          :category-text="categoryText"
-        >
-          <template v-slot:category>
+        <Accordion v-for="{ id, subcategories, ...rest } in costCategories" :key="id">
+          <template v-slot:title>
             <WidgetCategoryItem :category="rest" />
           </template>
-          <template v-slot:subcategory>
+          <template v-slot:content>
+            <h4 class="subcategory-title">Subcategories</h4>
             <WidgetCategoryItem
-              v-for="{
-                id,
-                subcategoryBackgroundColor,
-                subcategoryIcon,
-                subcategoryText
-              } in subcategories"
-              :key="id"
+              v-for="subcategory in subcategories"
+              :key="subcategory.id"
               :category="{
-                categoryBackgroundColor: subcategoryBackgroundColor,
-                categoryIcon: subcategoryIcon,
-                categoryText: subcategoryText
+                categoryBackgroundColor: subcategory.subcategoryBackgroundColor,
+                categoryIcon: subcategory.subcategoryIcon,
+                categoryText: subcategory.subcategoryText
               }"
             />
           </template>
-        </AccordionList>
+        </Accordion>
         <WidgetCategoryItem
           :category="{
             categoryText: 'Other',
@@ -49,7 +41,7 @@
 </template>
 
 <script setup lang="ts">
-import AccordionList from 'ui/list/AccordionList.vue'
+import Accordion from 'ui/accordion/Accordion.vue'
 import WidgetCategoryItem from 'components/items/WidgetCategoryItem.vue'
 import WidgetPanelHeader from 'components/headers/WidgetPanelHeader.vue'
 
@@ -334,6 +326,11 @@ const categoryText = computed(() => {
     overflow-x: hidden;
     overflow-y: auto;
     @include scrollbar(4px, rgb(48, 48, 48));
+    .subcategory-title {
+      text-align: center;
+      font-size: 18px;
+      font-weight: 600;
+    }
   }
 }
 </style>

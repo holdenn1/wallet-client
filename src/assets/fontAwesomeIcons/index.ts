@@ -51,7 +51,10 @@ import {
   faBookOpen,
   faUserGraduate,
   faDumbbell,
-  faPhoneVolume,faWifi
+  faPhoneVolume,
+  faWifi,
+  faGear,
+  faCreditCard
 } from '@fortawesome/free-solid-svg-icons'
 
 export default [
@@ -92,6 +95,7 @@ export default [
   faChildReaching,
   faShirt,
   faPumpSoap,
+  faCreditCard,
   faSuitcaseMedical,
   faMoneyBill1,
   faKey,
@@ -107,5 +111,7 @@ export default [
   faBookOpen,
   faUserGraduate,
   faDumbbell,
-  faPhoneVolume,faWifi
+  faPhoneVolume,
+  faWifi,
+  faGear
 ]

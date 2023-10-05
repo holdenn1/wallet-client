@@ -5,6 +5,8 @@ import WalletPageVue from '@/pages/WalletPage.vue'
 import RecoverPasswordPage from '@/pages/RecoverPasswordPage.vue'
 import DefaultWidgets from 'components/widgets/widget-panel/DefaultWidgets.vue'
 import Categories from 'components/widgets/widget-panel/Categories.vue'
+import SettingsOperation from 'components/widgets/widget-panel/SettingsOperation.vue'
+import SelectAnAccount from 'components/widgets/widget-panel/SelectAnAccount.vue'
 import MainLayout from 'components/Layouts/MainLayout.vue'
 import Widgets from 'components/widgets/Widgets.vue'
 
@@ -57,6 +59,16 @@ const router = createRouter({
                   path: 'categories',
                   name: 'categories',
                   component: Categories
+                },
+                {
+                  path: 'setting-operation',
+                  name: 'setting-operation',
+                  component: SettingsOperation
+                },
+                {
+                  path: 'select-account',
+                  name: 'select-account',
+                  component: SelectAnAccount
                 }
               ]
             }

@@ -1,6 +1,9 @@
 <template>
   <div class="operation">
     <div class="operation__content">
+      <router-link :to="{ name: 'setting-operation' }">
+        <font-awesome-icon icon="gear" class="operation__setting" size="2xl" />
+      </router-link>
       <font-awesome-icon icon="check" class="operation__confirm" size="2xl" />
       <div v-show="route.query.type !== 'transfer'" class="operation__type">
         <font-awesome-icon
@@ -22,8 +25,8 @@
       <span class="operation__currency">UAH</span>
     </div>
     <div class="operation-account">
-      <router-link :to="{ name: 'default-widgets' }" class="operation-account__account-link"
-        >Account</router-link
+      <router-link :to="{ name: 'select-account' }" class="operation-account__account-link"
+        >Select an account</router-link
       >
     </div>
   </div>
@@ -75,6 +78,13 @@ const route = useRoute()
     }
   }
   &__confirm {
+    position: absolute;
+    top: 12px;
+    left: 20px;
+    cursor: pointer;
+  }
+
+  &__setting {
     position: absolute;
     top: 12px;
     right: 20px;

@@ -7,7 +7,7 @@
         <span class="bills__bill-money">1 000 000. 00</span>
       </div>
       <button class="bills__add-bill">
-        Add the bill
+       Credit card
         <font-awesome-icon
           icon="fa-circle-plus"
           style="color: hsl(242, 61%, 48%); padding-left: 8px"

@@ -2,8 +2,10 @@
   <div class="category-slot" @click="toggleAccordion()">
     <slot name="category" />
   </div>
+
   <div class="subcategory-slot" v-show="isOpen">
     <h4 class="subcategory-slot__text">Subcategories</h4>
+
     <slot name="subcategory" />
   </div>
 </template>

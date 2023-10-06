@@ -1,14 +1,18 @@
 <template>
   <header class="widget-panel-header">
-    <router-link :to="{ name: 'default-widgets' }">
+    <button type="button" @click="() => router.go(-1)">
       <font-awesome-icon icon="circle-arrow-left" class="return-icon" size="2xl" />
-    </router-link>
+    </button>
     <h3 class="widget-panel-header__title">{{ headerTitleText }}</h3>
   </header>
 </template>
 
 <script setup lang="ts">
+import {useRouter} from 'vue-router'
+
 defineProps<{ headerTitleText?: string }>()
+
+const router = useRouter()
 </script>
 
 <style lang="scss" scoped>

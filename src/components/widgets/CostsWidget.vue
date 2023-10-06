@@ -1,21 +1,23 @@
 <template>
-  <div @click="() => isMenu = false" class="cost-widget">
+  <div @click="() => (isMenu = false)" class="cost-widget">
     <PopupWidgetMenu :is-menu="isMenu" @is-menu="() => (isMenu = !isMenu)" />
     <h3 class="widget-title">Recent entries</h3>
     <p class="widget-description">The last 30 days</p>
     <div class="costs">
       <ul class="costs__list">
-        <li class="costs__item" v-for="cost in costs" :key="cost.id">
-          <img class="costs__img" src="" alt="" />
-          <div class="costs__info">
-            <span class="costs__category-type">{{ cost.costType }}</span>
-            <span class="costs__account-type">{{ cost.accountType }}</span>
-          </div>
-          <div class="costs__date-and-sum">
-            <span class="costs__date">5, 00 uah</span>
-            <span class="costs__sum">Yesterday</span>
-          </div>
-        </li>
+        <router-link :to="{ name: 'operation-details' }">
+          <li class="costs__item" v-for="cost in costs" :key="cost.id">
+            <img class="costs__img" src="" alt="" />
+            <div class="costs__info">
+              <span class="costs__category-type">{{ cost.costType }}</span>
+              <span class="costs__account-type">{{ cost.accountType }}</span>
+            </div>
+            <div class="costs__date-and-sum">
+              <span class="costs__date">5, 00 uah</span>
+              <span class="costs__sum">Yesterday</span>
+            </div>
+          </li>
+        </router-link>
       </ul>
     </div>
   </div>

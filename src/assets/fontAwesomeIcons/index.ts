@@ -54,11 +54,15 @@ import {
   faPhoneVolume,
   faWifi,
   faGear,
-  faCreditCard
+  faCreditCard,
+  faArrowRightLong,
+  faArrowDown, faRectangleList
 } from '@fortawesome/free-solid-svg-icons'
 
 export default [
-  faEnvelope,
+  faEnvelope,faRectangleList,
+  faArrowDown,
+  faArrowRightLong,
   faCirclePlus,
   faCoins,
   faUtensils,

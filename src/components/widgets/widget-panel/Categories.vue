@@ -2,7 +2,8 @@
 <template>
   <div class="cost-categories-menu">
     <WidgetPanelHeader :header-title-text="`${categoryText} Categories`" />
-    <div class="categories-list">
+    <WidgetPanelContentWrapper>
+
       <template v-if="route.query.type === 'cost'">
         <Accordion v-for="{ id, subcategories, ...rest } in costCategories" :key="id">
           <template v-slot:title>
@@ -36,7 +37,7 @@
           :category="category"
         />
       </template>
-    </div>
+    </WidgetPanelContentWrapper>
   </div>
 </template>
 
@@ -44,6 +45,8 @@
 import Accordion from 'ui/accordion/Accordion.vue'
 import WidgetCategoryItem from 'components/items/WidgetCategoryItem.vue'
 import WidgetPanelHeader from 'components/headers/WidgetPanelHeader.vue'
+import WidgetPanelContentWrapper from 'ui/wrappers/WidgetPanelContentWrapper.vue'
+
 
 import { computed } from 'vue'
 import { useRoute } from 'vue-router'
@@ -319,18 +322,12 @@ const categoryText = computed(() => {
   width: 100%;
   height: 100%;
 
-  .categories-list {
-    width: 100%;
-    height: calc(100vh - 120px);
-    padding: 10px;
-    overflow-x: hidden;
-    overflow-y: auto;
-    @include scrollbar(4px, rgb(48, 48, 48));
+  
     .subcategory-title {
       text-align: center;
       font-size: 18px;
       font-weight: 600;
     }
-  }
+  
 }
 </style>

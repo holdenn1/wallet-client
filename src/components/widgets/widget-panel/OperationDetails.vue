@@ -5,7 +5,7 @@
         <font-awesome-icon icon="check" size="2xl" style="color: white" />
       </button>
     </WidgetPanelHeader>
-    <div class="operation-details__content">
+    <WidgetPanelContentWrapper>
       <div class="operation-details-field">
         <Accordion>
           <template v-slot:title>
@@ -88,22 +88,29 @@
         </div>
       </div>
       <div class="operation-details-field">
-        <SettingOperationInput label="Recipient" placeholder="Recipient" v-model="recipient" />
+        <SettingOperationInput
+          input-type="text"
+          label="Recipient"
+          placeholder="Recipient"
+          v-model="recipient"
+        />
       </div>
       <div class="operation-details-field">
         <SettingOperationInput
+          input-type="text"
           label="Description"
           placeholder="Description"
           v-model="description"
         />
       </div>
-    </div>
+    </WidgetPanelContentWrapper>
   </div>
 </template>
 
 <script setup lang="ts">
 import WidgetPanelHeader from 'components/headers/WidgetPanelHeader.vue'
 import SettingOperationInput from 'ui/inputs/SettingOperationInput.vue'
+import WidgetPanelContentWrapper from 'ui/wrappers/WidgetPanelContentWrapper.vue'
 import Accordion from 'ui/accordion/Accordion.vue'
 
 import { ref } from 'vue'
@@ -121,18 +128,10 @@ const sum = ref('')
   width: 100%;
   height: 100%;
 
-  &__content {
-    width: 100%;
-    height: calc(100vh - 120px);
-    padding: 20px;
-    overflow-x: hidden;
-    overflow-y: auto;
-    @include scrollbar(4px, rgb(48, 48, 48));
-  }
   .operation-details-field {
     cursor: pointer;
     &__title {
-      font-size: 18px;
+      font-size: 16px;
       font-weight: 600;
       position: relative;
       margin-bottom: 10px;
@@ -146,7 +145,7 @@ const sum = ref('')
     .operation-details-input-wrapper {
       flex: 1 1 auto;
       &__label {
-        font-size: 18px;
+        font-size: 16px;
         font-weight: 600;
       }
       &__input {

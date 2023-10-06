@@ -15,7 +15,9 @@
       </button>
     </div>
     <div class="balance-control">
-      <button class="balance-control__balance-setting">Adjust the balance</button>
+      <router-link :to="{ name: 'adjust-balance' }" class="balance-control__balance-setting"
+        >Adjust the balance</router-link
+      >
       <router-link :to="{ name: 'operations-history' }" class="balance-control__balance-history">
         <font-awesome-icon
           icon="fa-calendar-minus"
@@ -74,6 +76,7 @@
     justify-content: space-between;
     &__balance-setting {
       @include userSidebarBtn(160px, 36px);
+      @include flexCenter;
     }
     &__balance-history {
       @include userSidebarBtn(110px, 36px);

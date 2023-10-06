@@ -1,13 +1,13 @@
 <template>
   <div class="operation-setting-input">
     <label class="operation-setting-input__label" for="description">
-      {{label}}
+      {{ label }}
       <input
         id="description"
         :value="modelValue"
         @input="$emit('update:modelValue', ($event.target as HTMLInputElement).value)"
         class="operation-setting-input__input"
-        type="text"
+        :type="inputType"
         :placeholder="placeholder"
       />
     </label>
@@ -15,7 +15,12 @@
 </template>
 
 <script setup lang="ts">
-defineProps<{ modelValue: string; label: string; placeholder: string }>()
+defineProps<{
+  modelValue: string
+  label: string
+  placeholder?: string
+  inputType: 'text' | 'number'
+}>()
 defineEmits(['update:modelValue'])
 </script>
 
@@ -26,11 +31,16 @@ defineEmits(['update:modelValue'])
     margin-bottom: 24px;
   }
   &__label {
-    font-size: 18px;
+    font-size: 16px;
     font-weight: 600;
   }
   &__input {
     @include input;
+    &::-webkit-outer-spin-button,
+    &::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
   }
 }
 </style>

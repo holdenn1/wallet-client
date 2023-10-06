@@ -9,6 +9,7 @@ import SettingsOperation from 'components/widgets/widget-panel/SettingsOperation
 import SelectAnAccount from 'components/widgets/widget-panel/SelectAnAccount.vue'
 import OperationDetails from 'components/widgets/widget-panel/OperationDetails.vue'
 import OperationsHistory from 'components/widgets/widget-panel/OperationsHistory.vue'
+import AdjustBalance from 'components/widgets/widget-panel/AdjustBalance.vue'
 import MainLayout from 'components/Layouts/MainLayout.vue'
 import Widgets from 'components/widgets/Widgets.vue'
 
@@ -81,6 +82,11 @@ const router = createRouter({
                   path: 'operations-history',
                   name: 'operations-history',
                   component: OperationsHistory
+                },
+                {
+                  path: 'adjust-balance',
+                  name: 'adjust-balance',
+                  component: AdjustBalance
                 }
               ]
             }

@@ -1,15 +1,17 @@
 <template>
   <div class="select-account">
     <WidgetPanelHeader header-title-text="Operation settings" />
-    <div class="accounts-list">
+    <WidgetPanelContentWrapper>
       <WidgetCategoryItem v-for="{ id, ...rest } in accounts" :key="id" :category="rest" />
-    </div>
+    </WidgetPanelContentWrapper>
   </div>
 </template>
 
 <script setup lang="ts">
 import WidgetPanelHeader from 'components/headers/WidgetPanelHeader.vue'
 import WidgetCategoryItem from 'components/items/WidgetCategoryItem.vue'
+import WidgetPanelContentWrapper from 'ui/wrappers/WidgetPanelContentWrapper.vue'
+
 
 const accounts = [
   {
@@ -33,13 +35,6 @@ const accounts = [
   width: 100%;
   height: 100%;
 
-  .accounts-list {
-    width: 100%;
-    height: calc(100vh - 120px);
-    padding: 10px;
-    overflow-x: hidden;
-    overflow-y: auto;
-    @include scrollbar(4px, rgb(48, 48, 48));
-  }
+
 }
 </style>

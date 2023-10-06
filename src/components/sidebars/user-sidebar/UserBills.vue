@@ -7,7 +7,7 @@
         <span class="bills__bill-money">1 000 000. 00</span>
       </div>
       <button class="bills__add-bill">
-       Credit card
+        Credit card
         <font-awesome-icon
           icon="fa-circle-plus"
           style="color: hsl(242, 61%, 48%); padding-left: 8px"
@@ -16,12 +16,12 @@
     </div>
     <div class="balance-control">
       <button class="balance-control__balance-setting">Adjust the balance</button>
-      <button class="balance-control__balance-history">
+      <router-link :to="{ name: 'operations-history' }" class="balance-control__balance-history">
         <font-awesome-icon
           icon="fa-calendar-minus"
           style="color: hsl(242, 61%, 48%); padding-right: 8px"
         />History
-      </button>
+      </router-link>
     </div>
   </div>
 </template>
@@ -30,6 +30,7 @@
 
 <style lang="scss" scoped>
 @import '@/styles/mixins/user-sidebar-btn.scss';
+@import '@/styles/mixins/d-flex-ctr.scss';
 .bills-widget {
   height: 162px;
   overflow: hidden;
@@ -76,6 +77,7 @@
     }
     &__balance-history {
       @include userSidebarBtn(110px, 36px);
+      @include flexCenter;
     }
   }
 }

@@ -1,6 +1,10 @@
 <template>
   <div class="operation-details">
-    <WidgetPanelHeader header-title-text="Details" />
+    <WidgetPanelHeader header-title-text="Details">
+      <button type="button" @click="() => console.log('confirm')">
+        <font-awesome-icon icon="check" size="2xl" style="color: white" />
+      </button>
+    </WidgetPanelHeader>
     <div class="operation-details__content">
       <div class="operation-details-field">
         <Accordion>

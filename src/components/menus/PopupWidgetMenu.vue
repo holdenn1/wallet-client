@@ -66,6 +66,17 @@ const periods = [
     margin-bottom: 10px;
     cursor: pointer;
     font-weight: 500;
+    &::after {
+      content: '';
+      display: block;
+      width: 0;
+      height: 2px;
+      background: #272727;
+      transition: width 0.4s;
+    }
+    &:hover::after {
+      width: 100%;
+    }
     &:last-child {
       margin: 0;
     }

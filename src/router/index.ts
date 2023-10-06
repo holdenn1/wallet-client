@@ -8,6 +8,7 @@ import Categories from 'components/widgets/widget-panel/Categories.vue'
 import SettingsOperation from 'components/widgets/widget-panel/SettingsOperation.vue'
 import SelectAnAccount from 'components/widgets/widget-panel/SelectAnAccount.vue'
 import OperationDetails from 'components/widgets/widget-panel/OperationDetails.vue'
+import OperationsHistory from 'components/widgets/widget-panel/OperationsHistory.vue'
 import MainLayout from 'components/Layouts/MainLayout.vue'
 import Widgets from 'components/widgets/Widgets.vue'
 
@@ -75,6 +76,11 @@ const router = createRouter({
                   path: 'operation-details',
                   name: 'operation-details',
                   component: OperationDetails
+                },
+                {
+                  path: 'operations-history',
+                  name: 'operations-history',
+                  component: OperationsHistory
                 }
               ]
             }

@@ -9,7 +9,8 @@ import SettingsOperation from 'components/widgets/widget-panel/SettingsOperation
 import SelectAnAccount from 'components/widgets/widget-panel/SelectAnAccount.vue'
 import OperationDetails from 'components/widgets/widget-panel/OperationDetails.vue'
 import OperationsHistory from 'components/widgets/widget-panel/OperationsHistory.vue'
-import AdjustBalance from 'components/widgets/widget-panel/AdjustBalance.vue'
+import AddCreditCard from 'components/widgets/widget-panel/AddCreditCard.vue'
+import CorrectBalance from 'components/widgets/widget-panel/CorrectBalance.vue'
 import MainLayout from 'components/Layouts/MainLayout.vue'
 import Widgets from 'components/widgets/Widgets.vue'
 
@@ -84,9 +85,14 @@ const router = createRouter({
                   component: OperationsHistory
                 },
                 {
-                  path: 'adjust-balance',
-                  name: 'adjust-balance',
-                  component: AdjustBalance
+                  path: 'correct-balance',
+                  name: 'correct-balance',
+                  component: CorrectBalance
+                },
+                {
+                  path: 'add-credit-card',
+                  name: 'add-credit-card',
+                  component: AddCreditCard
                 }
               ]
             }

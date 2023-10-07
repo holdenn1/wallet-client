@@ -56,6 +56,11 @@ const {
   }
   .input {
     @include input;
+    &::-webkit-outer-spin-button,
+    &::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
   }
   .error {
     text-align: center;

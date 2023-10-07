@@ -6,17 +6,17 @@
         <span class="bills__bill-type">Cash</span>
         <span class="bills__bill-money">1 000 000. 00</span>
       </div>
-      <button class="bills__add-bill">
+      <router-link :to="{ name: 'add-credit-card' }" class="bills__add-bill">
         Credit card
         <font-awesome-icon
           icon="fa-circle-plus"
           style="color: hsl(242, 61%, 48%); padding-left: 8px"
         />
-      </button>
+      </router-link>
     </div>
     <div class="balance-control">
-      <router-link :to="{ name: 'adjust-balance' }" class="balance-control__balance-setting"
-        >Adjust the balance</router-link
+      <router-link :to="{ name: 'correct-balance' }" class="balance-control__balance-setting"
+        >Correct the balance</router-link
       >
       <router-link :to="{ name: 'operations-history' }" class="balance-control__balance-history">
         <font-awesome-icon
@@ -67,6 +67,7 @@
       color: white;
     }
     &__add-bill {
+      @include flexCenter;
       @include userSidebarBtn(130px, 40px);
       border: 1px solid hsl(242, 61%, 48%);
     }

@@ -11,7 +11,7 @@ export default defineConfig({
       components: '/src/components',
       navigation: '/src/components/navigation',
       forms: '/src/components/forms',
-      ui: '/src/components/UI',
+      ui: '/src/components/ui',
       icons: '/src/assets/icons',
       widgetMenus: '/src/components/menus/widgetMenus'
     }

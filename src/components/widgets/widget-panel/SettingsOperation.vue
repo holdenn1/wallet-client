@@ -2,8 +2,18 @@
   <div class="operation-settings">
     <WidgetPanelHeader header-title-text="Operation settings" />
     <div class="operation-setting-inputs">
-      <SettingOperationInput label="Description" placeholder="Description" v-model="description" />
-      <SettingOperationInput label="Recipient" placeholder="Recipient" v-model="recipient" />
+      <SettingOperationInput
+        input-type="text"
+        label="Description"
+        placeholder="Description"
+        v-model="description"
+      />
+      <SettingOperationInput
+        input-type="text"
+        label="Recipient"
+        placeholder="Recipient"
+        v-model="recipient"
+      />
     </div>
   </div>
 </template>

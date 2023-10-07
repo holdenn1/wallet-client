@@ -1,6 +1,6 @@
 <template>
   <div class="adjust-balance">
-    <WidgetPanelHeader header-title-text="Adjust the balance" >
+    <WidgetPanelHeader header-title-text="Adjust the balance">
       <button type="button" @click="() => console.log('confirm')">
         <font-awesome-icon icon="check" size="2xl" style="color: white" />
       </button>
@@ -8,23 +8,18 @@
     <WidgetPanelContentWrapper>
       <h4 class="adjust-balance__title">Select the correction method</h4>
       <Accordion>
-        <template v-slot:title
-          ><h5 class="adjust-balance__input-title">Correct the balance</h5></template
-        >
-        <template v-slot:content>
-          <SettingOperationInput
+        <template #title><h5 class="adjust-balance__input-title">Correct the balance</h5></template>
+        <template #content
+          ><SettingOperationInput
             label="Correct the balance"
             input-type="number"
             :model-value="correctBalance"
             placeholder="Input correct balance"
-          />
-        </template>
+        /></template>
       </Accordion>
       <Accordion>
-        <template v-slot:title
-          ><h5 class="adjust-balance__input-title">Set a new balance</h5></template
-        >
-        <template v-slot:content>
+        <template #title><h5 class="adjust-balance__input-title">Set a new balance</h5></template>
+        <template #content>
           <SettingOperationInput
             label="Correct the balance"
             input-type="number"
@@ -60,6 +55,7 @@ const changeBalance = ref('')
     margin-bottom: 30px;
   }
   &__input-title {
+    cursor: pointer;
     font-size: 18px;
     font-weight: 600;
   }

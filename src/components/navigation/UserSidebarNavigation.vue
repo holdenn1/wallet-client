@@ -1,11 +1,11 @@
 <template>
   <div class="user-navigation">
-    <button class="user-navigation__settings-btn">
+    <router-link :to="{ name: 'user-settings' }" class="user-navigation__settings-link">
       <font-awesome-icon
         icon="fa-sliders"
         style="color: hsl(242, 61%, 48%); padding-right: 8px"
       />Settings
-    </button>
+    </router-link>
     <button class="user-navigation__logout-btn" type="button" @click="userStore.logoutUser">
       <font-awesome-icon
         icon="fa-arrow-right-from-bracket"
@@ -23,6 +23,7 @@ const userStore = useUserStore()
 
 <style lang="scss" scoped>
 @import '@/styles/mixins/user-sidebar-btn.scss';
+@import '@/styles/mixins/d-flex-ctr';
 
 .user-navigation {
   width: 100%;
@@ -32,8 +33,9 @@ const userStore = useUserStore()
   justify-content: flex-end;
   align-items: center;
   padding: 20px;
-  &__settings-btn {
+  &__settings-link {
     @include userSidebarBtn(240px, 42px);
+    @include flexCenter;
     margin-bottom: 20px;
     transition: 0.5s;
     &:hover {
@@ -42,6 +44,7 @@ const userStore = useUserStore()
   }
   &__logout-btn {
     @include userSidebarBtn(240px, 42px);
+
     transition: 0.5s;
     &:hover {
       color: white;

@@ -17,7 +17,7 @@ defineProps<{ type: string; handleClick(): void }>()
   @include mainButton(#1660b4, #3a76b8);
 }
 
-.btn-type-money-operation{
+.btn-type-money-operation {
   @include mainButton(inherit, hsl(199, 64%, 42%));
   width: 100%;
   height: 60px;
@@ -26,5 +26,7 @@ defineProps<{ type: string; handleClick(): void }>()
   border-radius: 0;
 }
 
-
+.btn-type-delete-an-account {
+  @include mainButton(#f11313, #cc0202);
+}
 </style>

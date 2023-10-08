@@ -1,5 +1,5 @@
 <template>
-  <div  @click="() => isMenu = false" class="cash-flow-widget">
+  <div @click="() => (isMenu = false)" class="cash-flow-widget">
     <PopupWidgetMenu :is-menu="isMenu" @is-menu="() => (isMenu = !isMenu)" />
     <h3 class="widget-title">Recent entries</h3>
     <p class="widget-description">The last 30 days</p>
@@ -12,7 +12,6 @@
         </div>
         <ProgressLine bgcolor="#00c241" :completed="75" />
       </div>
-
       <div class="cash-flow__costs-progress-line-wrapper">
         <div class="cash-flow__progressbar-title">
           <span>Costs</span>

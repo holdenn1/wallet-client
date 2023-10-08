@@ -10,10 +10,11 @@ import SelectAnAccount from 'components/widgets/widget-panel/SelectAnAccount.vue
 import OperationDetails from 'components/widgets/widget-panel/OperationDetails.vue'
 import OperationsHistory from 'components/widgets/widget-panel/OperationsHistory.vue'
 import AddCreditCard from 'components/widgets/widget-panel/AddCreditCard.vue'
+import UserSettings from 'components/widgets/widget-panel/UserSettings.vue'
 import CorrectBalance from 'components/widgets/widget-panel/CorrectBalance.vue'
 import MainLayout from 'components/Layouts/MainLayout.vue'
-import Widgets from 'components/widgets/Widgets.vue'
 
+import Widgets from 'components/widgets/Widgets.vue'
 import NotFound from 'components/errors/NotFound.vue'
 import { createRouter, createWebHashHistory } from 'vue-router'
 
@@ -93,6 +94,11 @@ const router = createRouter({
                   path: 'add-credit-card',
                   name: 'add-credit-card',
                   component: AddCreditCard
+                },
+                {
+                  path: 'user-settings',
+                  name: 'user-settings',
+                  component: UserSettings
                 }
               ]
             }

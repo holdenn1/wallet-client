@@ -4,7 +4,7 @@
       <font-awesome-icon icon="circle-arrow-left" size="2xl" style="color: white" />
     </router-link>
     <h3 class="widget-panel-header__title">{{ headerTitleText }}</h3>
-    <slot nama="confirmChanges" />
+    <slot name="confirmChanges" />
   </header>
 </template>
 

@@ -14,6 +14,7 @@ import WidgetPanel from './widget-panel/WidgetPanel.vue'
 </script>
 
 <style lang="scss" scoped>
+@import '@/styles/mixins/scrollbar';
 .widget-wrapper {
   grid-area: wallet-content;
   width: 100%;
@@ -25,5 +26,12 @@ import WidgetPanel from './widget-panel/WidgetPanel.vue'
   grid-template-areas:
     'financial-control dynamic-widget-panel'
     'cost-structure dynamic-widget-panel';
+  @media screen and (max-width: 640px) {
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 1fr;
+    grid-template-areas:
+      'financial-control '
+      'cost-structure ';
+  }
 }
 </style>

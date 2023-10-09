@@ -12,7 +12,7 @@ ChartJS.defaults.font.style  = "normal";
 
 const data = {
   chartData: {
-    labels: ['VueJs', 'EmberJs', 'ReactJs', 'AngularJs'],
+    labels: ['Food', 'Shopping', 'Home', 'Internet'],
     datasets: [
       {
         backgroundColor: ['#41B883', '#E46651', '#00D8FF', '#DD1B16'],

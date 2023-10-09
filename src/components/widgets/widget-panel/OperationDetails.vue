@@ -2,7 +2,7 @@
   <div class="operation-details">
     <UpdateOperationForm>
       <template #header-form>
-        <WidgetPanelHeader header-title-text="Details">
+        <WidgetPanelHeader header-title-text="Details" :is-navigate-back="true">
           <button type="submit">
             <font-awesome-icon icon="check" size="2xl" style="color: white" />
           </button>
@@ -93,12 +93,16 @@ import Accordion from 'ui/accordion/Accordion.vue'
       font-weight: 600;
       position: relative;
       margin-bottom: 10px;
+
     }
     &__icon {
       color: #5a5a5a;
       position: absolute;
       top: 0;
       right: 0;
+      @media screen and (max-width: 960px){
+        right: 32px;
+      }
     }
   }
 }

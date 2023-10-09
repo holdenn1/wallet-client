@@ -26,11 +26,13 @@ import WidgetPanel from './widget-panel/WidgetPanel.vue'
   grid-template-areas:
     'financial-control dynamic-widget-panel'
     'cost-structure dynamic-widget-panel';
+  position: relative;
   @media screen and (max-width: 640px) {
+    transition: 0.7s;
     grid-template-columns: 1fr;
     grid-template-rows: 1fr 1fr;
     grid-template-areas:
-      'financial-control '
+      'financial-control'
       'cost-structure ';
   }
 }

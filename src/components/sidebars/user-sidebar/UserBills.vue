@@ -38,6 +38,9 @@
   overflow: hidden;
   padding: 20px;
   border-bottom: 1px solid rgb(207, 207, 207);
+  @media screen and (max-width: 340px) {
+    padding: 8px;
+  }
 
   &__title {
     font-size: 18px;

@@ -6,8 +6,8 @@
     <div class="user-sidebar__content">
       <div class="user-sidebar__user-info">
         <div class="user-info">
-          <img :src="preAvatar" alt="" class="user-info__avatar" />
-          <h4 class="user-info__full-name">Lorem, ipsum.</h4>
+          <img src="@/assets/IMG_20210510_120704_374.jpg" alt="" class="user-info__avatar" />
+          <h4 class="user-info__full-name">Ihor Ivliev</h4>
         </div>
       </div>
       <BillsWidget />
@@ -29,6 +29,7 @@ import { storeToRefs } from 'pinia'
 const mainStore = useMainStore()
 const resizeWindow = ref(0)
 
+console.log(resizeWindow)
 const { mainState } = storeToRefs(mainStore)
 
 const { setMenuVisible } = mainStore
@@ -53,17 +54,23 @@ watchEffect(() => {
 
 <style lang="scss" scoped>
 .user-sidebar {
+  width: 320px;
   grid-area: user-sidebar;
   background-color: hsl(240, 12%, 97%);
   position: relative;
-  z-index: 500;
+  z-index: 1000;
+  transition: 0.7s;
 
   @media screen and (max-width: 960px) {
     position: absolute;
     top: 0;
-    right: -310px;
+    right: -320px;
   }
 
+  @media screen and (max-width: 340px) {
+    width: 290px;
+    right: -290px;
+  }
   .menu-button-wrapper {
     display: none;
     position: absolute;
@@ -72,6 +79,9 @@ watchEffect(() => {
     z-index: 500;
     @media screen and (max-width: 960px) {
       display: block;
+    }
+    @media screen and (max-width: 374px) {
+
     }
   }
 
@@ -103,5 +113,6 @@ watchEffect(() => {
   position: absolute;
   top: 0;
   right: 0;
+  transition: 0.3s;
 }
 </style>

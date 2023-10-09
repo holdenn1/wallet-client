@@ -1,14 +1,12 @@
 <template>
- 
-    <div class="progressbar-line">
-      <div
-        class="progressbar-line__filler"
-        :style="`width: ${completed}%; background-color: ${bgcolor}`"
-      >
-        <span class="progressbar-line__label"></span>
-      </div>
+  <div class="progressbar-line">
+    <div
+      class="progressbar-line__filler"
+      :style="`width: ${completed}%; background-color: ${bgcolor}`"
+    >
+      <span class="progressbar-line__label"></span>
     </div>
-  
+  </div>
 </template>
 
 <script setup lang="ts">

@@ -1,13 +1,12 @@
 <template>
   <div @click="() => (isMenu = false)" class="cost-widget">
     <PopupWidgetMenu :is-menu="isMenu" @is-menu="() => (isMenu = !isMenu)" />
-    <h3 class="widget-title">Recent entries</h3>
-    <p class="widget-description">The last 30 days</p>
+    <WidgetTitle />
     <div class="costs">
       <ul class="costs__list">
         <router-link :to="{ name: 'operation-details' }">
           <li class="costs__item" v-for="cost in costs" :key="cost.id">
-            <img class="costs__img" src="" alt="" />
+            <img class="costs__img" src="" />
             <div class="costs__info">
               <span class="costs__category-type">{{ cost.costType }}</span>
               <span class="costs__account-type">{{ cost.accountType }}</span>
@@ -26,25 +25,25 @@
 <script setup lang="ts">
 import PopupWidgetMenu from 'components/menus/PopupWidgetMenu.vue'
 import { ref } from 'vue'
+import WidgetTitle from 'ui/titles/WidgetTitle.vue'
 
 const isMenu = ref<boolean>(false)
 
 const costs = [
-  { id: 1, costType: 'Test 1', accountType: 'Account 1' },
-  { id: 2, costType: 'Test 2', accountType: 'Account 2' },
-  { id: 3, costType: 'Test 3', accountType: 'Account 3' },
-  { id: 4, costType: 'Test 4', accountType: 'Account 4' },
-  { id: 5, costType: 'Test 5', accountType: 'Account 5' },
-  { id: 6, costType: 'Test 6', accountType: 'Account 6' },
-  { id: 7, costType: 'Test 7', accountType: 'Account 7' },
-  { id: 8, costType: 'Test 8', accountType: 'Account 8' },
-  { id: 9, costType: 'Test 9', accountType: 'Account 9' }
+  { id: 1, costType: 'Test 1', accountType: 'Account 1', img: '' },
+  { id: 2, costType: 'Test 2', accountType: 'Account 2', img: '' },
+  { id: 3, costType: 'Test 3', accountType: 'Account 3', img: '' },
+  { id: 4, costType: 'Test 4', accountType: 'Account 4', img: '' },
+  { id: 5, costType: 'Test 5', accountType: 'Account 5', img: '' },
+  { id: 6, costType: 'Test 6', accountType: 'Account 6', img: '' },
+  { id: 7, costType: 'Test 7', accountType: 'Account 7', img: '' },
+  { id: 8, costType: 'Test 8', accountType: 'Account 8', img: '' },
+  { id: 9, costType: 'Test 9', accountType: 'Account 9', img: '' }
 ]
 </script>
 
 <style lang="scss" scoped>
 @import '@/styles/mixins/scrollbar.scss';
-@import '@/styles/mixins/widgetTitle.scss';
 @import '@/styles/mixins/d-flex-js-sb-al-ctr.scss';
 .cost-widget {
   grid-area: costs;
@@ -54,7 +53,6 @@ const costs = [
   @include scrollbar(4px, rgb(56, 56, 56));
   position: relative;
 
-  @include widgetTitle;
   .costs {
     &__item {
       width: 100%;

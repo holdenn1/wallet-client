@@ -33,6 +33,9 @@ const userStore = useUserStore()
   justify-content: flex-end;
   align-items: center;
   padding: 20px;
+  @media screen and (max-width: 340px) {
+    padding: 10px;
+  }
   &__settings-link {
     @include userSidebarBtn(240px, 42px);
     @include flexCenter;

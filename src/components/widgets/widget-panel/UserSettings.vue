@@ -2,9 +2,11 @@
   <div class="user-settings">
     <EditUserForm>
       <WidgetPanelHeader header-title-text="Add thr credit card">
-        <button type="submit">
-          <font-awesome-icon icon="check" size="2xl" style="color: white" />
-        </button>
+
+          <button type="submit">
+            <font-awesome-icon icon="check" size="2xl" style="color: white" />
+          </button>
+
       </WidgetPanelHeader>
     </EditUserForm>
     <div class="user-settings__buttons">

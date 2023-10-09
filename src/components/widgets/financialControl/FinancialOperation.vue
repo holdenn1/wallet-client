@@ -59,6 +59,10 @@ const route = useRoute()
     display: flex;
     align-items: center;
     padding: 0 12px;
+    @media screen and (max-width: 640px){
+      padding: 0 32px;
+
+    }
   }
 
   .operation-account {
@@ -82,6 +86,10 @@ const route = useRoute()
     top: 12px;
     left: 20px;
     cursor: pointer;
+    @media screen and (max-width: 640px){
+      left: 34px;
+
+    }
   }
 
   &__setting {
@@ -89,6 +97,9 @@ const route = useRoute()
     top: 12px;
     right: 20px;
     cursor: pointer;
+    @media screen and (max-width: 640px){
+      right: 34px;
+    }
   }
 
   &__currency {

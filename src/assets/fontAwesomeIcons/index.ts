@@ -56,11 +56,15 @@ import {
   faGear,
   faCreditCard,
   faArrowRightLong,
-  faArrowDown, faRectangleList
+  faArrowDown,
+  faRectangleList,
+  faBarsProgress,
+  faChartPie
 } from '@fortawesome/free-solid-svg-icons'
 
 export default [
-  faEnvelope,faRectangleList,
+  faEnvelope,
+  faRectangleList,
   faArrowDown,
   faArrowRightLong,
   faCirclePlus,
@@ -83,6 +87,7 @@ export default [
   faCheck,
   faEllipsisVertical,
   faMinus,
+  faChartPie,
   faPlus,
   faArrowRightFromBracket,
   faBaby,
@@ -117,5 +122,6 @@ export default [
   faDumbbell,
   faPhoneVolume,
   faWifi,
-  faGear
+  faGear,
+  faBarsProgress
 ]

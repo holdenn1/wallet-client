@@ -58,11 +58,8 @@ const route = useRoute()
     flex: 1 1 auto;
     display: flex;
     align-items: center;
-    padding: 0 12px;
-    @media screen and (max-width: 640px){
-      padding: 0 32px;
+    padding: 0 60px;
 
-    }
   }
 
   .operation-account {
@@ -74,6 +71,8 @@ const route = useRoute()
     &__account-link {
       @include mainButton(inherit, hsl(199, 64%, 42%));
       @include flexCenter;
+      font-size: 20px;
+      font-weight: 500;
       width: 100%;
       height: 60px;
       transition: 0.7s;

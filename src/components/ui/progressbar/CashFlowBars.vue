@@ -29,7 +29,7 @@ defineProps<{ incomeColor: string; costColor: string }>()
 .cash-flow {
   font-size: 14px;
   font-weight: 600;
-  padding: 10px;
+  padding: 10px 20px;
   overflow: hidden;
 
   &__progressbar-title {

@@ -13,8 +13,6 @@ import { useRouter } from 'vue-router'
 
 // const userStore = useUserStore()
 
-const t = { s: 1, s2: 23 }
-
 const router = useRouter()
 globalRouter.router = router
 

@@ -36,4 +36,10 @@ const onSubmit = handleSubmit((values, { resetForm }) => {
 })
 </script>
 
-<style scoped></style>
+<style lang="scss" scoped>
+.operation-info-form{
+  &__input-wrapper{
+    padding: 10px;
+  }
+}
+</style>

@@ -57,7 +57,10 @@ const operationType = computed(() => {
   &__money-operation {
     text-align: center;
     @include mainButton(inherit, hsl(199, 68%, 41%));
+
     @include flexCenter;
+    font-size: 20px;
+    font-weight: 500;
     width: 100%;
     height: 60px;
     transition: 0.7s;

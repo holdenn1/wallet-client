@@ -10,12 +10,13 @@ defineProps<{ titleColor?: 'grey' | 'white' }>()
 <style scoped>
 .widget-title {
   text-align: left;
-  font-size: 22px;
+  font-size: 20px;
+  font-weight: 600;
   margin-bottom: 10px;
 }
 .widget-description {
   font-size: 14px;
-  font-weight: 600;
+  font-weight: 500;
   color: grey;
   text-align: left;
   text-transform: uppercase;

@@ -4,8 +4,8 @@
     <WidgetTitle />
     <div class="costs">
       <ul class="costs__list">
-        <router-link :to="{ name: 'operation-details' }">
-          <li class="costs__item" v-for="cost in costs" :key="cost.id">
+        <li class="costs__item" v-for="cost in costs" :key="cost.id">
+          <router-link class="costs__link" :to="{ name: 'operation-details' }">
             <img class="costs__img" src="" />
             <div class="costs__info">
               <span class="costs__category-type">{{ cost.costType }}</span>
@@ -15,8 +15,8 @@
               <span class="costs__date">5, 00 uah</span>
               <span class="costs__sum">Yesterday</span>
             </div>
-          </li>
-        </router-link>
+          </router-link>
+        </li>
       </ul>
     </div>
   </div>
@@ -47,7 +47,7 @@ const costs = [
 @import '@/styles/mixins/d-flex-js-sb-al-ctr.scss';
 .cost-widget {
   grid-area: costs;
-  padding: 20px;
+  padding: 20px 40px;
   overflow-y: auto;
   overflow-x: hidden;
   @include scrollbar(4px, rgb(56, 56, 56));
@@ -55,9 +55,6 @@ const costs = [
 
   .costs {
     &__item {
-      width: 100%;
-      height: 60px;
-      @include flex-js-sb-al-ctr;
       margin-bottom: 10px;
       border-bottom: 1px solid rgb(172, 172, 172);
       cursor: pointer;
@@ -65,6 +62,13 @@ const costs = [
       &:last-child {
         margin: 0;
       }
+    }
+
+    &__link {
+
+      width: 100%;
+      height: 60px;
+      @include flex-js-sb-al-ctr;
     }
     &__img {
       width: 40px;

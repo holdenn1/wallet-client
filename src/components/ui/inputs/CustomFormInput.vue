@@ -52,7 +52,6 @@ const {
     font-size: 18px;
     font-weight: 500;
     color: black;
-    margin-bottom: 10px;
   }
   .input {
     @include input;

@@ -8,10 +8,7 @@
       </div>
       <router-link :to="{ name: 'add-credit-card' }" class="bills__add-bill">
         Credit card
-        <font-awesome-icon
-          icon="fa-circle-plus"
-          style="color: hsl(242, 61%, 48%); padding-left: 8px"
-        />
+        <font-awesome-icon icon="fa-circle-plus" class="bills-icon" />
       </router-link>
     </div>
     <div class="balance-control">
@@ -19,10 +16,7 @@
         >Correct the balance</router-link
       >
       <router-link :to="{ name: 'operations-history' }" class="balance-control__balance-history">
-        <font-awesome-icon
-          icon="fa-calendar-minus"
-          style="color: hsl(242, 61%, 48%); padding-right: 8px"
-        />History
+        <font-awesome-icon icon="fa-calendar-minus" class="balance-control-icon" />History
       </router-link>
     </div>
   </div>
@@ -73,11 +67,23 @@
       @include flexCenter;
       @include userSidebarBtn(130px, 40px);
       border: 1px solid hsl(242, 61%, 48%);
+      position: relative;
+      padding-right: 10px;
+      .bills-icon {
+        position: absolute;
+        top: 9px;
+        right: 6px;
+        color: hsl(242, 61%, 48%);
+
+      }
     }
   }
   .balance-control {
     display: flex;
     justify-content: space-between;
+    gap: 10px;
+
+
     &__balance-setting {
       @include userSidebarBtn(160px, 36px);
       @include flexCenter;
@@ -85,6 +91,13 @@
     &__balance-history {
       @include userSidebarBtn(110px, 36px);
       @include flexCenter;
+      position: relative;
+    .balance-control-icon {
+      color: hsl(242, 61%, 48%);
+      position: absolute;
+      top: 9px;
+      right: 6px;
+    }
     }
   }
 }

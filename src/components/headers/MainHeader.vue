@@ -12,7 +12,7 @@
   width: 100%;
   height: 60px;
   z-index: 1500;
-  background-color: hsl(242, 61%, 48%);
-  box-shadow: 0px 4px 6px 0px hsl(242, 32%, 52%);
+  background-color: hsl(199, 60%, 49%);
+  box-shadow: 0px 4px 6px 0px hsl(200, 36%, 23%);
 }
 </style>

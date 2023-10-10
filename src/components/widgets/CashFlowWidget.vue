@@ -19,6 +19,6 @@ const isMenu = ref<boolean>(false)
 <style lang="scss" scoped>
 .cash-flow-widget {
   grid-area: cash-flow;
-  padding: 20px;
+  padding: 20px 40px;
 }
 </style>

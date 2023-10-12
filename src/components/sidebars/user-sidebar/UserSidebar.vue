@@ -29,7 +29,7 @@ import { storeToRefs } from 'pinia'
 const mainStore = useMainStore()
 const resizeWindow = ref(0)
 
-console.log(resizeWindow)
+
 const { mainState } = storeToRefs(mainStore)
 
 const { setMenuVisible } = mainStore

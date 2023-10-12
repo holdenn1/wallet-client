@@ -5,7 +5,7 @@
     <WidgetPanelContentWrapper>
 
       <template v-if="route.query.type === 'cost'">
-        <Accordion v-for="{ id, subcategories, ...rest } in costCategories" :key="id">
+        <Accordion v-for="{ id, subcategories, ...rest } in categoryStore.categoryState.cost" :key="id">
           <template v-slot:title>
             <WidgetCategoryItem :category="rest" />
           </template>
@@ -15,24 +15,25 @@
               v-for="subcategory in subcategories"
               :key="subcategory.id"
               :category="{
-                categoryBackgroundColor: subcategory.subcategoryBackgroundColor,
+                categoryIconBackground: subcategory.subcategoryIconBackground,
                 categoryIcon: subcategory.subcategoryIcon,
-                categoryText: subcategory.subcategoryText
+                category: subcategory.subcategory,
+                type: subcategory.type
               }"
             />
           </template>
         </Accordion>
-        <WidgetCategoryItem
+<!--        <WidgetCategoryItem
           :category="{
             categoryText: 'Other',
             categoryIcon: 'fa-bars',
             categoryBackgroundColor: 'background-color: rgb(172, 92, 0);'
           }"
-        />
+        />-->
       </template>
       <template v-if="route.query.type === 'income'">
         <WidgetCategoryItem
-          v-for="category in incomeCategories"
+          v-for="category in categoryStore.categoryState.income"
           :key="category.id"
           :category="category"
         />
@@ -48,12 +49,18 @@ import WidgetPanelHeader from 'components/headers/WidgetPanelHeader.vue'
 import WidgetPanelContentWrapper from 'ui/wrappers/WidgetPanelContentWrapper.vue'
 
 
-import { computed } from 'vue'
+import {computed, onMounted} from 'vue'
 import { useRoute } from 'vue-router'
+import {useCategoryStore} from "@/store/categoryStore";
 
 const route = useRoute()
 
-const costCategories = [
+const categoryStore = useCategoryStore()
+
+onMounted(() => {
+  console.log(categoryStore.categoryState.cost)
+})
+/*const costCategories = [
   {
     id: 1,
     categoryIcon: 'fa-utensils',
@@ -307,7 +314,9 @@ const incomeCategories = [
     categoryBackgroundColor: 'background-color: rgb(13, 67, 245);',
     categoryText: 'Selling'
   }
-]
+]*/
+
+
 
 const categoryText = computed(() => {
   if (route.query.type === 'cost') return 'Cost'

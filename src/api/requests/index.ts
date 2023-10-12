@@ -53,3 +53,8 @@ export const sendMessageForRecoverPassword = (userEmail: { email: string }) =>
 
 export const recoverUserPassword = (userData: { token: string; password: string }) =>
   instance.post('auth/recover/user-password', userData)
+
+
+/*Category requests*/
+
+export const getCategories = () => instance.get('categories/get-categories')

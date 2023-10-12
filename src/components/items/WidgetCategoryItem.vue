@@ -1,19 +1,22 @@
 <!-- eslint-disable vue/multi-word-component-names -->
 <template>
   <div class="category">
-    <div class="category__icon-wrapper" :style="category.categoryBackgroundColor">
+    <div class="category__icon-wrapper" :style="category.categoryIconBackground">
       <font-awesome-icon :icon="category.categoryIcon" style="color: white" size="2xl" />
     </div>
-    <span class="category__text">{{ category.categoryText }}</span>
+    <span class="category__text">{{ category.category }}</span>
   </div>
 </template>
 
 <script setup lang="ts">
+import type { CategoryType } from '@/store/types/categoryStoreTypes'
+
 defineProps<{
   category: {
-    categoryBackgroundColor: string
+    type: CategoryType
+    category: string
     categoryIcon: string
-    categoryText: string
+    categoryIconBackground: string
   }
 }>()
 </script>

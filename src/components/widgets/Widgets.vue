@@ -11,6 +11,16 @@
 import CoastStructureWidget from './CoastStructureWidget.vue'
 import FinancialControlWidget from './financialControl/FinancialControlWidget.vue'
 import WidgetPanel from './widget-panel/WidgetPanel.vue'
+
+import { useCategoryStore } from '@/store/categoryStore'
+
+import { onMounted } from 'vue'
+
+const categoryStore = useCategoryStore()
+
+onMounted(async () => {
+  await categoryStore.getCategoriesAction()
+})
 </script>
 
 <style lang="scss" scoped>

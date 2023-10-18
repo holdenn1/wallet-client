@@ -1,33 +1,14 @@
 <template>
   <div class="adjust-balance">
-    <WidgetPanelHeader header-title-text="Adjust the balance">
+    <WidgetPanelHeader header-title-text="Correct the balance">
       <button type="button" @click="() => console.log('confirm')">
         <font-awesome-icon icon="check" size="2xl" style="color: white" />
       </button>
     </WidgetPanelHeader>
+
     <WidgetPanelContentWrapper>
-      <h4 class="adjust-balance__title">Select the correction method</h4>
-      <Accordion>
-        <template #title><h5 class="adjust-balance__input-title">Correct the balance</h5></template>
-        <template #content
-          ><SettingOperationInput
-            label="Correct the balance"
-            input-type="number"
-            :model-value="correctBalance"
-            placeholder="Input correct balance"
-        /></template>
-      </Accordion>
-      <Accordion>
-        <template #title><h5 class="adjust-balance__input-title">Set a new balance</h5></template>
-        <template #content>
-          <SettingOperationInput
-            label="Correct the balance"
-            input-type="number"
-            :model-value="changeBalance"
-            placeholder="Input the new balance"
-          />
-        </template>
-      </Accordion>
+      <!--      <h4 class="adjust-balance__title">Select the correction method</h4>-->
+      <CorrectBalanceForm />
     </WidgetPanelContentWrapper>
   </div>
 </template>
@@ -39,6 +20,7 @@ import SettingOperationInput from 'ui/inputs/SettingOperationInput.vue'
 import Accordion from 'ui/accordion/Accordion.vue'
 
 import { ref } from 'vue'
+import CorrectBalanceForm from 'forms/widgetForms/CorrectBalanceForm.vue'
 
 const correctBalance = ref('')
 const changeBalance = ref('')

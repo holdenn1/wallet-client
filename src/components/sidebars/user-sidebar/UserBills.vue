@@ -90,6 +90,7 @@
     }
     &__balance-history {
       @include userSidebarBtn(110px, 36px);
+      padding-right: 10px;
       @include flexCenter;
       position: relative;
     .balance-control-icon {

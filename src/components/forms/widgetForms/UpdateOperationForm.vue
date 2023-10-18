@@ -5,35 +5,35 @@
       <slot name="content-form" />
 
       <CustomFormInput
-        :value="values.sum"
-        name="sum"
+        :value="values.amount"
+        name="amount"
         type="number"
-        label="Enter the credit card name"
-        placeholder="The credit card name"
+        label="Enter the amount"
+        placeholder="The amount"
       />
 
       <CustomFormInput
         :value="values.date"
         name="date"
         type="date"
-        label="Enter the credit card name"
-        placeholder="The credit card name"
+        label="Enter the date"
+        placeholder="The date"
       />
 
       <CustomFormInput
         :value="values.recipient"
         name="recipient"
         type="text"
-        label="Enter the credit card name"
-        placeholder="The credit card name"
+        label="Enter the recipient"
+        placeholder="The recipient"
       />
 
       <CustomFormInput
         :value="values.description"
         name="description"
         type="text"
-        label="Enter the credit card name"
-        placeholder="The credit card name"
+        label="Enter the description"
+        placeholder="The description"
       />
     </WidgetPanelContentWrapper>
   </form>
@@ -45,7 +45,7 @@ import { useForm } from 'vee-validate'
 
 const { values, handleSubmit } = useForm({
   initialValues: {
-    sum: '',
+    amount: '',
     date: '',
     recipient: '',
     description: ''

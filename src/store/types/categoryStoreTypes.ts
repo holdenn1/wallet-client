@@ -1,6 +1,6 @@
 export type InitialValuesCategoryStore = {
-  cost: CostCategory[]
-  income: IncomeCategory[]
+  cost: Category[]
+  income: Category[]
 }
 
 export enum CategoryType {
@@ -8,7 +8,7 @@ export enum CategoryType {
   INCOME = 'income'
 }
 
-type Category = {
+export type Category = {
   id: number
   type: CategoryType
   category: string
@@ -17,8 +17,6 @@ type Category = {
   subcategories: Subcategory[]
 }
 
-type CostCategory = Category
-type IncomeCategory = Omit<Category, 'subcategories'>
 
 type Subcategory = {
   id: number

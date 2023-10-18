@@ -26,7 +26,7 @@
     </div>
     <div class="operation-account">
       <router-link :to="{ name: 'select-account' }" class="operation-account__account-link"
-        >Select an account</router-link
+        >Select payment method</router-link
       >
     </div>
   </div>

@@ -3,27 +3,9 @@
   <div class="cost-categories-menu">
     <WidgetPanelHeader :header-title-text="`${categoryText} Categories`" />
     <WidgetPanelContentWrapper>
-
       <template v-if="route.query.type === 'cost'">
-        <Accordion v-for="{ id, subcategories, ...rest } in categoryStore.categoryState.cost" :key="id">
-          <template v-slot:title>
-            <WidgetCategoryItem :category="rest" />
-          </template>
-          <template v-slot:content>
-            <h4 class="subcategory-title">Subcategories</h4>
-            <WidgetCategoryItem
-              v-for="subcategory in subcategories"
-              :key="subcategory.id"
-              :category="{
-                categoryIconBackground: subcategory.subcategoryIconBackground,
-                categoryIcon: subcategory.subcategoryIcon,
-                category: subcategory.subcategory,
-                type: subcategory.type
-              }"
-            />
-          </template>
-        </Accordion>
-<!--        <WidgetCategoryItem
+        <CategoriesList :category="categoryStore.categoryState.cost" />
+        <!--        <WidgetCategoryItem
           :category="{
             categoryText: 'Other',
             categoryIcon: 'fa-bars',
@@ -31,27 +13,21 @@
           }"
         />-->
       </template>
-      <template v-if="route.query.type === 'income'">
-        <WidgetCategoryItem
-          v-for="category in categoryStore.categoryState.income"
-          :key="category.id"
-          :category="category"
-        />
+      <template v-else>
+        <CategoriesList :category="categoryStore.categoryState.income" />
       </template>
     </WidgetPanelContentWrapper>
   </div>
 </template>
 
 <script setup lang="ts">
-import Accordion from 'ui/accordion/Accordion.vue'
-import WidgetCategoryItem from 'components/items/WidgetCategoryItem.vue'
+import CategoriesList from 'components/lists/CategoriesList.vue'
 import WidgetPanelHeader from 'components/headers/WidgetPanelHeader.vue'
 import WidgetPanelContentWrapper from 'ui/wrappers/WidgetPanelContentWrapper.vue'
 
-
-import {computed, onMounted} from 'vue'
+import { computed, onMounted } from 'vue'
 import { useRoute } from 'vue-router'
-import {useCategoryStore} from "@/store/categoryStore";
+import { useCategoryStore } from '@/store/categoryStore'
 
 const route = useRoute()
 
@@ -316,8 +292,6 @@ const incomeCategories = [
   }
 ]*/
 
-
-
 const categoryText = computed(() => {
   if (route.query.type === 'cost') return 'Cost'
   if (route.query.type === 'income') return 'Income'
@@ -331,12 +305,10 @@ const categoryText = computed(() => {
   width: 100%;
   height: 100%;
 
-  
-    .subcategory-title {
-      text-align: center;
-      font-size: 18px;
-      font-weight: 600;
-    }
-  
+  .subcategory-title {
+    text-align: center;
+    font-size: 18px;
+    font-weight: 600;
+  }
 }
 </style>

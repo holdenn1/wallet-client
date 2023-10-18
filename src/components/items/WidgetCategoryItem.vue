@@ -1,22 +1,20 @@
 <!-- eslint-disable vue/multi-word-component-names -->
 <template>
   <div class="category">
-    <div class="category__icon-wrapper" :style="category.categoryIconBackground">
-      <font-awesome-icon :icon="category.categoryIcon" style="color: white" size="2xl" />
+    <div class="category__icon-wrapper" :style="category.iconBackground">
+      <font-awesome-icon :icon="category.icon" style="color: white" size="2xl" />
     </div>
-    <span class="category__text">{{ category.category }}</span>
+    <span class="category__text">{{ category.text }}</span>
+    <slot name="balance" />
   </div>
 </template>
 
 <script setup lang="ts">
-import type { CategoryType } from '@/store/types/categoryStoreTypes'
-
 defineProps<{
   category: {
-    type: CategoryType
-    category: string
-    categoryIcon: string
-    categoryIconBackground: string
+    text: string
+    icon: string
+    iconBackground: string
   }
 }>()
 </script>
@@ -41,6 +39,12 @@ defineProps<{
     @include flexCenter;
     &:last-child {
       margin: 0;
+    }
+  }
+  &__balance-wrapper {
+    margin: 0 40px 0 auto;
+    .category-balance {
+      font-weight: 600;
     }
   }
 }

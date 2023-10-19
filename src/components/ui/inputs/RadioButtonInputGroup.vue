@@ -1,13 +1,13 @@
 <template>
   <div class="middle">
-    <label>
-      <Field :name="inputName" type="radio" :value="firstInputValue" :title="firstInputTitleText" />
+    <label class="label line" :title="firstInputTitleText">
+      <Field :name="inputName" type="radio" :value="firstInputValue"  />
       <div class="front-end box">
         <span>{{ firstInputText }}</span>
       </div>
     </label>
-    <label>
-      <Field :name="inputName" type="radio" :value="secondInputValue" :title="secondInputValue" />
+    <label class="label" :title="secondInputTitleText">
+      <Field :name="inputName" type="radio" :value="secondInputValue"  />
       <div class="back-end box">
         <span>{{ secondInputText }}</span>
       </div>
@@ -33,15 +33,15 @@ defineProps<{
 @import '@/styles/mixins/d-flex-ctr';
 
 .middle {
-  width: 280px;
+  width: 100%;
   height: 60px;
   border-radius: 12px;
   overflow: hidden;
   border: 1px solid hsl(199, 60%, 49%);
   display: flex;
-  h1 {
-    color: white;
-  }
+  display: flex;
+  justify-content: space-evenly;
+
   input[type='radio'] {
     display: none;
     &:checked {
@@ -53,16 +53,32 @@ defineProps<{
       }
     }
   }
+
+  .label {
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
+
+  .line {
+    border-right: 1px solid hsl(199, 60%, 49%);
+  }
   .box {
     height: 100%;
-    width: 140px;
     background-color: white;
     transition: 0.3s;
     will-change: transition;
-    font-weight: 900;
+    
     cursor: pointer;
     text-align: center;
     @include flexCenter;
+    transition: 0.7s;
+    &:hover {
+      background-color: hsl(199, 72%, 57%);
+      span {
+        color: white;
+      }
+    }
 
     span {
       transition: all 300ms ease;
@@ -70,7 +86,7 @@ defineProps<{
       color: hsl(199, 60%, 49%);
 
       &:before {
-        font-size: 1.2em;
+        
         display: block;
         transform: translateY(-80px);
         opacity: 0;

@@ -1,21 +1,22 @@
 <template>
   <div class="adjust-balance">
-    <WidgetPanelHeader header-title-text="Correct the balance">
-      <button type="button" @click="() => console.log('confirm')">
-        <font-awesome-icon icon="check" size="2xl" style="color: white" />
-      </button>
-    </WidgetPanelHeader>
+    
 
-    <WidgetPanelContentWrapper>
       <!--      <h4 class="adjust-balance__title">Select the correction method</h4>-->
-      <CorrectBalanceForm />
-    </WidgetPanelContentWrapper>
+      <CorrectBalanceForm >
+        <WidgetPanelHeader header-title-text="Correct the balance">
+          <button type="submit" >
+            <font-awesome-icon icon="check" size="2xl" style="color: white" />
+          </button>
+        </WidgetPanelHeader>
+
+      </CorrectBalanceForm>
+
   </div>
 </template>
 
 <script setup lang="ts">
 import WidgetPanelHeader from 'components/headers/WidgetPanelHeader.vue'
-import WidgetPanelContentWrapper from 'ui/wrappers/WidgetPanelContentWrapper.vue'
 import CorrectBalanceForm from 'forms/widgetForms/CorrectBalanceForm.vue'
 
 

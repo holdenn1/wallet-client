@@ -100,7 +100,8 @@ const state = reactive({
 }
 
 .custom-select .items div:hover {
-  background-color: hsl(199, 60%, 49%);
+  background-color: hsl(199, 72%, 57%);
+  color: white;
 }
 
 .selectHide {

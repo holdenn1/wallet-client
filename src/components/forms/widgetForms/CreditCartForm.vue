@@ -11,6 +11,15 @@
           placeholder="The credit card name"
         />
       </div>
+      <div class="input-wrapper">
+        <CustomFormInput
+          :value="values.balance"
+          name="balance"
+          type="number"
+          label="Enter enter current balance"
+          placeholder="Current balance"
+        />
+      </div>
     
   </form>
 </template>
@@ -21,7 +30,8 @@ import { useForm } from 'vee-validate'
 
 const { values, handleSubmit } = useForm({
   initialValues: {
-    creditCardName: ''
+    creditCardName: '',
+    balance: 0
   }
 })
 

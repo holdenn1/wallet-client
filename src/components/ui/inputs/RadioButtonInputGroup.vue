@@ -1,28 +1,39 @@
 <template>
   <div class="middle">
     <label>
-      <input type="radio" name="radio" checked />
+      <Field :name="inputName" type="radio" :value="firstInputValue" :title="firstInputTitleText" />
       <div class="front-end box">
-        <span>Front-end</span>
+        <span>{{ firstInputText }}</span>
       </div>
     </label>
-
     <label>
-      <input type="radio" name="radio" />
+      <Field :name="inputName" type="radio" :value="secondInputValue" :title="secondInputValue" />
       <div class="back-end box">
-        <span>Back-end</span>
+        <span>{{ secondInputText }}</span>
       </div>
     </label>
   </div>
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { Field } from 'vee-validate'
+
+defineProps<{
+  inputName: string
+  firstInputText: string
+  secondInputText: string
+  firstInputValue: string
+  secondInputValue: string
+  firstInputTitleText?: string
+  secondInputTitleText?: string
+}>()
+</script>
 
 <style lang="scss" scoped>
 @import '@/styles/mixins/d-flex-ctr';
 
 .middle {
-  width: 300px;
+  width: 280px;
   height: 60px;
   border-radius: 12px;
   overflow: hidden;
@@ -44,16 +55,15 @@
   }
   .box {
     height: 100%;
-    width: 150px;
+    width: 140px;
     background-color: white;
     transition: 0.3s;
     will-change: transition;
     font-weight: 900;
     cursor: pointer;
+    text-align: center;
     @include flexCenter;
-    &:active {
-      transform: translateY(10px);
-    }
+
     span {
       transition: all 300ms ease;
       user-select: none;

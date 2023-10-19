@@ -1,35 +1,51 @@
 <template>
-  <form  @submit="onSubmit">
-    <RadioButtonInput/>
-<!--    <Accordion>
-      <template #title><h5 class="adjust-balance__input-title">Correct the balance</h5></template>
-      <template #content
-      ><SettingOperationInput
-          label="Correct the balance"
-          input-type="number"
-          :model-value="correctBalance"
-          placeholder="Input correct balance"
-      /></template>
-    </Accordion>
-    <Accordion>
-      <template #title><h5 class="adjust-balance__input-title">Set a new balance</h5></template>
-      <template #content>
-        <SettingOperationInput
-            label="Correct the balance"
-            input-type="number"
-            :model-value="changeBalance"
-            placeholder="Input the new balance"
-        />
-      </template>
-    </Accordion>-->
+  <form @submit="onSubmit">
+    <div>
+      <h3>Select a correction method</h3>
+      <RadioButtonInput
+        first-input-text="Correct by recording"
+        second-input-text="Change the current balance"
+        :first-input-title-text="''"
+        :secondInputTitleText="''"
+        :first-input-value="'If you forgot to enter multiple expenses, Wallet will create an adjustment entry for you'"
+        :second-input-value="'If you have not entered data for a long time, Wallet will change the current balance of your account'"
+        :input-name="''"
+      />
+    </div>
+    <div>
+      <h3>Select balance for correct</h3>
+      <RadioButtonInput
+        first-input-text="Credit card"
+        second-input-text="Cash"
+        :first-input-value="''"
+        :second-input-value="''"
+        :input-name="''"
+      />
+    </div>
+
+    <CustomSelect
+      :options="['Mono Bank', 'Privat Bank', ]"
+      :default="'Select credit card'"
+      @input="(option) => console.log(option)"
+      
+    />
+    <div class="input-wrapper">
+      <CustomFormInput
+        :value="values.creditCardName"
+        name="creditCardName"
+        type="text"
+        label="Enter the credit card name"
+        placeholder="The credit card name"
+      />
+    </div>
   </form>
 </template>
 
 <script setup lang="ts">
 import { useForm } from 'vee-validate'
-import Accordion from "ui/accordion/Accordion.vue";
-import SettingOperationInput from "ui/inputs/SettingOperationInput.vue";
-import RadioButtonInput from "ui/inputs/RadioButtonInputGroup.vue";
+
+import RadioButtonInput from 'ui/inputs/RadioButtonInputGroup.vue'
+import CustomSelect from 'ui/inputs/CustomSelect.vue'
 
 const { values, handleSubmit } = useForm({
   initialValues: {
@@ -43,6 +59,4 @@ const onSubmit = handleSubmit((values, { resetForm }) => {
 })
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>

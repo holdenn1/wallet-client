@@ -16,14 +16,9 @@
 <script setup lang="ts">
 import WidgetPanelHeader from 'components/headers/WidgetPanelHeader.vue'
 import WidgetPanelContentWrapper from 'ui/wrappers/WidgetPanelContentWrapper.vue'
-import SettingOperationInput from 'ui/inputs/SettingOperationInput.vue'
-import Accordion from 'ui/accordion/Accordion.vue'
-
-import { ref } from 'vue'
 import CorrectBalanceForm from 'forms/widgetForms/CorrectBalanceForm.vue'
 
-const correctBalance = ref('')
-const changeBalance = ref('')
+
 </script>
 
 <style lang="scss" scoped>

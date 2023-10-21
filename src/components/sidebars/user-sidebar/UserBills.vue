@@ -4,7 +4,7 @@
     <div class="bills">
       <div class="bills__bill">
         <span class="bills__bill-type">Cash</span>
-        <span class="bills__bill-money">1 000 000. 00</span>
+        <span class="bills__bill-money">{{ userStore.userState.user?.cash }}</span>
       </div>
       <router-link :to="{ name: 'add-credit-card' }" class="bills__add-bill">
         Credit card
@@ -22,7 +22,13 @@
   </div>
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { useUserStore } from '@/store/userStore';
+
+
+const userStore = useUserStore()
+
+</script>
 
 <style lang="scss" scoped>
 @import '@/styles/mixins/user-sidebar-btn.scss';

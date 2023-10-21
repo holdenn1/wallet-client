@@ -1,36 +1,60 @@
 <template>
   <Accordion v-for="{ id, subcategories, ...rest } in category" :key="id">
     <template v-slot:title>
-      <WidgetCategoryItem
-        :category="{
-          text: rest.category,
-          icon: rest.categoryIcon,
-          iconBackground: rest.categoryIconBackground
-        }"
-      />
+      <router-link :to="{ query: { type: route.query.type, category: rest.category } }">
+        <WidgetCategoryItem
+          :category="{
+            text: rest.category,
+            icon: rest.categoryIcon,
+            iconBackground: rest.categoryIconBackground
+          }"
+        />
+      </router-link>
     </template>
     <template v-slot:content v-if="subcategories.length">
-      <h4 class="subcategory-title">Subcategories</h4>
-      <WidgetCategoryItem
-        v-for="subcategory in subcategories"
-        :key="subcategory.id"
-        :category="{
-          iconBackground: subcategory.subcategoryIconBackground,
-          icon: subcategory.subcategoryIcon,
-          text: subcategory.subcategory
-        }"
-      />
+      <SubcategoryContentWrapper>
+        <h4 class="subcategory-title">Subcategories</h4>
+        <router-link
+          v-for="subcategory in subcategories"
+          :key="subcategory.id"
+          :to="{
+            query: {
+              type: route.query.type,
+              category: rest.category,
+              subcategory: subcategory.subcategory
+            }
+          }"
+        >
+          <WidgetCategoryItem
+            :category="{
+              iconBackground: subcategory.subcategoryIconBackground,
+              icon: subcategory.subcategoryIcon,
+              text: subcategory.subcategory
+            }"
+          />
+        </router-link>
+      </SubcategoryContentWrapper>
     </template>
   </Accordion>
 </template>
 
 <script setup lang="ts">
 import Accordion from 'ui/accordion/Accordion.vue'
+import SubcategoryContentWrapper from 'ui/wrappers/SubcategoryContentWrapper.vue'
 import WidgetCategoryItem from 'components/items/WidgetCategoryItem.vue'
 
-import type {Category} from "@/store/types/categoryStoreTypes";
+import type { Category } from '@/store/types/categoryStoreTypes'
+import { useRoute } from 'vue-router'
 
 defineProps<{ category: Category[] }>()
+
+const route = useRoute()
 </script>
 
-<style scoped></style>
+<style scoped>
+.subcategory-title {
+  text-align: center;
+  font-size: 18px;
+  font-weight: 600;
+}
+</style>

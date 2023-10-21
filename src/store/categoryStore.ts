@@ -13,15 +13,17 @@ export const useCategoryStore = defineStore('category', () => {
     cost: [],
     income: []
   })
+  
   const { toastify } = useToastify()
+
   async function getCategoriesAction() {
     try {
       const {
-        data: { cost, income }
+        data: { cost, income, other }
       }: GetCategoriesResponse = await getCategories()
 
-      categoryState.value.cost = cost
-      categoryState.value.income = income
+      categoryState.value.cost = [...cost, ...other]
+      categoryState.value.income = [...income, ...other]
     } catch (e) {
       if (e instanceof AxiosError) {
         toastify('error', e.response?.data?.message || 'An error occurred')

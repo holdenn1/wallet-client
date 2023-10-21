@@ -9,7 +9,14 @@ export type User = {
   photo: null
   birthday: string | null
   cash: string
+  creditCard: CreditCard[]
   isEmailConfirmed: boolean
+}
+
+type CreditCard = {
+  id: number
+  bankName: string
+  balance: number
 }
 
 export type InitialValuesUserStore = {

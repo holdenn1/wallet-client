@@ -5,13 +5,6 @@
     <WidgetPanelContentWrapper>
       <template v-if="route.query.type === 'cost'">
         <CategoriesList :category="categoryStore.categoryState.cost" />
-        <!--        <WidgetCategoryItem
-          :category="{
-            categoryText: 'Other',
-            categoryIcon: 'fa-bars',
-            categoryBackgroundColor: 'background-color: rgb(172, 92, 0);'
-          }"
-        />-->
       </template>
       <template v-else>
         <CategoriesList :category="categoryStore.categoryState.income" />
@@ -25,18 +18,18 @@ import CategoriesList from 'components/lists/CategoriesList.vue'
 import WidgetPanelHeader from 'components/headers/WidgetPanelHeader.vue'
 import WidgetPanelContentWrapper from 'ui/wrappers/WidgetPanelContentWrapper.vue'
 
-import { computed, onMounted } from 'vue'
-import { useRoute } from 'vue-router'
 import { useCategoryStore } from '@/store/categoryStore'
+
+import { computed } from 'vue'
+import { useRoute } from 'vue-router'
 
 const route = useRoute()
 
 const categoryStore = useCategoryStore()
 
-onMounted(() => {
-  console.log(categoryStore.categoryState.cost)
-})
-/*const costCategories = [
+
+/*
+const costCategories = [
   {
     id: 1,
     categoryIcon: 'fa-utensils',
@@ -252,7 +245,8 @@ onMounted(() => {
     categoryText: 'Internet'
   }
 ]
-
+*/
+/*
 const incomeCategories = [
   {
     id: 1,
@@ -305,10 +299,5 @@ const categoryText = computed(() => {
   width: 100%;
   height: 100%;
 
-  .subcategory-title {
-    text-align: center;
-    font-size: 18px;
-    font-weight: 600;
-  }
 }
 </style>

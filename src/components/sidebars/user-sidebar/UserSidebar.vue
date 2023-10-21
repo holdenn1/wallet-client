@@ -6,8 +6,10 @@
     <div class="user-sidebar__content">
       <div class="user-sidebar__user-info">
         <div class="user-info">
-          <img src="@/assets/IMG_20210510_120704_374.jpg" alt="" class="user-info__avatar" />
-          <h4 class="user-info__full-name">Ihor Ivliev</h4>
+          <img :src="userState.user?.photo ?? preAvatar" alt="" class="user-info__avatar" />
+          <h4 class="user-info__full-name">
+            {{ userState.user?.firstName }} {{ userState.user?.lastName }}
+          </h4>
         </div>
       </div>
       <BillsWidget />
@@ -25,12 +27,14 @@ import MenuButton from 'ui/buttons/MenuButton.vue'
 import { onBeforeUnmount, onMounted, ref, watchEffect } from 'vue'
 import { useMainStore } from '@/store/mainStore'
 import { storeToRefs } from 'pinia'
+import { useUserStore } from '@/store/userStore'
 
 const mainStore = useMainStore()
+const userStore = useUserStore()
 const resizeWindow = ref(0)
 
-
 const { mainState } = storeToRefs(mainStore)
+const { userState } = storeToRefs(userStore)
 
 const { setMenuVisible } = mainStore
 const handleResize = () => (resizeWindow.value = window.innerWidth)
@@ -81,7 +85,6 @@ watchEffect(() => {
       display: block;
     }
     @media screen and (max-width: 374px) {
-
     }
   }
 

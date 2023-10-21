@@ -5,7 +5,8 @@ export type InitialValuesCategoryStore = {
 
 export enum CategoryType {
   COST = 'cost',
-  INCOME = 'income'
+  INCOME = 'income',
+  OTHER = 'other'
 }
 
 export type Category = {
@@ -20,7 +21,7 @@ export type Category = {
 
 type Subcategory = {
   id: number
-  type: CategoryType.COST
+  type: CategoryType
   subcategory: string
   subcategoryIcon: string
   subcategoryIconBackground: string
@@ -29,6 +30,7 @@ type Subcategory = {
 export type GetCategoriesResponse = {
   data: {
     cost: Category[],
-    income: Category[]
+    income: Category[],
+    other: Category[]
   }
 }

@@ -1,5 +1,6 @@
 import { faGoogle } from '@fortawesome/free-brands-svg-icons'
 import {
+
   faEnvelope,
   faRightToBracket,
   faUserPlus,

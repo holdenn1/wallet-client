@@ -4,7 +4,7 @@
     <slot name="title" />
   </div>
 
-  <div class="accordion-content" v-show="isOpen">
+  <div v-show="isOpen">
     <slot name="content" />
   </div>
 </template>
@@ -24,9 +24,5 @@ const toggleAccordion = () => {
   margin-bottom: 12px;
 }
 
-.accordion-content {
-  margin: 0 10px 12px 20px;
-  padding-bottom: 10px;
-  border-bottom: 1px solid rgb(182, 182, 182);
-}
+
 </style>

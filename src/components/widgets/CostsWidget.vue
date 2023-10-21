@@ -10,6 +10,7 @@
             <div class="costs__info">
               <span class="costs__category-type">{{ cost.costType }}</span>
               <span class="costs__account-type">{{ cost.accountType }}</span>
+              <span class="costs__account-type">description  - received</span>
             </div>
             <div class="costs__date-and-sum">
               <span class="costs__date">5, 00 uah</span>

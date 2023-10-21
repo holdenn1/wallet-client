@@ -113,7 +113,7 @@ export const useUserStore = defineStore('user', () => {
       localStorage.setItem('accessToken', tokens.accessToken)
       localStorage.setItem('refreshToken', tokens.refreshToken)
       userState.value.user = user
-      router.push({ name: 'wallet' })
+      router.push({ name: 'default-widgets' })
     } catch (e) {
       router.push({ path: '/' })
       console.error(e)

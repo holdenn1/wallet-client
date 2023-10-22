@@ -1,6 +1,12 @@
 <template>
   <div class="select-account">
-    <WidgetPanelHeader header-title-text="Operation settings" />
+    <WidgetPanelHeader header-title-text="Operation settings" :is-navigate-back="true">
+      <template #return>
+        <button type="button" @click="$emit('close-select-payment-menu')">
+          <font-awesome-icon icon="circle-arrow-left" size="2xl" style="color: white" />
+        </button>
+      </template>
+    </WidgetPanelHeader>
     <WidgetPanelContentWrapper>
       <WidgetBalanceItem
         :balance="{
@@ -20,6 +26,10 @@
 import WidgetBalanceItem from 'components/items/WidgetBalanceItem.vue'
 import WidgetPanelHeader from 'components/headers/WidgetPanelHeader.vue'
 import WidgetPanelContentWrapper from 'ui/wrappers/WidgetPanelContentWrapper.vue'
+
+defineEmits<{
+  (e: 'close-select-payment-menu'): void
+}>()
 </script>
 
 <style lang="scss" scoped>

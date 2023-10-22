@@ -4,9 +4,6 @@ import SignUpPageVue from '@/pages/SignUpPage.vue'
 import WalletPageVue from '@/pages/WalletPage.vue'
 import RecoverPasswordPage from '@/pages/RecoverPasswordPage.vue'
 import DefaultWidgets from 'components/widgets/widget-panel/DefaultWidgets.vue'
-import Categories from 'components/widgets/widget-panel/Categories.vue'
-import SettingsOperation from 'components/widgets/widget-panel/SettingsOperation.vue'
-import SelectAnAccount from 'components/widgets/widget-panel/SelectPaymentMethot.vue'
 import OperationDetails from 'components/widgets/widget-panel/OperationDetails.vue'
 import OperationsHistory from 'components/widgets/widget-panel/OperationsHistory.vue'
 import AddCreditCard from 'components/widgets/widget-panel/AddCreditCard.vue'
@@ -60,21 +57,7 @@ const router = createRouter({
                   name: 'default-widgets',
                   component: DefaultWidgets
                 },
-                {
-                  path: 'categories',
-                  name: 'categories',
-                  component: Categories
-                },
-                {
-                  path: 'setting-operation',
-                  name: 'setting-operation',
-                  component: SettingsOperation
-                },
-                {
-                  path: 'select-account',
-                  name: 'select-account',
-                  component: SelectAnAccount
-                },
+              
                 {
                   path: 'operation-details',
                   name: 'operation-details',

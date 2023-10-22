@@ -1,9 +1,7 @@
 <template>
   <div class="operation">
     <div class="operation__content">
-      <router-link :to="{ name: 'setting-operation' }">
-        <font-awesome-icon icon="gear" class="operation__setting" size="2xl" />
-      </router-link>
+      <font-awesome-icon @click="$emit('open-setting-operation')"  icon="gear" class="operation__setting" size="2xl" />
       <font-awesome-icon icon="check" class="operation__confirm" size="2xl" />
       <div v-show="route.query.type !== 'transfer'" class="operation__type">
         <font-awesome-icon
@@ -25,9 +23,7 @@
       <span class="operation__currency">UAH</span>
     </div>
     <div class="operation-account">
-      <router-link :to="{ name: 'select-account' }" class="operation-account__account-link"
-        >Select payment method</router-link
-      >
+      <button type="button" @click="$emit('open-select-payment-method')" class="operation-account__account-btn">Select payment method</button>
     </div>
   </div>
 </template>
@@ -36,6 +32,11 @@
 import { useRoute } from 'vue-router'
 
 const route = useRoute()
+
+defineEmits<{
+  (e: 'open-setting-operation'): void
+  (e: 'open-select-payment-method'): void
+}>()
 </script>
 
 <style lang="scss" scoped>
@@ -59,7 +60,6 @@ const route = useRoute()
     display: flex;
     align-items: center;
     padding: 0 60px;
-
   }
 
   .operation-account {
@@ -68,7 +68,7 @@ const route = useRoute()
     display: flex;
     justify-content: space-between;
     align-items: center;
-    &__account-link {
+    &__account-btn {
       @include mainButton(inherit, hsl(199, 64%, 42%));
       @include flexCenter;
       font-size: 20px;
@@ -85,9 +85,8 @@ const route = useRoute()
     top: 12px;
     left: 20px;
     cursor: pointer;
-    @media screen and (max-width: 640px){
+    @media screen and (max-width: 640px) {
       left: 34px;
-
     }
   }
 
@@ -96,7 +95,7 @@ const route = useRoute()
     top: 12px;
     right: 20px;
     cursor: pointer;
-    @media screen and (max-width: 640px){
+    @media screen and (max-width: 640px) {
       right: 34px;
     }
   }

@@ -96,6 +96,8 @@ export const useUserStore = defineStore('user', () => {
       }
     } catch (e) {
       toastify('error', 'An error occurred')
+      router.push({ path: '/' })
+      
       console.error(e)
     }
   }

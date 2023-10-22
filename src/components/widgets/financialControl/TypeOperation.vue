@@ -1,46 +1,40 @@
 <template>
   <div class="type-operation">
-    <router-link
-      :to="{ name: 'categories', query: { type: 'income' } }"
+    <button
+      type="button"
       class="type-operation__money-operation"
-      :class="{ 'type-operation_active': operationType === 'income' }"
-      >Income</router-link
+      :class="{ 'type-operation_active': categoryList === 'income' }"
+      @click="$emit('set-category-list', 'income')"
     >
-    <router-link
-      :to="{ name: 'categories', query: { type: 'cost' } }"
+      Income
+    </button>
+    <button
+      type="button"
       class="type-operation__money-operation"
-      :class="{ 'type-operation_active': operationType === 'cost' }"
-      >Cost</router-link
+      :class="{ 'type-operation_active': categoryList === 'cost' }"
+      @click="$emit('set-category-list', 'cost')"
     >
-    <router-link
-      :to="{ name: 'default-widgets', query: { type: 'transfer' } }"
+      Cost
+    </button>
+    <button
+      type="button"
       class="type-operation__money-operation"
-      :class="{ 'type-operation_active': operationType === 'transfer' }"
-      >Money transfer</router-link
+      :class="{ 'type-operation_active': categoryList === 'transfer' }"
+      
     >
+      Money transfer
+    </button>
   </div>
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue'
-import { useRoute } from 'vue-router'
+import { toRefs } from 'vue'
 
-const route = useRoute()
+defineEmits<{ (e: 'set-category-list', data: 'cost' | 'income' | 'transfer'): void }>()
 
-const queryParams = {
-  cost: 'cost',
-  income: 'income',
-  transfer: 'transfer'
-}
+const props = defineProps<{ categoryList: 'cost' | 'income' | 'transfer' | null }>()
 
-const operationType = computed(() => {
-  if (route.query.type) {
-    //@ts-ignore
-    return queryParams[route.query.type]
-  } else {
-    return ''
-  }
-})
+const { categoryList } = toRefs(props)
 </script>
 
 <style lang="scss" scoped>

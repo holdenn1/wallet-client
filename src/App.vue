@@ -17,6 +17,7 @@ const router = useRouter()
 globalRouter.router = router
 
 onMounted(() => {
+
   const userData = document.cookie
     ?.split('; ')
     ?.find((row) => row.startsWith('userData='))
@@ -37,11 +38,7 @@ onMounted(() => {
     }
   }
 
-  if (localStorage.getItem('refreshToken')) {
-    userStore.checkAuth()
-  } else {
-    userStore.logoutUser()
-  }
+  userStore.checkAuth()
 })
 </script>
 

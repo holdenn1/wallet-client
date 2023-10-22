@@ -1,14 +1,17 @@
 <!-- eslint-disable vue/multi-word-component-names -->
 <template>
   <div class="cost-categories-menu">
-    <WidgetPanelHeader :header-title-text="`${categoryText} Categories`" />
+    <WidgetPanelHeader :header-title-text="`${categoryText} Categories`" :is-navigate-back="true">
+      <template #return>
+        <button type="button" @click="$emit('close-category-list')">
+          <font-awesome-icon icon="circle-arrow-left" size="2xl" style="color: white" />
+        </button>
+      </template>
+    </WidgetPanelHeader>
     <WidgetPanelContentWrapper>
-      <template v-if="route.query.type === 'cost'">
-        <CategoriesList :category="categoryStore.categoryState.cost" />
-      </template>
-      <template v-else>
-        <CategoriesList :category="categoryStore.categoryState.income" />
-      </template>
+      <CategoriesList v-if="categoryList === 'cost'" :category="categoryStore.categoryState.cost" />
+
+      <CategoriesList v-else :category="categoryStore.categoryState.income" />
     </WidgetPanelContentWrapper>
   </div>
 </template>
@@ -20,13 +23,15 @@ import WidgetPanelContentWrapper from 'ui/wrappers/WidgetPanelContentWrapper.vue
 
 import { useCategoryStore } from '@/store/categoryStore'
 
-import { computed } from 'vue'
-import { useRoute } from 'vue-router'
+import { computed, toRefs } from 'vue'
 
-const route = useRoute()
+const props = defineProps<{ categoryList: 'cost' | 'income' | 'transfer' | null }>()
+defineEmits<{
+  (e: 'close-category-list'): void
+}>()
 
+const { categoryList } = toRefs(props)
 const categoryStore = useCategoryStore()
-
 
 /*
 const costCategories = [
@@ -287,8 +292,8 @@ const incomeCategories = [
 ]*/
 
 const categoryText = computed(() => {
-  if (route.query.type === 'cost') return 'Cost'
-  if (route.query.type === 'income') return 'Income'
+  if (categoryList.value === 'cost') return 'Cost'
+  if (categoryList.value === 'income') return 'Income'
   return null
 })
 </script>
@@ -298,6 +303,5 @@ const categoryText = computed(() => {
 .cost-categories-menu {
   width: 100%;
   height: 100%;
-
 }
 </style>

@@ -13,9 +13,7 @@ import { useRoute } from 'vue-router'
 import { useResize } from '@/hooks/useResize'
 
 const routes = [
-  'setting-operation',
-  'categories',
-  'select-account',
+  
   'operation-details',
   'operations-history',
   'correct-balance',

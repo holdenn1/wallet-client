@@ -1,19 +1,13 @@
 <template>
   <header class="widget-panel-header">
-    <button
-      v-if="isNavigateBack"
-      type="button"
-      @click="() => router.go(-1)"
-      class="widget-panel-header__link"
-    >
-      <font-awesome-icon icon="circle-arrow-left" size="2xl" class="widget-panel-header__icon" />
-    </button>
+    <slot v-if="isNavigateBack" name="return" />
+
     <router-link v-else class="widget-panel-header__link" :to="{ name: 'default-widgets' }">
       <font-awesome-icon icon="circle-arrow-left" size="2xl" class="widget-panel-header__icon" />
     </router-link>
     <h3 class="widget-panel-header__title">{{ headerTitleText }}</h3>
     <div class="widget-panel-header__confirm">
-      <slot />
+      <slot name="confirm" />
     </div>
   </header>
 </template>

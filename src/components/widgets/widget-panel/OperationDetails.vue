@@ -3,9 +3,22 @@
     <UpdateOperationForm>
       <template #header-form>
         <WidgetPanelHeader header-title-text="Details" :is-navigate-back="true">
-          <button type="submit">
-            <font-awesome-icon icon="check" size="2xl" style="color: white" />
+          <template #return>
+            <button
+      
+            type="button"
+            @click="() => router.go(-1)"
+            class="widget-panel-header__link"
+          >
+            <font-awesome-icon icon="circle-arrow-left" size="2xl" class="widget-panel-header__icon" />
           </button>
+          </template>
+          <template #confirm>
+
+            <button type="submit">
+              <font-awesome-icon icon="check" size="2xl" style="color: white" />
+            </button>
+          </template>
         </WidgetPanelHeader>
       </template>
       <template #content-form>
@@ -99,8 +112,10 @@ import UpdateOperationForm from 'forms/widgetForms/UpdateOperationForm.vue'
 import Accordion from 'ui/accordion/Accordion.vue'
 
 import { useCategoryStore } from '@/store/categoryStore'
+import { useRouter } from 'vue-router'
 
 const categoryStore = useCategoryStore()
+const router = useRouter()
 </script>
 
 <style lang="scss" scoped>

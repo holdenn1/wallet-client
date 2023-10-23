@@ -1,6 +1,6 @@
 <template>
   <div class="select-account">
-    <WidgetPanelHeader header-title-text="Operation settings" :is-navigate-back="true">
+    <WidgetPanelHeader header-title-text="Operation settings">
       <template #return>
         <button type="button" @click="$emit('close-select-payment-menu')">
           <font-awesome-icon icon="circle-arrow-left" size="2xl" style="color: white" />
@@ -8,14 +8,16 @@
       </template>
     </WidgetPanelHeader>
     <WidgetPanelContentWrapper>
-      <WidgetBalanceItem
-        :balance="{
-          icon: 'fa-sack-dollar',
-          iconBackground: 'background-color: rgb(8 217 0);',
-          text: 'Cash',
-          balance: '2200.00'
-        }"
-      />
+      <div @click="$emit('set-payment-method', { name: 'Cash' })">
+        <WidgetBalanceItem
+          :balance="{
+            icon: 'fa-sack-dollar',
+            iconBackground: 'background-color: rgb(8 217 0);',
+            text: 'Cash',
+            balance: '2200.00'
+          }"
+        />
+      </div>
       <!--This will be credit cards list      -->
       <!--      <WidgetBalanceItem v-for="{ id, ...rest } in balance" :key="id" :balance="rest" />-->
     </WidgetPanelContentWrapper>
@@ -27,8 +29,11 @@ import WidgetBalanceItem from 'components/items/WidgetBalanceItem.vue'
 import WidgetPanelHeader from 'components/headers/WidgetPanelHeader.vue'
 import WidgetPanelContentWrapper from 'ui/wrappers/WidgetPanelContentWrapper.vue'
 
+import type { PaymentMethodType } from './types'
+
 defineEmits<{
   (e: 'close-select-payment-menu'): void
+  (e: 'set-payment-method', data: PaymentMethodType): void
 }>()
 </script>
 

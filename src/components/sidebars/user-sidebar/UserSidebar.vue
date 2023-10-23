@@ -62,7 +62,7 @@ watchEffect(() => {
   grid-area: user-sidebar;
   background-color: hsl(240, 12%, 97%);
   position: relative;
-  z-index: 1000;
+  z-index: 1200;
   transition: 0.7s;
 
   @media screen and (max-width: 960px) {

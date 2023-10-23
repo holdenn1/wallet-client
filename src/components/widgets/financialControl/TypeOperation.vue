@@ -29,10 +29,11 @@
 
 <script setup lang="ts">
 import { toRefs } from 'vue'
+import type { OperationTypes } from './types';
 
-defineEmits<{ (e: 'set-category-list', data: 'cost' | 'income' | 'transfer'): void }>()
+defineEmits<{ (e: 'set-category-list', data: OperationTypes): void }>()
 
-const props = defineProps<{ categoryList: 'cost' | 'income' | 'transfer' | null }>()
+const props = defineProps<{ categoryList: OperationTypes }>()
 
 const { categoryList } = toRefs(props)
 </script>

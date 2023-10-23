@@ -5,7 +5,6 @@ import WalletPageVue from '@/pages/WalletPage.vue'
 import RecoverPasswordPage from '@/pages/RecoverPasswordPage.vue'
 import DefaultWidgets from 'components/widgets/widget-panel/DefaultWidgets.vue'
 import OperationDetails from 'components/widgets/widget-panel/OperationDetails.vue'
-import OperationsHistory from 'components/widgets/widget-panel/OperationsHistory.vue'
 import AddCreditCard from 'components/widgets/widget-panel/AddCreditCard.vue'
 import UserSettings from 'components/widgets/widget-panel/UserSettings.vue'
 import CorrectBalance from 'components/widgets/widget-panel/CorrectBalance.vue'
@@ -57,17 +56,13 @@ const router = createRouter({
                   name: 'default-widgets',
                   component: DefaultWidgets
                 },
-              
+
                 {
                   path: 'operation-details',
                   name: 'operation-details',
                   component: OperationDetails
                 },
-                {
-                  path: 'operations-history',
-                  name: 'operations-history',
-                  component: OperationsHistory
-                },
+
                 {
                   path: 'correct-balance',
                   name: 'correct-balance',

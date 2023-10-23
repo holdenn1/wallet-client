@@ -1,5 +1,5 @@
 <template>
-  <h3 class="widget-title">Recent entries</h3>
+  <h3 class="widget-title" :style="{ color: titleColor }">Recent entries</h3>
   <p class="widget-description" :style="{ color: titleColor }">The last 30 days</p>
 </template>
 

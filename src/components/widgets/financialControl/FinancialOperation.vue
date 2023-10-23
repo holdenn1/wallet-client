@@ -1,37 +1,53 @@
 <template>
   <div class="operation">
     <div class="operation__content">
-      <font-awesome-icon @click="$emit('open-setting-operation')"  icon="gear" class="operation__setting" size="2xl" />
-      <font-awesome-icon icon="check" class="operation__confirm" size="2xl" />
-      <div v-show="route.query.type !== 'transfer'" class="operation__type">
+      <font-awesome-icon
+        @click="$emit('open-setting-operation')"
+        icon="gear"
+        class="operation__setting"
+        size="2xl"
+      />
+      <button type="submit">
+        <font-awesome-icon icon="check" class="operation__confirm" size="2xl" />
+      </button>
+      <div v-show="categoryList !== 'transfer'" class="operation__type">
         <font-awesome-icon
-          v-show="route.query.type === 'cost'"
+          v-show="categoryList === 'cost'"
           icon="minus"
           style="color: white"
           size="lg"
         />
         <font-awesome-icon
-          v-show="route.query.type === 'income'"
+          v-show="categoryList === 'income'"
           icon="plus"
           style="color: white"
           size="lg"
         />
       </div>
       <div class="operation-money-input-wrapper">
-        <input class="operation-money-input" type="number" />
+        <Field :name="'amount'" class="operation-money-input" type="number"/>
       </div>
       <span class="operation__currency">UAH</span>
     </div>
     <div class="operation-account">
-      <button type="button" @click="$emit('open-select-payment-method')" class="operation-account__account-btn">Select payment method</button>
+      <button
+        type="button"
+        @click="$emit('open-select-payment-method')"
+        class="operation-account__account-btn"
+      >
+        Select payment method
+      </button>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { useRoute } from 'vue-router'
+import { Field } from 'vee-validate';
+import type { OperationTypes } from './types'
 
-const route = useRoute()
+defineProps<{
+  categoryList: OperationTypes
+}>()
 
 defineEmits<{
   (e: 'open-setting-operation'): void

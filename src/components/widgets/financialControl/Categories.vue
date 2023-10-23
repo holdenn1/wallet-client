@@ -1,7 +1,7 @@
 <!-- eslint-disable vue/multi-word-component-names -->
 <template>
   <div class="cost-categories-menu">
-    <WidgetPanelHeader :header-title-text="`${categoryText} Categories`" :is-navigate-back="true">
+    <WidgetPanelHeader :header-title-text="`${categoryText} Categories`">
       <template #return>
         <button type="button" @click="$emit('close-category-list')">
           <font-awesome-icon icon="circle-arrow-left" size="2xl" style="color: white" />
@@ -9,9 +9,14 @@
       </template>
     </WidgetPanelHeader>
     <WidgetPanelContentWrapper>
-      <CategoriesList v-if="categoryList === 'cost'" :category="categoryStore.categoryState.cost" />
-
-      <CategoriesList v-else :category="categoryStore.categoryState.income" />
+      <CategoriesList
+      
+        :category="
+          categoryList === 'cost'
+            ? categoryStore.categoryState.cost
+            : categoryStore.categoryState.income
+        "
+      />
     </WidgetPanelContentWrapper>
   </div>
 </template>
@@ -24,8 +29,9 @@ import WidgetPanelContentWrapper from 'ui/wrappers/WidgetPanelContentWrapper.vue
 import { useCategoryStore } from '@/store/categoryStore'
 
 import { computed, toRefs } from 'vue'
+import type { OperationTypes } from './types'
 
-const props = defineProps<{ categoryList: 'cost' | 'income' | 'transfer' | null }>()
+const props = defineProps<{ categoryList: OperationTypes }>()
 defineEmits<{
   (e: 'close-category-list'): void
 }>()

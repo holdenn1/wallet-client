@@ -44,11 +44,12 @@ import SubcategoryContentWrapper from 'ui/wrappers/SubcategoryContentWrapper.vue
 import WidgetCategoryItem from 'components/items/WidgetCategoryItem.vue'
 
 import type { Category } from '@/store/types/categoryStoreTypes'
-import { useRoute } from 'vue-router'
+import { useRoute } from 'vue-router';
 
 defineProps<{ category: Category[] }>()
 
 const route = useRoute()
+
 </script>
 
 <style scoped>

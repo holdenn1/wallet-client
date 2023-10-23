@@ -15,7 +15,6 @@ import { useResize } from '@/hooks/useResize'
 const routes = [
   
   'operation-details',
-  'operations-history',
   'correct-balance',
   'add-credit-card',
   'user-settings'

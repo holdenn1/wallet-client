@@ -15,19 +15,14 @@
       <router-link :to="{ name: 'correct-balance' }" class="balance-control__balance-setting"
         >Correct the balance</router-link
       >
-      <router-link :to="{ name: 'operations-history' }" class="balance-control__balance-history">
-        <font-awesome-icon icon="fa-calendar-minus" class="balance-control-icon" />History
-      </router-link>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { useUserStore } from '@/store/userStore';
-
+import { useUserStore } from '@/store/userStore'
 
 const userStore = useUserStore()
-
 </script>
 
 <style lang="scss" scoped>
@@ -80,31 +75,13 @@ const userStore = useUserStore()
         top: 9px;
         right: 6px;
         color: hsl(242, 61%, 48%);
-
       }
     }
   }
   .balance-control {
-    display: flex;
-    justify-content: space-between;
-    gap: 10px;
-
-
     &__balance-setting {
-      @include userSidebarBtn(160px, 36px);
+      @include userSidebarBtn(100%, 36px);
       @include flexCenter;
-    }
-    &__balance-history {
-      @include userSidebarBtn(110px, 36px);
-      padding-right: 10px;
-      @include flexCenter;
-      position: relative;
-    .balance-control-icon {
-      color: hsl(242, 61%, 48%);
-      position: absolute;
-      top: 9px;
-      right: 6px;
-    }
     }
   }
 }

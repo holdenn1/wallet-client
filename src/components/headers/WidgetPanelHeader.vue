@@ -1,10 +1,7 @@
 <template>
   <header class="widget-panel-header">
-    <slot v-if="isNavigateBack" name="return" />
+    <slot name="return" />
 
-    <router-link v-else class="widget-panel-header__link" :to="{ name: 'default-widgets' }">
-      <font-awesome-icon icon="circle-arrow-left" size="2xl" class="widget-panel-header__icon" />
-    </router-link>
     <h3 class="widget-panel-header__title">{{ headerTitleText }}</h3>
     <div class="widget-panel-header__confirm">
       <slot name="confirm" />
@@ -13,11 +10,7 @@
 </template>
 
 <script setup lang="ts">
-import { useRouter } from 'vue-router'
-
-defineProps<{ headerTitleText?: string; isNavigateBack?: boolean }>()
-
-const router = useRouter()
+defineProps<{ headerTitleText?: string }>()
 </script>
 
 <style lang="scss" scoped>
@@ -45,18 +38,6 @@ const router = useRouter()
     .widget-panel-header {
       display: flex;
       justify-content: space-around;
-      &__link {
-        order: 3;
-      }
-      &__icon {
-        transform: rotate(180deg);
-      }
-      &__title {
-        order: 2;
-      }
-      &__confirm {
-        order: 1;
-      }
     }
   }
 }

@@ -1,103 +1,164 @@
 <template>
-  <div class="financial-control-widget">
-    <div class="financial-control-wrapper">
-      <TypeOperation
-        @set-category-list="
-          (category) => {
-            isSettingOperation = true
-            categoryList = category
-            currentSettingMenu = 'categories'
-          }
-        "
-        :categoryList="categoryList"
-      />
-      <FinancialOperation
-        @open-select-payment-method="
-          () => {
-            isSettingOperation = true
-            currentSettingMenu = 'payment-method'
-          }
-        "
-        @open-setting-operation="
-          () => {
-            currentSettingMenu = 'addition-information'
-            isSettingOperation = true
-          }
-        "
-      />
+  <form @submit="onSubmit" class="financial-control-form">
+    <div class="financial-control-widget">
+      <div class="financial-control-wrapper">
+        <TypeOperation
+          @set-category-list="
+            (category) => {
+              categoryList = category
+              setOpenSettingMenu('categories')
+            }
+          "
+          :categoryList="categoryList"
+        />
+        <FinancialOperation
+          :categoryList="categoryList"
+          :paymentMethod="paymentMethod"
+          @open-select-payment-method="setOpenSettingMenu('payment-method')"
+          @open-setting-operation="setOpenSettingMenu('addition-information')"
+        />
+      </div>
+      <div v-show="isSettingOperation" :class="{ settings: isSettingOperation }">
+        <Categories
+          v-show="currentSettingMenu === 'categories'"
+          @close-category-list="() => (isSettingOperation = false)"
+          :categoryList="categoryList"
+        />
+        <SelectPaymentMethod
+          v-show="currentSettingMenu === 'payment-method'"
+          @set-payment-method="
+            (data) => {
+              isSettingOperation = false
+              paymentMethod = data
+            }
+          "
+          @close-select-payment-menu="() => (isSettingOperation = false)"
+        />
+        <AdditionInformation
+          v-show="currentSettingMenu === 'addition-information'"
+          @close-setting-operation-menu="() => (isSettingOperation = false)"
+          :description-value="values.description"
+          :recipient-value="values.recipient"
+        />
+      </div>
     </div>
-    <div v-show="isSettingOperation" :class="{ settings: isSettingOperation }">
-      <Categories
-        v-show="currentSettingMenu === 'categories'"
-        @close-category-list="() => (isSettingOperation = false)"
-        :categoryList="categoryList"
-      />
-      <SelectPaymentMethod
-        v-show="currentSettingMenu === 'payment-method'"
-        @close-select-payment-menu="() => (isSettingOperation = false)"
-      />
-      <AdditionInformation
-        v-show="currentSettingMenu === 'addition-information'"
-        @close-setting-operation-menu="() => (isSettingOperation = false)"
-      />
-    </div>
-  </div>
+  </form>
 </template>
 
 <script setup lang="ts">
+import Categories from './Categories.vue'
 import TypeOperation from './TypeOperation.vue'
 import FinancialOperation from './FinancialOperation.vue'
-import Categories from './Categories.vue'
 import SelectPaymentMethod from './SelectPaymentMethod.vue'
 import AdditionInformation from './AdditionInformation.vue'
-import { ref } from 'vue'
+
+import { ref, watchEffect } from 'vue'
+
+import type { OperationTypes, TransactionOptionMenus, PaymentMethodType } from './types'
+
+import { useForm } from 'vee-validate'
+import { useRoute, useRouter } from 'vue-router'
+import { useToastify } from 'vue-toastify-3'
 
 const isSettingOperation = ref<boolean>(false)
-const categoryList = ref<'cost' | 'income' | 'transfer' | null>(null)
-const currentSettingMenu = ref<'categories' | 'payment-method' | 'addition-information' | ''>('')
-// import { computed } from 'vue'
-// import { useRoute } from 'vue-router'
 
-// const route = useRoute()
+const categoryList = ref<OperationTypes>('')
 
-// const operations = {
-//   cost: 'cost',
-//   income: 'income',
-//   transfer: 'transfer'
-// }
+const currentSettingMenu = ref<TransactionOptionMenus>('')
 
-// const operationType = computed(() => {
-//   if (route.query.type) {
-//     //@ts-ignore
-//     return operations[route.query.type]
-//   } else {
-//     return ''
-//   }
-// })
+const paymentMethod = ref<PaymentMethodType | null>(null)
+
+const route = useRoute()
+const router = useRouter()
+
+const { toastify } = useToastify()
+
+const { values, handleSubmit, resetForm } = useForm({
+  initialValues: {
+    amount: 0,
+    description: '',
+    recipient: ''
+  }
+})
+
+const onSubmit = handleSubmit((values, { resetForm }) => {
+  console.log(values)
+  if (!values.amount) {
+    toastify('warning', 'Amount is required field')
+    return
+  }
+  if (!paymentMethod.value) {
+    toastify('warning', 'Please select payment method')
+    return
+  }
+  if (!route.query.category) {
+    toastify('warning', 'Please select category')
+    return
+  }
+  console.log({
+    amount: values.amount,
+    paymentMethod: paymentMethod.value,
+    additionInformation: {
+      description: values.recipient,
+      recipient: values.recipient
+    },
+    category: route.query.category,
+    subcategory: route.query.subcategory
+  })
+  paymentMethod.value = null
+  isSettingOperation.value = false
+  router.replace({ name: 'default-widgets' })
+  resetForm()
+})
+
+watchEffect(() => {
+  if (route.name !== 'default-widgets') {
+    paymentMethod.value = null
+    isSettingOperation.value = false
+    // router.replace({ name: 'default-widgets' })
+    resetForm()
+  }
+})
+
+const setOpenSettingMenu = (menu: TransactionOptionMenus) => {
+  isSettingOperation.value = true
+  currentSettingMenu.value = menu
+    router.replace({ name: 'default-widgets' })
+
+}
 </script>
 
 <style lang="scss" scoped>
-.financial-control-widget {
-  position: relative;
-  .financial-control-wrapper {
-    grid-area: financial-control;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-between;
-    width: 100%;
+.financial-control-form {
+  width: 100%;
+  height: 100%;
+  .financial-control-widget {
+    position: relative;
     height: 100%;
-    overflow: hidden;
-    background-color: hsl(199, 60%, 49%);
-  }
-  .settings {
-    position: absolute;
-    top: 0px;
-    left: 0;
-    width: 100%;
-    height: calc(100vh - 60px);
-    z-index: 1000;
-    background-color: white;
+    .financial-control-wrapper {
+      grid-area: financial-control;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      background-color: hsl(199, 60%, 49%);
+    }
+    .settings {
+      position: absolute;
+      top: 0px;
+      right: -100%;
+      width: 100%;
+      height: calc(100vh - 60px);
+      z-index: 1000;
+      background-color: white;
+      @media screen and (max-width: 640px) {
+        top: 0;
+        left: 0;
+      }
+    }
   }
 }
 </style>

@@ -51,7 +51,7 @@ const periods = [
     width: 280px;
     top: 40px;
     right: 0;
-    z-index: 800;
+    z-index: 500;
     background-color: #e0e0e0;
     box-shadow: 3px 3px 6px 0px rgba(46, 46, 46, 0.75);
     padding: 14px;

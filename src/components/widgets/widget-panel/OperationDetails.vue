@@ -2,19 +2,21 @@
   <div class="operation-details">
     <UpdateOperationForm>
       <template #header-form>
-        <WidgetPanelHeader header-title-text="Details" :is-navigate-back="true">
+        <WidgetPanelHeader header-title-text="Details">
           <template #return>
             <button
-      
-            type="button"
-            @click="() => router.go(-1)"
-            class="widget-panel-header__link"
-          >
-            <font-awesome-icon icon="circle-arrow-left" size="2xl" class="widget-panel-header__icon" />
-          </button>
+              type="button"
+              @click="() => router.replace({ name: 'default-widgets' })"
+              class="widget-panel-header__link"
+            >
+              <font-awesome-icon
+                icon="circle-arrow-left"
+                size="2xl"
+                class="widget-panel-header__icon"
+              />
+            </button>
           </template>
           <template #confirm>
-
             <button type="submit">
               <font-awesome-icon icon="check" size="2xl" style="color: white" />
             </button>
@@ -96,10 +98,11 @@
               </template>
             </Accordion>
           </div>
-          <h3 class="operation-details__group-title" style="margin-top: 20px">Additional settings</h3>
+          <h3 class="operation-details__group-title" style="margin-top: 20px">
+            Additional settings
+          </h3>
         </div>
       </template>
-
     </UpdateOperationForm>
   </div>
 </template>
@@ -125,14 +128,13 @@ const router = useRouter()
   width: 100%;
   height: 100%;
 
-  &__group-title{
+  &__group-title {
     text-align: center;
     font-size: 22px;
     font-weight: 600;
     margin-bottom: 20px;
   }
   .details-wrapper {
-
     .operation-details-field {
       cursor: pointer;
       position: relative;

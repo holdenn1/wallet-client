@@ -11,7 +11,8 @@ import { getCategories } from '@/api/requests'
 export const useCategoryStore = defineStore('category', () => {
   const categoryState = ref<InitialValuesCategoryStore>({
     cost: [],
-    income: []
+    income: [],
+    transfer: []
   })
   
   const { toastify } = useToastify()
@@ -19,11 +20,12 @@ export const useCategoryStore = defineStore('category', () => {
   async function getCategoriesAction() {
     try {
       const {
-        data: { cost, income, other }
+        data: { cost, income, other, transfer }
       }: GetCategoriesResponse = await getCategories()
 
       categoryState.value.cost = [...cost, ...other]
       categoryState.value.income = [...income, ...other]
+      categoryState.value.transfer = transfer
     } catch (e) {
       if (e instanceof AxiosError) {
         toastify('error', e.response?.data?.message || 'An error occurred')

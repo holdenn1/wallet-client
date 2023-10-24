@@ -1,12 +1,14 @@
 export type InitialValuesCategoryStore = {
   cost: Category[]
-  income: Category[]
+  income: Category[],
+  transfer: Category[]
 }
 
 export enum CategoryType {
   COST = 'cost',
   INCOME = 'income',
-  OTHER = 'other'
+  OTHER = 'other',
+  TRANSFER = 'transfer'
 }
 
 export type Category = {
@@ -31,6 +33,7 @@ export type GetCategoriesResponse = {
   data: {
     cost: Category[],
     income: Category[],
-    other: Category[]
+    other: Category[],
+    transfer: Category[]
   }
 }

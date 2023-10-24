@@ -1,6 +1,5 @@
 import { faGoogle } from '@fortawesome/free-brands-svg-icons'
 import {
-
   faEnvelope,
   faRightToBracket,
   faUserPlus,
@@ -60,12 +59,14 @@ import {
   faArrowDown,
   faRectangleList,
   faBarsProgress,
-  faChartPie
+  faChartPie,
+  faMoneyBillTransfer
 } from '@fortawesome/free-solid-svg-icons'
 
 export default [
   faEnvelope,
   faRectangleList,
+  faMoneyBillTransfer,
   faArrowDown,
   faArrowRightLong,
   faCirclePlus,

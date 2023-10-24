@@ -8,7 +8,7 @@
       </template>
     </WidgetPanelHeader>
     <WidgetPanelContentWrapper>
-      <div @click="$emit('set-payment-method', { name: 'Cash' })">
+      <div @click="$emit('set-payment-method', PaymentMethodType.CASH)">
         <WidgetBalanceItem
           :balance="{
             icon: 'fa-sack-dollar',
@@ -29,7 +29,7 @@ import WidgetBalanceItem from 'components/items/WidgetBalanceItem.vue'
 import WidgetPanelHeader from 'components/headers/WidgetPanelHeader.vue'
 import WidgetPanelContentWrapper from 'ui/wrappers/WidgetPanelContentWrapper.vue'
 
-import type { PaymentMethodType } from './types'
+import { PaymentMethodType } from './types'
 
 defineEmits<{
   (e: 'close-select-payment-menu'): void
@@ -42,5 +42,6 @@ defineEmits<{
 .select-account {
   width: 100%;
   height: 100%;
+  background-color: white;
 }
 </style>

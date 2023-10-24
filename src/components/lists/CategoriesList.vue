@@ -46,7 +46,7 @@ import WidgetCategoryItem from 'components/items/WidgetCategoryItem.vue'
 import type { Category } from '@/store/types/categoryStoreTypes'
 import { useRoute } from 'vue-router';
 
-defineProps<{ category: Category[] }>()
+defineProps<{ category: Category[] | null }>()
 
 const route = useRoute()
 

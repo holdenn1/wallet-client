@@ -1,7 +1,7 @@
 <!-- eslint-disable vue/multi-word-component-names -->
 <template>
   <div class="cost-categories-menu">
-    <WidgetPanelHeader :header-title-text="`${categoryText} Categories`">
+    <WidgetPanelHeader :header-title-text="`${title} Categories`">
       <template #return>
         <button type="button" @click="$emit('close-category-list')">
           <font-awesome-icon icon="circle-arrow-left" size="2xl" style="color: white" />
@@ -9,14 +9,7 @@
       </template>
     </WidgetPanelHeader>
     <WidgetPanelContentWrapper>
-      <CategoriesList
-      
-        :category="
-          categoryList === 'cost'
-            ? categoryStore.categoryState.cost
-            : categoryStore.categoryState.income
-        "
-      />
+      <CategoriesList :category="currentList" />
     </WidgetPanelContentWrapper>
   </div>
 </template>
@@ -28,7 +21,7 @@ import WidgetPanelContentWrapper from 'ui/wrappers/WidgetPanelContentWrapper.vue
 
 import { useCategoryStore } from '@/store/categoryStore'
 
-import { computed, toRefs } from 'vue'
+import { ref, toRefs, watchEffect } from 'vue'
 import type { OperationTypes } from './types'
 
 const props = defineProps<{ categoryList: OperationTypes }>()
@@ -297,10 +290,31 @@ const incomeCategories = [
   }
 ]*/
 
-const categoryText = computed(() => {
-  if (categoryList.value === 'cost') return 'Cost'
-  if (categoryList.value === 'income') return 'Income'
-  return null
+const title = ref()
+const currentList = ref()
+
+watchEffect(() => {
+  switch (categoryList.value) {
+    case 'cost': {
+      title.value = 'Cost'
+      currentList.value = categoryStore.categoryState.cost
+      break
+    }
+    case 'income': {
+      title.value = 'Income'
+      currentList.value = categoryStore.categoryState.income
+      break
+    }
+    case 'transfer': {
+      title.value = 'Transfer'
+      currentList.value = categoryStore.categoryState.transfer
+      break
+    }
+    default: {
+      title.value = null
+      currentList.value = null
+    }
+  }
 })
 </script>
 
@@ -309,5 +323,6 @@ const categoryText = computed(() => {
 .cost-categories-menu {
   width: 100%;
   height: 100%;
+  background-color: white;
 }
 </style>

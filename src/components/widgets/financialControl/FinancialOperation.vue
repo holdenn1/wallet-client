@@ -25,9 +25,12 @@
         />
       </div>
       <div class="operation-money-input-wrapper">
-        <Field :name="'amount'" class="operation-money-input" type="number"/>
+        <Field :name="'amount'" class="operation-money-input" type="number" />
       </div>
       <span class="operation__currency">UAH</span>
+    </div>
+    <div class="operation__category">
+      <span> {{ categoryInfo }}</span>
     </div>
     <div class="operation-account">
       <button
@@ -42,8 +45,10 @@
 </template>
 
 <script setup lang="ts">
-import { Field } from 'vee-validate';
+import { Field } from 'vee-validate'
 import type { OperationTypes } from './types'
+import { computed } from 'vue'
+import { useRoute } from 'vue-router'
 
 defineProps<{
   categoryList: OperationTypes
@@ -53,6 +58,17 @@ defineEmits<{
   (e: 'open-setting-operation'): void
   (e: 'open-select-payment-method'): void
 }>()
+
+const route = useRoute()
+
+const categoryInfo = computed(() => {
+  if (route.query.category ?? route.query.category)
+    return `Category - ${route.query.subcategory ?? route.query.category}`
+  if (route.query.category ?? route.query.category)
+    return `Category - ${route.query.subcategory ?? route.query.category}`
+  if (route.query.category) return `Category - ${route.query.category}`
+  return ''
+})
 </script>
 
 <style lang="scss" scoped>
@@ -74,8 +90,15 @@ defineEmits<{
   &__content {
     flex: 1 1 auto;
     display: flex;
-    align-items: center;
-    padding: 0 60px;
+    align-items: flex-end;
+
+    padding: 0 60px 40px;
+  }
+
+  &__category {
+    padding: 0 60px 10px;
+    font-weight: 500;
+    height: 36px;
   }
 
   .operation-account {

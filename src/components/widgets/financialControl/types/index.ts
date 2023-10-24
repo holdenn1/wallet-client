@@ -2,7 +2,9 @@ export type TransactionOptionMenus = 'categories' | 'payment-method' | 'addition
 
 export type OperationTypes = 'cost' | 'income' | 'transfer' | ''
 
-export type PaymentMethodType = {
-  name: string
-  id?: number | null
+export enum PaymentMethodType {
+  MONOBANK  = 'monobank',
+  PRIVAT_BANK  = 'privat-bank',
+  OSCHADBANK = 'oschadbank',
+  CASH = 'cash'
 }

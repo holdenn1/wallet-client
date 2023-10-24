@@ -50,6 +50,7 @@ const {descriptionValue, recipientValue} = toRefs(props)
 .operation-settings {
   width: 100%;
   height: 100%;
+  background-color: white;
   .operation-setting-inputs {
     padding: 10px;
   

@@ -82,7 +82,6 @@ const { values, handleSubmit, resetForm } = useForm({
 })
 
 const onSubmit = handleSubmit((values, { resetForm }) => {
-  console.log(values)
   if (!values.amount) {
     toastify('warning', 'Amount is required field')
     return
@@ -98,24 +97,24 @@ const onSubmit = handleSubmit((values, { resetForm }) => {
   console.log({
     amount: values.amount,
     paymentMethod: paymentMethod.value,
-    additionInformation: {
-      description: values.recipient,
-      recipient: values.recipient
-    },
+    description: values.recipient,
+    recipient: values.recipient,
+    typeOperation: categoryList.value,
     category: route.query.category,
     subcategory: route.query.subcategory
   })
   paymentMethod.value = null
   isSettingOperation.value = false
+  categoryList.value = ''
   router.replace({ name: 'default-widgets' })
   resetForm()
 })
 
 watchEffect(() => {
   if (route.name !== 'default-widgets') {
+    categoryList.value = ''
     paymentMethod.value = null
     isSettingOperation.value = false
-    // router.replace({ name: 'default-widgets' })
     resetForm()
   }
 })
@@ -123,8 +122,7 @@ watchEffect(() => {
 const setOpenSettingMenu = (menu: TransactionOptionMenus) => {
   isSettingOperation.value = true
   currentSettingMenu.value = menu
-    router.replace({ name: 'default-widgets' })
-
+  // router.replace({ name: 'default-widgets' })
 }
 </script>
 
@@ -153,7 +151,7 @@ const setOpenSettingMenu = (menu: TransactionOptionMenus) => {
       width: 100%;
       height: calc(100vh - 60px);
       z-index: 1000;
-      background-color: white;
+
       @media screen and (max-width: 640px) {
         top: 0;
         left: 0;

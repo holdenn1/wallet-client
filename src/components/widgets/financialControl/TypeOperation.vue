@@ -20,7 +20,7 @@
       type="button"
       class="type-operation__money-operation"
       :class="{ 'type-operation_active': categoryList === 'transfer' }"
-      
+      @click="$emit('set-category-list', 'transfer')"
     >
       Money transfer
     </button>

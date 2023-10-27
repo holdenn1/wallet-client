@@ -29,7 +29,8 @@
 
 <script setup lang="ts">
 import { toRefs } from 'vue'
-import type { OperationTypes } from './types';
+
+import type { OperationTypes } from '@/components/forms/widgetForms/types';
 
 defineEmits<{ (e: 'set-category-list', data: OperationTypes): void }>()
 
@@ -68,3 +69,4 @@ const { categoryList } = toRefs(props)
   }
 }
 </style>
+../../forms/widgetForms/types

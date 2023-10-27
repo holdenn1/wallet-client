@@ -60,7 +60,7 @@ import {
   faRectangleList,
   faBarsProgress,
   faChartPie,
-  faMoneyBillTransfer
+  faMoneyBillTransfer,
 } from '@fortawesome/free-solid-svg-icons'
 
 export default [

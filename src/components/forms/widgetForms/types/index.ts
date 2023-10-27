@@ -3,8 +3,12 @@ export type TransactionOptionMenus = 'categories' | 'payment-method' | 'addition
 export type OperationTypes = 'cost' | 'income' | 'transfer' | ''
 
 export enum PaymentMethodType {
-  MONOBANK  = 'monobank',
-  PRIVAT_BANK  = 'privat-bank',
-  OSCHADBANK = 'oschadbank',
+  CREDIT_CARD = 'card',
   CASH = 'cash'
+}
+
+export enum Banks {
+  MONOBANK  = 'MonoBank',
+  PRIVAT_BANK  = 'PrivatBank',
+  OSCHADBANK = 'OschadBank'
 }

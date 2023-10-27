@@ -27,7 +27,7 @@
 
       <div v-if="values.balanceType === 'card'" class="select-wrapper">
         <CustomSelect
-          :options="['Mono Bank', 'Privat Bank']"
+          :options="['MonoBank', 'PrivatBank', 'OschadBank']"
           :default="'Select credit card'"
           @input="(option) => (bankName = option)"
         />

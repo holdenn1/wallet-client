@@ -1,15 +1,15 @@
 <!-- eslint-disable vue/multi-word-component-names -->
 <template>
   <div class="widget-wrapper">
-    <FinancialControlWidget />
+    <CreateTransactionForm />
     <CoastStructureWidget />
     <WidgetPanel />
   </div>
 </template>
 
 <script setup lang="ts">
+import CreateTransactionForm from 'forms/widgetForms/CreateTransactionForm.vue'
 import CoastStructureWidget from './CoastStructureWidget.vue'
-import FinancialControlWidget from './financialControl/FinancialControlWidget.vue'
 import WidgetPanel from './widget-panel/WidgetPanel.vue'
 
 import { useCategoryStore } from '@/store/categoryStore'

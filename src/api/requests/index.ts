@@ -1,6 +1,6 @@
 import instance from '@/api'
 import type { AxiosRequestConfig } from 'axios'
-import type { LoginUserData, RegistrationUserData } from './types'
+import type { CreateTransactionData, LoginUserData, RegistrationUserData } from './types'
 
 /* user's requests */
 
@@ -58,3 +58,7 @@ export const recoverUserPassword = (userData: { token: string; password: string 
 /*Category requests*/
 
 export const getCategories = () => instance.get('categories/get-categories')
+
+// transactions requests
+
+export const createTransaction = (data:CreateTransactionData) => instance.post('transactions/create', data)

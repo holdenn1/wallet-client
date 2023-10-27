@@ -46,9 +46,10 @@
 
 <script setup lang="ts">
 import { Field } from 'vee-validate'
-import type { OperationTypes } from './types'
 import { computed } from 'vue'
 import { useRoute } from 'vue-router'
+
+import type { OperationTypes } from '@/components/forms/widgetForms/types';
 
 defineProps<{
   categoryList: OperationTypes
@@ -163,3 +164,4 @@ const categoryInfo = computed(() => {
   }
 }
 </style>
+../../forms/widgetForms/types

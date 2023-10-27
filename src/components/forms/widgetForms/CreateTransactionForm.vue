@@ -46,19 +46,20 @@
 </template>
 
 <script setup lang="ts">
-import Categories from './Categories.vue'
-import TypeOperation from './TypeOperation.vue'
-import FinancialOperation from './FinancialOperation.vue'
-import SelectPaymentMethod from './SelectPaymentMethod.vue'
-import AdditionInformation from './AdditionInformation.vue'
+import Categories from 'components/widgets/financialControl/Categories.vue'
+import TypeOperation from 'components/widgets/financialControl/TypeOperation.vue'
+import FinancialOperation from 'components/widgets/financialControl/FinancialOperation.vue'
+import SelectPaymentMethod from 'components/widgets/financialControl/SelectPaymentMethod.vue'
+import AdditionInformation from 'components/widgets/financialControl/AdditionInformation.vue'
 
+import { AxiosError } from 'axios'
 import { ref, watchEffect } from 'vue'
-
-import type { OperationTypes, TransactionOptionMenus, PaymentMethodType } from './types'
-
 import { useForm } from 'vee-validate'
-import { useRoute, useRouter } from 'vue-router'
 import { useToastify } from 'vue-toastify-3'
+import { useRoute, useRouter } from 'vue-router'
+import { createTransaction } from '@/api/requests'
+
+import type { OperationTypes, TransactionOptionMenus, PaymentMethodType, Banks } from './types'
 
 const isSettingOperation = ref<boolean>(false)
 
@@ -67,6 +68,7 @@ const categoryList = ref<OperationTypes>('')
 const currentSettingMenu = ref<TransactionOptionMenus>('')
 
 const paymentMethod = ref<PaymentMethodType | null>(null)
+const bankName = ref<Banks | null>(null)
 
 const route = useRoute()
 const router = useRouter()
@@ -81,33 +83,49 @@ const { values, handleSubmit, resetForm } = useForm({
   }
 })
 
-const onSubmit = handleSubmit((values, { resetForm }) => {
-  if (!values.amount) {
-    toastify('warning', 'Amount is required field')
-    return
+const onSubmit = handleSubmit(async (values, { resetForm }) => {
+  try {
+    if (!values.amount) {
+      toastify('warning', 'Amount is required field')
+      return
+    }
+    if (!paymentMethod.value) {
+      toastify('warning', 'Please select payment method')
+      return
+    }
+    if (!route.query.category) {
+      toastify('warning', 'Please select category')
+      return
+    }
+
+    const data = await createTransaction({
+      amount: String(values.amount),
+      paymentMethod: paymentMethod.value ?? '',
+      bankName: bankName.value ?? undefined,
+      description: values.description,
+      recipient: values.recipient,
+      typeOperation: categoryList.value,
+      category: (route.query.category as string) ?? '',
+      subcategory: (route.query.subcategory as string) ?? ''
+    })
+
+    if (!data) {
+      throw new Error()
+    }
+
+    paymentMethod.value = null
+    isSettingOperation.value = false
+    categoryList.value = ''
+    router.replace({ name: 'default-widgets' })
+    resetForm()
+  } catch (e) {
+    if (e instanceof AxiosError) {
+      toastify('error', e.response?.data?.message || 'An error occurred')
+      console.error(e)
+    } else {
+      console.error(e)
+    }
   }
-  if (!paymentMethod.value) {
-    toastify('warning', 'Please select payment method')
-    return
-  }
-  if (!route.query.category) {
-    toastify('warning', 'Please select category')
-    return
-  }
-  console.log({
-    amount: values.amount,
-    paymentMethod: paymentMethod.value,
-    description: values.recipient,
-    recipient: values.recipient,
-    typeOperation: categoryList.value,
-    category: route.query.category,
-    subcategory: route.query.subcategory
-  })
-  paymentMethod.value = null
-  isSettingOperation.value = false
-  categoryList.value = ''
-  router.replace({ name: 'default-widgets' })
-  resetForm()
 })
 
 watchEffect(() => {

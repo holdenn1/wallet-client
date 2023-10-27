@@ -29,7 +29,9 @@ import WidgetBalanceItem from 'components/items/WidgetBalanceItem.vue'
 import WidgetPanelHeader from 'components/headers/WidgetPanelHeader.vue'
 import WidgetPanelContentWrapper from 'ui/wrappers/WidgetPanelContentWrapper.vue'
 
-import { PaymentMethodType } from './types'
+import { PaymentMethodType } from '@/components/forms/widgetForms/types';
+
+
 
 defineEmits<{
   (e: 'close-select-payment-menu'): void

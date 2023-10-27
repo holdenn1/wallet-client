@@ -22,7 +22,8 @@ import WidgetPanelContentWrapper from 'ui/wrappers/WidgetPanelContentWrapper.vue
 import { useCategoryStore } from '@/store/categoryStore'
 
 import { ref, toRefs, watchEffect } from 'vue'
-import type { OperationTypes } from './types'
+
+import type { OperationTypes } from '@/components/forms/widgetForms/types'
 
 const props = defineProps<{ categoryList: OperationTypes }>()
 defineEmits<{
@@ -326,3 +327,4 @@ watchEffect(() => {
   background-color: white;
 }
 </style>
+../../forms/widgetForms/types

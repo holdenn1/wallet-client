@@ -1,6 +1,11 @@
 import instance from '@/api'
 import type { AxiosRequestConfig } from 'axios'
-import type { CreateTransactionData, LoginUserData, RegistrationUserData } from './types'
+import type {
+  AddCreditCardData,
+  CreateTransactionData,
+  LoginUserData,
+  RegistrationUserData
+} from './types'
 
 /* user's requests */
 
@@ -65,3 +70,8 @@ export const createTransaction = (data: CreateTransactionData) =>
 
 export const getTransactions = (userId: number) =>
   instance.get(`transactions/get-transactions/${userId}`)
+
+// credit cards
+
+export const AddCreditCardRequest = (data: AddCreditCardData) =>
+  instance.post('user/add/credit-card', data)

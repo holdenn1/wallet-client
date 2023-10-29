@@ -66,7 +66,7 @@ watchEffect(() => {
       position: relative;
       cursor: pointer;
       display: none;
-      @media screen and (max-width: 640px) {
+      @media screen and (max-width: 760px) {
         display: block;
       }
       .widget-switch-chart {

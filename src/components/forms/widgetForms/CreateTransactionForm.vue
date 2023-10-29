@@ -112,6 +112,7 @@ const onSubmit = handleSubmit(async (values, { resetForm }) => {
       subcategory: (route.query.subcategory as string) ?? ''
     })
 
+    console.log(data);
     
     if (!data) {
       throw new Error()
@@ -180,7 +181,7 @@ const setOpenSettingMenu = (menu: TransactionOptionMenus) => {
       height: calc(100vh - 60px);
       z-index: 1000;
 
-      @media screen and (max-width: 640px) {
+      @media screen and (max-width: 760px) {
         top: 0;
         left: 0;
       }

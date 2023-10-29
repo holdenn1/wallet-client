@@ -125,7 +125,7 @@ const categoryInfo = computed(() => {
     top: 12px;
     left: 20px;
     cursor: pointer;
-    @media screen and (max-width: 640px) {
+    @media screen and (max-width: 760px) {
       left: 34px;
     }
   }
@@ -135,7 +135,7 @@ const categoryInfo = computed(() => {
     top: 12px;
     right: 20px;
     cursor: pointer;
-    @media screen and (max-width: 640px) {
+    @media screen and (max-width: 760px) {
       right: 34px;
     }
   }

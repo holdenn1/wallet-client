@@ -34,7 +34,7 @@ defineProps<{ headerTitleText?: string }>()
   &__icon {
     color: white;
   }
-  @media screen and (max-width: 640px) {
+  @media screen and (max-width: 760px) {
     .widget-panel-header {
       display: flex;
       justify-content: space-around;

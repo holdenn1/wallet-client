@@ -23,3 +23,8 @@ export type CreateTransactionData = {
   bankName?: Banks
   subcategory?: string
 }
+
+export type AddCreditCardData = {
+  bankName: Banks;
+  balance: string;
+}

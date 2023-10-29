@@ -15,21 +15,34 @@
       <router-link :to="{ name: 'correct-balance' }" class="balance-control__balance-setting"
         >Correct the balance</router-link
       >
+      <router-link
+        v-show="isTransactionHistoryBtn"
+        :to="{ name: 'operation-history' }"
+        class="balance-control__balance-setting"
+        >Transaction History</router-link
+      >
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
+import { useResize } from '@/hooks/useResize'
 import { useUserStore } from '@/store/userStore'
+import { computed } from 'vue'
 
 const userStore = useUserStore()
+const { resizeWindow } = useResize()
+
+const isTransactionHistoryBtn = computed(() => {
+  if (resizeWindow.value < 760) return true
+  return false
+})
 </script>
 
 <style lang="scss" scoped>
 @import '@/styles/mixins/user-sidebar-btn.scss';
 @import '@/styles/mixins/d-flex-ctr.scss';
 .bills-widget {
-  height: 162px;
   overflow: hidden;
   padding: 20px;
   border-bottom: 1px solid rgb(207, 207, 207);
@@ -82,6 +95,7 @@ const userStore = useUserStore()
     &__balance-setting {
       @include userSidebarBtn(100%, 36px);
       @include flexCenter;
+      margin-bottom: 10px;
     }
   }
 }

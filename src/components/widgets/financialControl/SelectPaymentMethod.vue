@@ -18,8 +18,7 @@
           }"
         />
       </div>
-      <!--This will be credit cards list      -->
-      <!--      <WidgetBalanceItem v-for="{ id, ...rest } in balance" :key="id" :balance="rest" />-->
+        <WidgetBalanceItem v-for="{ id, ...rest } in userStore.userState.user?.creditCard" :key="id" :balance="rest" />
     </WidgetPanelContentWrapper>
   </div>
 </template>
@@ -30,8 +29,9 @@ import WidgetPanelHeader from 'components/headers/WidgetPanelHeader.vue'
 import WidgetPanelContentWrapper from 'ui/wrappers/WidgetPanelContentWrapper.vue'
 
 import { PaymentMethodType } from '@/components/forms/widgetForms/types';
+import { useUserStore } from '@/store/userStore';
 
-
+const userStore = useUserStore()
 
 defineEmits<{
   (e: 'close-select-payment-menu'): void

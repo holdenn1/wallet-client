@@ -47,9 +47,9 @@
 </template>
 
 <script setup lang="ts">
+import CustomSelect from 'ui/inputs/CustomSelect.vue'
 import WidgetPanelContentWrapper from 'ui/wrappers/WidgetPanelContentWrapper.vue'
 import RadioButtonInput from 'ui/inputs/RadioButtonInputGroup.vue'
-import CustomSelect from 'ui/inputs/CustomSelect.vue'
 
 import { useForm } from 'vee-validate'
 import { ref } from 'vue'

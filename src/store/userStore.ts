@@ -14,11 +14,15 @@ import { AxiosError } from 'axios'
 
 import type {
   AuthResponse,
+  CorrectUserBalanceData,
+  CreditCard,
   InitialValuesUserStore,
   LoginUserActionProps,
   RefreshTokensLoginResponse,
   RegistrationUserActionProps
 } from './types/userStoreTypes'
+
+import { PaymentMethodType } from '@/components/forms/widgetForms/types'
 
 export const useUserStore = defineStore('user', () => {
   const router = useRouter()
@@ -97,7 +101,7 @@ export const useUserStore = defineStore('user', () => {
     } catch (e) {
       toastify('error', 'An error occurred')
       router.push({ path: '/' })
-      
+
       console.error(e)
     }
   }
@@ -108,8 +112,7 @@ export const useUserStore = defineStore('user', () => {
       if (!refreshToken) {
         throw new Error()
       }
-      console.log(12413112);
-      
+
       const {
         data: { user, tokens }
       }: RefreshTokensLoginResponse = await refreshTokensLogin(refreshToken)
@@ -124,11 +127,43 @@ export const useUserStore = defineStore('user', () => {
     }
   }
 
+  function correctUserBalance({ amount, paymentMethod, type }: CorrectUserBalanceData) {
+    if (userState.value.user?.cash) {
+      switch (type) {
+        case 'cost': {
+          if (paymentMethod === PaymentMethodType.CASH) {
+            userState.value.user.cash = userState.value.user.cash - amount
+          }
+
+          break
+        }
+        case 'income': {
+          if (paymentMethod === PaymentMethodType.CASH) {
+            userState.value.user.cash = userState.value.user.cash + amount
+          }
+          break
+        }
+        case 'transfer': {
+          if (paymentMethod === PaymentMethodType.CASH) {
+            userState.value.user.cash = userState.value.user.cash - amount
+          }
+          break
+        }
+      }
+    }
+  }
+
+  function addUserCreditCard(creditCard: CreditCard) {
+    if (userState.value.user?.creditCard) {
+      userState.value.user?.creditCard.push(creditCard)
+    }
+  }
+
   return {
     userState,
     registrationUser,
     loginUser,
     logoutUser,
-    checkAuth
+    checkAuth,addUserCreditCard
   }
 })

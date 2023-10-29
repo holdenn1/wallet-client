@@ -1,13 +1,14 @@
 <template>
   <div class="user-settings">
     <EditUserForm>
-      <WidgetPanelHeader header-title-text="Add thr credit card">
+      <WidgetPanelHeader header-title-text="Settings">
         <template #return>
           <button type="button" @click="() => router.go(-1)" class="widget-panel-header__link">
             <font-awesome-icon
               icon="circle-arrow-left"
               size="2xl"
               class="widget-panel-header__icon"
+              style="color: white;"
             />
           </button>
         </template>

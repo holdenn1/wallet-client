@@ -21,7 +21,7 @@ import CashFlowWidget from 'components/widgets/CashFlowWidget.vue'
   grid-template-areas:
     'costs dynamic-widget-panel'
     'cash-flow dynamic-widget-panel';
-  @media screen and (max-width: 640px) {
+  @media screen and (max-width: 760px) {
     display: none;
   }
 }

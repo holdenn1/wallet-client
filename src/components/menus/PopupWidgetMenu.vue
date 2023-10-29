@@ -42,7 +42,7 @@ const periods = [
     top: 0px;
     right: 0px;
     cursor: pointer;
-    @media screen and (max-width: 640px) {
+    @media screen and (max-width: 760px) {
       right: 10px;
     }
   }

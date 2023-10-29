@@ -44,7 +44,7 @@ onMounted(async () => {
     'financial-control dynamic-widget-panel'
     'cost-structure dynamic-widget-panel';
   position: relative;
-  @media screen and (max-width: 640px) {
+  @media screen and (max-width: 760px) {
     transition: 0.7s;
     grid-template-columns: 1fr;
     grid-template-rows: 1fr 1fr;

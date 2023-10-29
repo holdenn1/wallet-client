@@ -1,3 +1,4 @@
+import type { PaymentMethodType, OperationTypes, Banks } from 'forms/widgetForms/types/index'
 import type { LoginUserData, RegistrationUserData } from '@/api/requests/types'
 import type { Ref } from 'vue'
 
@@ -8,14 +9,14 @@ export type User = {
   email: string
   photo: null
   birthday: string | null
-  cash: string
+  cash: number
   creditCard: CreditCard[]
   isEmailConfirmed: boolean
 }
 
-type CreditCard = {
+export type CreditCard = {
   id: number
-  bankName: string
+  bankName: Banks
   balance: number
 }
 
@@ -61,4 +62,15 @@ export type LoginUserActionProps = {
   data: LoginUserData
   resetForm: any
   isShowEmailConfirmMessage: Ref<boolean>
+}
+
+export type CorrectUserBalanceData = {
+  type: OperationTypes
+  paymentMethod: PaymentMethodType
+  amount: number
+  
+}
+
+export type AddCreditCardRequestType = {
+  data: CreditCard
 }

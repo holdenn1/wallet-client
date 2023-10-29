@@ -13,6 +13,7 @@
                 icon="circle-arrow-left"
                 size="2xl"
                 class="widget-panel-header__icon"
+                style="color: white;"
               />
             </button>
           </template>

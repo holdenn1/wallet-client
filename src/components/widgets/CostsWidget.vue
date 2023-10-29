@@ -53,6 +53,7 @@
 
 <script setup lang="ts">
 import PopupWidgetMenu from 'components/menus/PopupWidgetMenu.vue'
+
 import { ref } from 'vue'
 import WidgetTitle from 'ui/titles/WidgetTitle.vue'
 import { useTransactionStore } from '@/store/transactionStore'

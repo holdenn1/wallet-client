@@ -1,3 +1,4 @@
+import type { Banks } from '@/components/forms/widgetForms/types'
 import type { Category, Subcategory } from './categoryStoreTypes'
 
 export type InitialValuesTransactionStore = {
@@ -14,6 +15,7 @@ export type Transaction = {
   category: Category
   subcategory: Subcategory | null
   createAt: Date
+  bankName: Banks| undefined
 }
 
 export type GetTransactionsResponse = {

@@ -68,7 +68,7 @@ defineProps<{
     background-color: white;
     transition: 0.3s;
     will-change: transition;
-    
+    padding: 6px;
     cursor: pointer;
     text-align: center;
     @include flexCenter;

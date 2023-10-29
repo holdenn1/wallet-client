@@ -15,5 +15,8 @@
   overflow-x: hidden;
   overflow-y: auto;
   @include scrollbar(4px, rgb(48, 48, 48));
+  @media screen and (max-width: 960px) {
+    padding: 12px 40px;
+  }
 }
 </style>

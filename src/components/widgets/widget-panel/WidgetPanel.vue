@@ -13,7 +13,7 @@ import { useRoute } from 'vue-router'
 import { useResize } from '@/hooks/useResize'
 
 const routes = [
-  
+  'operation-history',
   'operation-details',
   'correct-balance',
   'add-credit-card',
@@ -26,7 +26,7 @@ const { resizeWindow } = useResize()
 
 const isAdaptivePanel = computed(() => {
   if (typeof route.name === 'string') {
-    if (routes.includes(route.name) && resizeWindow.value < 640) {
+    if (routes.includes(route.name) && resizeWindow.value < 760) {
       return true
     }
   }
@@ -39,7 +39,7 @@ const isAdaptivePanel = computed(() => {
   grid-area: dynamic-widget-panel;
   position: relative;
   background-color: white;
-  @media screen and (max-width: 640px) {
+  @media screen and (max-width: 760px) {
     width: 320px;
     height: 100%;
     position: absolute;

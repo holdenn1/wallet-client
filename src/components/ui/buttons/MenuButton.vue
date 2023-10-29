@@ -1,6 +1,6 @@
 <template>
-  <div class="btn-wrap">
-    <button type="button" @click="handleClick"><slot /></button>
+  <div class="btn-wrap" @click="handleClick">
+    <button type="button"><slot /></button>
   </div>
 </template>
 
@@ -20,6 +20,7 @@ defineProps<{ handleClick(): void }>()
   transform: rotate(270deg) perspective(200px) rotateX(35deg) translateZ(25px) translateY(5px);
   -webkit-backface-visibility: hidden;
   transition: all 0.5s ease-out;
+  cursor: pointer;
   button {
     font-size: 12px;
     letter-spacing: 3px;

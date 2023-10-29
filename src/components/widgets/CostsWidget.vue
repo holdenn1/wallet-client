@@ -4,17 +4,45 @@
     <WidgetTitle />
     <div class="costs">
       <ul class="costs__list">
-        <li class="costs__item" v-for="cost in costs" :key="cost.id">
+        <li
+          class="costs__item"
+          v-for="transaction in transactionsStore.transactionState.transactionHistoryList"
+          :key="transaction.id"
+        >
           <router-link class="costs__link" :to="{ name: 'operation-details' }">
-            <img class="costs__img" src="" />
+            <div
+              class="costs__icon-wrapper"
+              :style="
+                transaction.subcategory?.subcategoryIconBackground ??
+                transaction.category.categoryIconBackground
+              "
+            >
+              <font-awesome-icon
+                :icon="
+                  transaction.subcategory?.subcategoryIcon ?? transaction.category.categoryIcon
+                "
+                style="color: white"
+                size="2xl"
+              />
+            </div>
+
             <div class="costs__info">
-              <span class="costs__category-type">{{ cost.costType }}</span>
-              <span class="costs__account-type">{{ cost.accountType }}</span>
-              <span class="costs__account-type">description  - received</span>
+              <span class="costs__category-type">{{
+                transaction.subcategory?.subcategory ?? transaction.category.category
+              }}</span>
+              <span class="costs__account-type">{{ transaction.paymentMethod }}</span>
+              <span class="costs__account-type"
+                >{{ transaction.description }}
+                {{ transaction.description.length && transaction.recipient.length ? '-' : '' }}
+                {{ transaction.recipient }}</span
+              >
             </div>
             <div class="costs__date-and-sum">
-              <span class="costs__date">5, 00 uah</span>
-              <span class="costs__sum">Yesterday</span>
+              <span class="costs__sum">{{ transaction.amount }},00</span>
+
+              <span class="costs__date">{{
+                new Date(transaction.createAt).toISOString().split('T')[0]
+              }}</span>
             </div>
           </router-link>
         </li>
@@ -27,24 +55,16 @@
 import PopupWidgetMenu from 'components/menus/PopupWidgetMenu.vue'
 import { ref } from 'vue'
 import WidgetTitle from 'ui/titles/WidgetTitle.vue'
+import { useTransactionStore } from '@/store/transactionStore'
 
 const isMenu = ref<boolean>(false)
 
-const costs = [
-  { id: 1, costType: 'Test 1', accountType: 'Account 1', img: '' },
-  { id: 2, costType: 'Test 2', accountType: 'Account 2', img: '' },
-  { id: 3, costType: 'Test 3', accountType: 'Account 3', img: '' },
-  { id: 4, costType: 'Test 4', accountType: 'Account 4', img: '' },
-  { id: 5, costType: 'Test 5', accountType: 'Account 5', img: '' },
-  { id: 6, costType: 'Test 6', accountType: 'Account 6', img: '' },
-  { id: 7, costType: 'Test 7', accountType: 'Account 7', img: '' },
-  { id: 8, costType: 'Test 8', accountType: 'Account 8', img: '' },
-  { id: 9, costType: 'Test 9', accountType: 'Account 9', img: '' }
-]
+const transactionsStore = useTransactionStore()
 </script>
 
 <style lang="scss" scoped>
 @import '@/styles/mixins/scrollbar.scss';
+@import '@/styles/mixins/d-flex-ctr.scss';
 @import '@/styles/mixins/d-flex-js-sb-al-ctr.scss';
 .cost-widget {
   grid-area: costs;
@@ -59,45 +79,69 @@ const costs = [
       margin-bottom: 10px;
       border-bottom: 1px solid rgb(172, 172, 172);
       cursor: pointer;
-
+      overflow: hidden;
       &:last-child {
         margin: 0;
       }
     }
 
     &__link {
-
       width: 100%;
-      height: 60px;
-      @include flex-js-sb-al-ctr;
+      height: 70px;
+
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-bottom: 10px;
     }
-    &__img {
-      width: 40px;
-      height: 40px;
-      background-color: blueviolet;
+    &__icon-wrapper {
+      width: 50px;
+      height: 50px;
       border-radius: 100%;
-      object-fit: cover;
       margin-right: 10px;
+
+      @include flexCenter;
+      &:last-child {
+        margin: 0;
+      }
     }
+
     &__info {
       display: flex;
       flex-direction: column;
       flex: 1 1 auto;
     }
-    &__category-type,
-    .costs__date {
+    &__category-type,.costs__sum {
       font-size: 16px;
       font-weight: 500;
       margin-bottom: 2px;
     }
-    &__account-type,
-    .costs__sum {
-      font-size: 14px;
-      color: rgb(114, 114, 114);
+
+    &__category-type,
+    &__account-type {
+      display: block;
+      white-space: nowrap;
+     overflow: hidden;
+      text-overflow: ellipsis;
+      width: 200px;
+
+      @media screen and (max-width: 1200px) {
+        width: 90px;
+      }
+      @media screen and (max-width: 960px) {
+        width: 200px;
+      }
+      @media screen and (max-width: 860px) {
+        width: 90px;
+      }
     }
+
     &__date-and-sum {
-      display: flex;
-      flex-direction: column;
+      text-align: right;
+      text-wrap: nowrap;
+      span {
+        display: block;
+      }
     }
   }
 }

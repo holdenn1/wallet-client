@@ -58,8 +58,10 @@ import { useForm } from 'vee-validate'
 import { useToastify } from 'vue-toastify-3'
 import { useRoute, useRouter } from 'vue-router'
 import { createTransaction } from '@/api/requests'
+import { useTransactionStore } from '@/store/transactionStore'
 
 import type { OperationTypes, TransactionOptionMenus, PaymentMethodType, Banks } from './types'
+import type { CreateTransactionResponse } from '@/store/types/transactionStoreTypes'
 
 const isSettingOperation = ref<boolean>(false)
 
@@ -74,6 +76,7 @@ const route = useRoute()
 const router = useRouter()
 
 const { toastify } = useToastify()
+const transactionState = useTransactionStore()
 
 const { values, handleSubmit, resetForm } = useForm({
   initialValues: {
@@ -98,7 +101,7 @@ const onSubmit = handleSubmit(async (values, { resetForm }) => {
       return
     }
 
-    const data = await createTransaction({
+    const { data }: CreateTransactionResponse = await createTransaction({
       amount: String(values.amount),
       paymentMethod: paymentMethod.value ?? '',
       bankName: bankName.value ?? undefined,
@@ -109,9 +112,12 @@ const onSubmit = handleSubmit(async (values, { resetForm }) => {
       subcategory: (route.query.subcategory as string) ?? ''
     })
 
+    
     if (!data) {
       throw new Error()
     }
+    
+    transactionState.addTransactionToList(data)
 
     paymentMethod.value = null
     isSettingOperation.value = false
@@ -135,6 +141,10 @@ watchEffect(() => {
     isSettingOperation.value = false
     resetForm()
   }
+})
+
+watchEffect(() => {
+  categoryList.value = ''
 })
 
 const setOpenSettingMenu = (menu: TransactionOptionMenus) => {

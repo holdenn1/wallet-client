@@ -108,6 +108,8 @@ export const useUserStore = defineStore('user', () => {
       if (!refreshToken) {
         throw new Error()
       }
+      console.log(12413112);
+      
       const {
         data: { user, tokens }
       }: RefreshTokensLoginResponse = await refreshTokensLogin(refreshToken)

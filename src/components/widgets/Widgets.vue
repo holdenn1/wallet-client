@@ -15,11 +15,18 @@ import WidgetPanel from './widget-panel/WidgetPanel.vue'
 import { useCategoryStore } from '@/store/categoryStore'
 
 import { onMounted } from 'vue'
+import { useUserStore } from '@/store/userStore'
+import { useTransactionStore } from '@/store/transactionStore'
 
 const categoryStore = useCategoryStore()
+const userStore = useUserStore()
+const transactionsStore = useTransactionStore()
 
 onMounted(async () => {
   await categoryStore.getCategoriesAction()
+  if (userStore.userState.user?.id) {
+    await transactionsStore.getTransactionsHistory(userStore.userState.user?.id)
+  }
 })
 </script>
 

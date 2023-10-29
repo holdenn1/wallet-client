@@ -54,11 +54,14 @@ export const sendMessageForRecoverPassword = (userEmail: { email: string }) =>
 export const recoverUserPassword = (userData: { token: string; password: string }) =>
   instance.post('auth/recover/user-password', userData)
 
-
 /*Category requests*/
 
 export const getCategories = () => instance.get('categories/get-categories')
 
 // transactions requests
 
-export const createTransaction = (data:CreateTransactionData) => instance.post('transactions/create', data)
+export const createTransaction = (data: CreateTransactionData) =>
+  instance.post('transactions/create', data)
+
+export const getTransactions = (userId: number) =>
+  instance.get(`transactions/get-transactions/${userId}`)

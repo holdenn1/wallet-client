@@ -49,7 +49,7 @@ import { Field } from 'vee-validate'
 import { computed } from 'vue'
 import { useRoute } from 'vue-router'
 
-import type { OperationTypes } from '@/components/forms/widgetForms/types';
+import type { OperationTypes } from '@/components/forms/widgetForms/types'
 
 defineProps<{
   categoryList: OperationTypes

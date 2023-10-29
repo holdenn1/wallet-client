@@ -21,7 +21,7 @@ export type Category = {
 }
 
 
-type Subcategory = {
+export type Subcategory = {
   id: number
   type: CategoryType
   subcategory: string

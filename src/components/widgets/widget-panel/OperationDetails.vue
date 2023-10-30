@@ -13,7 +13,7 @@
                 icon="circle-arrow-left"
                 size="2xl"
                 class="widget-panel-header__icon"
-                style="color: white;"
+                style="color: white"
               />
             </button>
           </template>
@@ -88,14 +88,22 @@
               <template #content>
                 <WidgetBalanceItem
                   :balance="{
-                    icon: 'fa-sack-dollar',
-                    iconBackground: 'background-color: rgb(8 217 0);',
-                    text: 'Cash',
-                    balance: '2200.00'
+                    bankIcon: 'fa-sack-dollar',
+                    bankBackgroundColor: 'background-color: rgb(8 217 0);',
+                    bankName: 'Cash',
+                    balance: String(userStore.userState.user?.cash)
                   }"
                 />
-                <!--This will be credit cards list      -->
-                <!--      <WidgetBalanceItem v-for="{ id, ...rest } in balance" :key="id" :balance="rest" />-->
+                <WidgetBalanceItem
+                  v-for="creditCard in userStore.userState.user?.creditCard"
+                  :key="creditCard.id"
+                  :balance="{
+                    balance: String(creditCard.balance),
+                    bankBackgroundColor: creditCard.bankBackgroundColor,
+                    bankIcon: creditCard.bankIcon,
+                    bankName: creditCard.bankName
+                  }"
+                />
               </template>
             </Accordion>
           </div>
@@ -117,9 +125,12 @@ import Accordion from 'ui/accordion/Accordion.vue'
 
 import { useCategoryStore } from '@/store/categoryStore'
 import { useRouter } from 'vue-router'
+import { useUserStore } from '@/store/userStore'
 
 const categoryStore = useCategoryStore()
 const router = useRouter()
+
+const userStore = useUserStore()
 </script>
 
 <style lang="scss" scoped>

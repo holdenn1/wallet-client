@@ -127,26 +127,46 @@ export const useUserStore = defineStore('user', () => {
     }
   }
 
-  function correctUserBalance({ amount, paymentMethod, type }: CorrectUserBalanceData) {
+  function correctUserBalance({ amount, paymentMethod, type, creditCard }: CorrectUserBalanceData) {
     if (userState.value.user?.cash) {
       switch (type) {
         case 'cost': {
           if (paymentMethod === PaymentMethodType.CASH) {
             userState.value.user.cash = userState.value.user.cash - amount
+            return
           }
+          userState.value.user.creditCard.forEach((card) => {
+            if (card.id === creditCard?.id) {
+              card.balance = creditCard.balance
+            }
+          })
 
           break
         }
         case 'income': {
           if (paymentMethod === PaymentMethodType.CASH) {
             userState.value.user.cash = userState.value.user.cash + amount
+            return
           }
+          userState.value.user.creditCard.forEach((card) => {
+            if (card.id === creditCard?.id) {
+              card.balance = creditCard.balance
+            }
+          })
+
           break
         }
         case 'transfer': {
           if (paymentMethod === PaymentMethodType.CASH) {
             userState.value.user.cash = userState.value.user.cash - amount
+            return
           }
+          userState.value.user.creditCard.forEach((card) => {
+            if (card.id === creditCard?.id) {
+              card.balance = creditCard.balance
+            }
+          })
+
           break
         }
       }
@@ -164,6 +184,8 @@ export const useUserStore = defineStore('user', () => {
     registrationUser,
     loginUser,
     logoutUser,
-    checkAuth,addUserCreditCard
+    checkAuth,
+    addUserCreditCard,
+    correctUserBalance
   }
 })

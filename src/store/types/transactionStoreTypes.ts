@@ -1,5 +1,6 @@
-import type { Banks } from '@/components/forms/widgetForms/types'
+import type { Banks, PaymentMethodType } from '@/components/forms/widgetForms/types'
 import type { Category, Subcategory } from './categoryStoreTypes'
+import type { CreditCard } from './userStoreTypes'
 
 export type InitialValuesTransactionStore = {
   transactionHistoryList: Transaction[]
@@ -8,14 +9,14 @@ export type InitialValuesTransactionStore = {
 export type Transaction = {
   id: number
   type: 'cost'
-  paymentMethod: 'cash'
+  paymentMethod: PaymentMethodType
   amount: number
   recipient: string
   description: string
   category: Category
   subcategory: Subcategory | null
   createAt: Date
-  bankName: Banks| undefined
+  creditCard: CreditCard | undefined
 }
 
 export type GetTransactionsResponse = {

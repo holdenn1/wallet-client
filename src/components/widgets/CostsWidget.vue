@@ -1,5 +1,9 @@
 <template>
-  <div @click="() => (isMenu = false)" class="cost-widget">
+  <div
+    v-if="transactionsStore.transactionState.transactionHistoryList.length"
+    @click="() => (isMenu = false)"
+    class="cost-widget"
+  >
     <PopupWidgetMenu :is-menu="isMenu" @is-menu="() => (isMenu = !isMenu)" />
     <WidgetTitle />
     <div class="costs">
@@ -48,6 +52,10 @@
         </li>
       </ul>
     </div>
+  </div>
+
+  <div v-else class="cost-widget-error">
+    <p>No transactions found. Please create the new transaction</p>
   </div>
 </template>
 
@@ -112,7 +120,8 @@ const transactionsStore = useTransactionStore()
       flex-direction: column;
       flex: 1 1 auto;
     }
-    &__category-type,.costs__sum {
+    &__category-type,
+    .costs__sum {
       font-size: 16px;
       font-weight: 500;
       margin-bottom: 2px;
@@ -122,7 +131,7 @@ const transactionsStore = useTransactionStore()
     &__account-type {
       display: block;
       white-space: nowrap;
-     overflow: hidden;
+      overflow: hidden;
       text-overflow: ellipsis;
       width: 200px;
 
@@ -144,6 +153,15 @@ const transactionsStore = useTransactionStore()
         display: block;
       }
     }
+  }
+}
+
+.cost-widget-error {
+  height: 100%;
+  @include flexCenter;
+  p {
+    font-size: 22px;
+    font-weight: 500;
   }
 }
 </style>

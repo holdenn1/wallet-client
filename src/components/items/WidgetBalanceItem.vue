@@ -1,9 +1,10 @@
 <template>
+
   <WidgetCategoryItem
     :category="{
-      text: balance.text,
-      icon: balance.icon,
-      iconBackground: balance.iconBackground
+      text: balance.bankName,
+      icon: balance.bankIcon,
+      iconBackground: balance.bankBackgroundColor
     }"
   >
     <template #balance>
@@ -16,13 +17,9 @@
 
 <script setup lang="ts">
 import WidgetCategoryItem from './WidgetCategoryItem.vue'
-
 defineProps<{
   balance: {
-    text: string
-    icon: string
-    iconBackground: string
-    balance: string
+    bankName: string; balance: string | undefined; bankBackgroundColor: string; bankIcon: string;
   }
 }>()
 </script>

@@ -8,17 +8,32 @@
       </template>
     </WidgetPanelHeader>
     <WidgetPanelContentWrapper>
-      <div @click="$emit('set-payment-method', PaymentMethodType.CASH)">
+      <div @click="$emit('set-payment-method', { paymentMethod: PaymentMethodType.CASH })">
         <WidgetBalanceItem
           :balance="{
-            icon: 'fa-sack-dollar',
-            iconBackground: 'background-color: rgb(8 217 0);',
-            text: 'Cash',
-            balance: '2200.00'
+            bankIcon: 'fa-sack-dollar',
+            bankBackgroundColor: 'background-color: rgb(8 217 0);',
+            bankName: 'Cash',
+            balance: String(userStore.userState.user?.cash)
           }"
         />
       </div>
-        <WidgetBalanceItem v-for="{ id, ...rest } in userStore.userState.user?.creditCard" :key="id" :balance="rest" />
+      <WidgetBalanceItem
+        @click="
+          $emit('set-payment-method', {
+            paymentMethod: PaymentMethodType.CREDIT_CARD,
+            bankName: bank.bankName
+          })
+        "
+        v-for="bank in userStore.userState.user?.creditCard"
+        :key="bank.id"
+        :balance="{
+          balance: String(bank.balance),
+          bankIcon: bank.bankIcon,
+          bankName: bank.bankName,
+          bankBackgroundColor: bank.bankBackgroundColor
+        }"
+      />
     </WidgetPanelContentWrapper>
   </div>
 </template>
@@ -28,14 +43,18 @@ import WidgetBalanceItem from 'components/items/WidgetBalanceItem.vue'
 import WidgetPanelHeader from 'components/headers/WidgetPanelHeader.vue'
 import WidgetPanelContentWrapper from 'ui/wrappers/WidgetPanelContentWrapper.vue'
 
-import { PaymentMethodType } from '@/components/forms/widgetForms/types';
-import { useUserStore } from '@/store/userStore';
+import { Banks, PaymentMethodType } from '@/components/forms/widgetForms/types'
+import { useUserStore } from '@/store/userStore'
 
 const userStore = useUserStore()
 
+type PaymentMethodData = {
+  paymentMethod: PaymentMethodType
+  bankName?: Banks
+}
 defineEmits<{
   (e: 'close-select-payment-menu'): void
-  (e: 'set-payment-method', data: PaymentMethodType): void
+  (e: 'set-payment-method', data: PaymentMethodData): void
 }>()
 </script>
 

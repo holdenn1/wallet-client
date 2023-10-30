@@ -1,7 +1,7 @@
 <template>
   <div class="custom-select select" :tabindex="tabindex" @blur="state.open = false">
     <div class="selected" :class="{ open: state.open }" @click="state.open = !state.open">
-      {{ state.selected }}
+      {{ selectTitle }}
     </div>
     <div class="items" :class="{ selectHide: !state.open }">
       <div
@@ -22,13 +22,14 @@
 </template>
 
 <script setup lang="ts">
-import { reactive } from 'vue'
+import { computed, reactive, toRefs } from 'vue'
 
 const props = withDefaults(
   defineProps<{
     options: string[]
     default?: string | null
     tabindex?: number
+    isSubmitForm: boolean
   }>(),
   {
     default: null,
@@ -40,9 +41,17 @@ defineEmits<{
   (e: 'input', data: string | boolean | null): void
 }>()
 
+const {isSubmitForm} = toRefs(props)
 const state = reactive({
   selected: props.default ? props.default : props.options.length > 0 ? props.options[0] : null,
   open: false
+})
+
+const selectTitle = computed(() => {
+  if(!isSubmitForm.value){
+    return state.selected
+  }
+  return props.default
 })
 </script>
 

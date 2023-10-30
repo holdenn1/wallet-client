@@ -29,7 +29,8 @@
           @set-payment-method="
             (data) => {
               isSettingOperation = false
-              paymentMethod = data
+              paymentMethod = data.paymentMethod
+              bankName = data.bankName as Banks
             }
           "
           @close-select-payment-menu="() => (isSettingOperation = false)"
@@ -53,15 +54,16 @@ import SelectPaymentMethod from 'components/widgets/financialControl/SelectPayme
 import AdditionInformation from 'components/widgets/financialControl/AdditionInformation.vue'
 
 import { AxiosError } from 'axios'
-import { ref, watchEffect } from 'vue'
+import { ref } from 'vue'
 import { useForm } from 'vee-validate'
 import { useToastify } from 'vue-toastify-3'
-import { useRoute, useRouter } from 'vue-router'
+import { useRoute } from 'vue-router'
 import { createTransaction } from '@/api/requests'
 import { useTransactionStore } from '@/store/transactionStore'
 
 import type { OperationTypes, TransactionOptionMenus, PaymentMethodType, Banks } from './types'
 import type { CreateTransactionResponse } from '@/store/types/transactionStoreTypes'
+import { useUserStore } from '@/store/userStore'
 
 const isSettingOperation = ref<boolean>(false)
 
@@ -73,12 +75,12 @@ const paymentMethod = ref<PaymentMethodType | null>(null)
 const bankName = ref<Banks | null>(null)
 
 const route = useRoute()
-const router = useRouter()
 
 const { toastify } = useToastify()
 const transactionState = useTransactionStore()
+const userStore = useUserStore()
 
-const { values, handleSubmit, resetForm } = useForm({
+const { values, handleSubmit } = useForm({
   initialValues: {
     amount: 0,
     description: '',
@@ -112,18 +114,23 @@ const onSubmit = handleSubmit(async (values, { resetForm }) => {
       subcategory: (route.query.subcategory as string) ?? ''
     })
 
-    console.log(data);
-    
+    console.log(data)
+
     if (!data) {
       throw new Error()
     }
-    
+
     transactionState.addTransactionToList(data)
+    userStore.correctUserBalance({
+      amount: data.amount,
+      creditCard: data.creditCard,
+      paymentMethod: data.paymentMethod,
+      type: data.type
+    })
 
     paymentMethod.value = null
     isSettingOperation.value = false
     categoryList.value = ''
-    router.replace({ name: 'default-widgets' })
     resetForm()
   } catch (e) {
     if (e instanceof AxiosError) {
@@ -135,23 +142,9 @@ const onSubmit = handleSubmit(async (values, { resetForm }) => {
   }
 })
 
-watchEffect(() => {
-  if (route.name !== 'default-widgets') {
-    categoryList.value = ''
-    paymentMethod.value = null
-    isSettingOperation.value = false
-    resetForm()
-  }
-})
-
-watchEffect(() => {
-  categoryList.value = ''
-})
-
 const setOpenSettingMenu = (menu: TransactionOptionMenus) => {
   isSettingOperation.value = true
   currentSettingMenu.value = menu
-  // router.replace({ name: 'default-widgets' })
 }
 </script>
 

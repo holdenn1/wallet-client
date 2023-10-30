@@ -18,6 +18,8 @@ export type CreditCard = {
   id: number
   bankName: Banks
   balance: number
+  bankBackgroundColor: string
+  bankIcon: string
 }
 
 export type InitialValuesUserStore = {
@@ -68,7 +70,7 @@ export type CorrectUserBalanceData = {
   type: OperationTypes
   paymentMethod: PaymentMethodType
   amount: number
-  
+  creditCard: CreditCard | undefined
 }
 
 export type AddCreditCardRequestType = {

@@ -5,7 +5,13 @@
       <CustomSelect
         :options="['MonoBank', 'PrivatBank', 'OschadBank', '']"
         :default="'Select credit card'"
-        @input="(option) => (bankName = option)"
+        @input="
+          (option) => {
+            bankName = option
+            isSubmitForm = false
+          }
+        "
+        :is-submit-form="isSubmitForm"
       />
     </div>
     <div class="input-wrapper">
@@ -34,6 +40,7 @@ import { useToastify } from 'vue-toastify-3'
 import type { AddCreditCardRequestType } from '@/store/types/userStoreTypes'
 
 const bankName = ref()
+const isSubmitForm = ref<boolean>(false)
 
 const { values, handleSubmit } = useForm({
   initialValues: {
@@ -65,6 +72,7 @@ const onSubmit = handleSubmit(async (values, { resetForm }) => {
     userStore.addUserCreditCard(data)
 
     bankName.value = null
+    isSubmitForm.value = true
     resetForm()
   } catch (e) {
     if (e instanceof AxiosError) {

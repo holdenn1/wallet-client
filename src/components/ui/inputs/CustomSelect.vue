@@ -29,7 +29,7 @@ const props = withDefaults(
     options: string[]
     default?: string | null
     tabindex?: number
-    isSubmitForm: boolean
+    isSubmitForm?: boolean
   }>(),
   {
     default: null,

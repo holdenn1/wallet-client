@@ -34,7 +34,11 @@
               <span class="costs__category-type">{{
                 transaction.subcategory?.subcategory ?? transaction.category.category
               }}</span>
-              <span class="costs__account-type">{{ transaction.paymentMethod }}</span>
+              <span class="costs__account-type">{{
+                transaction.paymentMethod === 'cash'
+                  ? transaction.paymentMethod
+                  : transaction.creditCard?.bankName
+              }}</span>
               <span class="costs__account-type"
                 >{{ transaction.description }}
                 {{ transaction.description.length && transaction.recipient.length ? '-' : '' }}
@@ -42,7 +46,12 @@
               >
             </div>
             <div class="costs__date-and-sum">
-              <span class="costs__sum">{{ transaction.amount }},00</span>
+              <span
+                class="costs__sum"
+                :style="{ color: transaction.type === 'income' ? 'rgb(0, 194, 65)' : 'red' }"
+                >{{ transaction.type === 'income' ? '+' : '-' }}{{ ' '
+                }}{{ transaction.amount }},00</span
+              >
 
               <span class="costs__date">{{
                 new Date(transaction.createAt).toISOString().split('T')[0]

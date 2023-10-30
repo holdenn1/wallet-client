@@ -51,22 +51,67 @@ import CustomSelect from 'ui/inputs/CustomSelect.vue'
 import WidgetPanelContentWrapper from 'ui/wrappers/WidgetPanelContentWrapper.vue'
 import RadioButtonInput from 'ui/inputs/RadioButtonInputGroup.vue'
 
+import validationSchema from '@/utils/validate/correctBalanceValidateSchema'
+
 import { useForm } from 'vee-validate'
 import { ref } from 'vue'
+import { AxiosError } from 'axios'
+import { useToastify } from 'vue-toastify-3'
+import { correctBalanceRequest } from '@/api/requests'
+import type { CorrectTheBalanceResponse, Transaction } from '@/store/types/transactionStoreTypes'
+import { useUserStore } from '@/store/userStore'
+import { useTransactionStore } from '@/store/transactionStore'
+import type { CreditCard, User } from '@/store/types/userStoreTypes'
 
 const bankName = ref()
+
+const { toastify } = useToastify()
+
+const userStore = useUserStore()
+const transactionStore = useTransactionStore()
 
 const { values, handleSubmit } = useForm({
   initialValues: {
     method: '',
     balanceType: '',
     balance: 0
-  }
+  },
+  validationSchema
 })
 
-const onSubmit = handleSubmit((values, { resetForm }) => {
-  console.log({ ...values, bankName: bankName.value })
-  resetForm()
+const onSubmit = handleSubmit(async ({ balance, balanceType, method }, { resetForm }) => {
+  try {
+    const { data }: CorrectTheBalanceResponse = await correctBalanceRequest({
+      balanceType,
+      bankName: bankName.value,
+      correctBalance: String(balance),
+      method
+    })
+
+    console.log(data)
+
+    if ((data as Transaction).paymentMethod) {
+      const { amount, creditCard, paymentMethod, type, user } = data as Transaction
+      userStore.correctUserBalance({
+        amount: paymentMethod === 'cash' ? user.cash : amount,
+        creditCard,
+        paymentMethod,
+        type
+      })
+      transactionStore.addTransactionToList(data as Transaction)
+      resetForm()
+      return
+    }
+    userStore.changeBalance(data as User | CreditCard)
+    resetForm()
+  } catch (e) {
+    if (e instanceof AxiosError) {
+      toastify('error', e.response?.data?.message || 'An error occurred')
+      console.error(e)
+    } else {
+      console.error(e)
+    }
+  }
 })
 </script>
 

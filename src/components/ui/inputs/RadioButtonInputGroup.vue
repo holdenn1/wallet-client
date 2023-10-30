@@ -13,10 +13,11 @@
       </div>
     </label>
   </div>
+  <ErrorMessage :name="inputName" style="color: red;"/>
 </template>
 
 <script setup lang="ts">
-import { Field } from 'vee-validate'
+import { ErrorMessage, Field } from 'vee-validate'
 
 defineProps<{
   inputName: string
@@ -39,8 +40,8 @@ defineProps<{
   overflow: hidden;
   border: 1px solid hsl(199, 60%, 49%);
   display: flex;
-  display: flex;
   justify-content: space-evenly;
+  margin-bottom: 10px;
 
   input[type='radio'] {
     display: none;

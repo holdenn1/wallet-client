@@ -2,6 +2,7 @@ import instance from '@/api'
 import type { AxiosRequestConfig } from 'axios'
 import type {
   AddCreditCardData,
+  CorrectBalanceData,
   CreateTransactionData,
   LoginUserData,
   RegistrationUserData
@@ -65,11 +66,14 @@ export const getCategories = () => instance.get('categories/get-categories')
 
 // transactions requests
 
-export const createTransaction = (data: CreateTransactionData) =>
+export const createTransactionRequest = (data: CreateTransactionData) =>
   instance.post('transactions/create', data)
 
-export const getTransactions = (userId: number) =>
+export const getTransactionsRequest = (userId: number) =>
   instance.get(`transactions/get-transactions/${userId}`)
+
+export const correctBalanceRequest = (data: CorrectBalanceData) =>
+  instance.patch('transactions/correct/balance', data)
 
 // credit cards
 

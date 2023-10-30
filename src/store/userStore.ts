@@ -19,7 +19,8 @@ import type {
   InitialValuesUserStore,
   LoginUserActionProps,
   RefreshTokensLoginResponse,
-  RegistrationUserActionProps
+  RegistrationUserActionProps,
+  User
 } from './types/userStoreTypes'
 
 import { PaymentMethodType } from '@/components/forms/widgetForms/types'
@@ -132,7 +133,7 @@ export const useUserStore = defineStore('user', () => {
       switch (type) {
         case 'cost': {
           if (paymentMethod === PaymentMethodType.CASH) {
-            userState.value.user.cash = userState.value.user.cash - amount
+            userState.value.user.cash = amount
             return
           }
           userState.value.user.creditCard.forEach((card) => {
@@ -145,7 +146,7 @@ export const useUserStore = defineStore('user', () => {
         }
         case 'income': {
           if (paymentMethod === PaymentMethodType.CASH) {
-            userState.value.user.cash = userState.value.user.cash + amount
+            userState.value.user.cash = amount
             return
           }
           userState.value.user.creditCard.forEach((card) => {
@@ -158,7 +159,7 @@ export const useUserStore = defineStore('user', () => {
         }
         case 'transfer': {
           if (paymentMethod === PaymentMethodType.CASH) {
-            userState.value.user.cash = userState.value.user.cash - amount
+            userState.value.user.cash = amount
             return
           }
           userState.value.user.creditCard.forEach((card) => {
@@ -179,6 +180,21 @@ export const useUserStore = defineStore('user', () => {
     }
   }
 
+  function changeBalance(data: User | CreditCard) {
+    if (userState.value.user?.cash && userState.value.user?.creditCard) {
+      if ((data as CreditCard).balance) {
+        const { id, balance } = data as CreditCard
+        userState.value.user?.creditCard.forEach((card) => {
+          if (card.id === id) {
+            card.balance = balance
+          }
+        })
+        return
+      }
+      userState.value.user.cash = (data as User).cash
+    }
+  }
+
   return {
     userState,
     registrationUser,
@@ -186,6 +202,6 @@ export const useUserStore = defineStore('user', () => {
     logoutUser,
     checkAuth,
     addUserCreditCard,
-    correctUserBalance
+    correctUserBalance, changeBalance
   }
 })

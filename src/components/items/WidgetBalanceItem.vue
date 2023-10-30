@@ -9,7 +9,7 @@
   >
     <template #balance>
       <div class="balance-wrapper">
-        <span class="balance">{{ balance.balance }}</span>
+        <span class="balance">{{ balance.balance }},00</span>
       </div>
     </template>
   </WidgetCategoryItem>

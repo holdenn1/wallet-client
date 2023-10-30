@@ -1,6 +1,6 @@
-import type { Banks, PaymentMethodType } from '@/components/forms/widgetForms/types'
+import type { OperationTypes, PaymentMethodType } from '@/components/forms/widgetForms/types'
 import type { Category, Subcategory } from './categoryStoreTypes'
-import type { CreditCard } from './userStoreTypes'
+import type { CreditCard, User } from './userStoreTypes'
 
 export type InitialValuesTransactionStore = {
   transactionHistoryList: Transaction[]
@@ -8,7 +8,7 @@ export type InitialValuesTransactionStore = {
 
 export type Transaction = {
   id: number
-  type: 'cost'
+  type: OperationTypes
   paymentMethod: PaymentMethodType
   amount: number
   recipient: string
@@ -17,6 +17,7 @@ export type Transaction = {
   subcategory: Subcategory | null
   createAt: Date
   creditCard: CreditCard | undefined
+  user: User
 }
 
 export type GetTransactionsResponse = {
@@ -25,4 +26,12 @@ export type GetTransactionsResponse = {
 
 export type CreateTransactionResponse = {
   data: Transaction
+}
+
+export type CorrectTheBalanceResponse = {
+  data: User | CorrectCreditCardBalanceResponse | Transaction
+}
+
+type CorrectCreditCardBalanceResponse = CreditCard | {
+  user: User
 }

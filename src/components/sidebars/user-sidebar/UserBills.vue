@@ -4,7 +4,7 @@
     <div class="bills">
       <div class="bills__bill">
         <span class="bills__bill-type">Cash</span>
-        <span class="bills__bill-money">{{ userStore.userState.user?.cash }}</span>
+        <span class="bills__bill-money">{{ userStore.userState.user?.cash }},00</span>
       </div>
       <router-link :to="{ name: 'add-credit-card' }" class="bills__add-bill">
         Credit card

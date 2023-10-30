@@ -8,6 +8,12 @@ import type { InitialValuesSignUpForm } from '@/components/forms/mainForms/types
 export type RegistrationUserData = Omit<InitialValuesSignUpForm, 'confirmPassword'> & {
   photo: File
 }
+
+export enum CorrectBallanceMethod {
+  CORRECT = 'correct',
+  CHANGE = 'change'
+}
+
 export type LoginUserData = {
   email: string
   password: string
@@ -25,6 +31,13 @@ export type CreateTransactionData = {
 }
 
 export type AddCreditCardData = {
-  bankName: Banks;
-  balance: string;
+  bankName: Banks
+  balance: string
+}
+
+export type CorrectBalanceData = {
+  method: string
+  balanceType: string
+  bankName: Banks
+  correctBalance: string
 }

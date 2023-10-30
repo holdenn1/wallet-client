@@ -58,7 +58,7 @@ import { ref } from 'vue'
 import { useForm } from 'vee-validate'
 import { useToastify } from 'vue-toastify-3'
 import { useRoute } from 'vue-router'
-import { createTransaction } from '@/api/requests'
+import { createTransactionRequest } from '@/api/requests'
 import { useTransactionStore } from '@/store/transactionStore'
 
 import type { OperationTypes, TransactionOptionMenus, PaymentMethodType, Banks } from './types'
@@ -103,7 +103,7 @@ const onSubmit = handleSubmit(async (values, { resetForm }) => {
       return
     }
 
-    const { data }: CreateTransactionResponse = await createTransaction({
+    const { data }: CreateTransactionResponse = await createTransactionRequest({
       amount: String(values.amount),
       paymentMethod: paymentMethod.value ?? '',
       bankName: bankName.value ?? undefined,
@@ -114,15 +114,15 @@ const onSubmit = handleSubmit(async (values, { resetForm }) => {
       subcategory: (route.query.subcategory as string) ?? ''
     })
 
-    console.log(data)
 
     if (!data) {
       throw new Error()
     }
+console.log(data);
 
     transactionState.addTransactionToList(data)
     userStore.correctUserBalance({
-      amount: data.amount,
+      amount:  data.paymentMethod === 'cash' ?  data.user.cash : data.amount,
       creditCard: data.creditCard,
       paymentMethod: data.paymentMethod,
       type: data.type

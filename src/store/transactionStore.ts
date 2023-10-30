@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia'
 import { ref } from 'vue'
-import { getTransactions } from '@/api/requests'
+import { getTransactionsRequest } from '@/api/requests'
 import { AxiosError } from 'axios'
 import { useToastify } from 'vue-toastify-3'
 
@@ -17,7 +17,7 @@ export const useTransactionStore = defineStore('transaction', () => {
 
   async function getTransactionsHistory(userId: number) {
     try {
-      const { data }: GetTransactionsResponse = await getTransactions(userId)
+      const { data }: GetTransactionsResponse = await getTransactionsRequest(userId)
 
       if (data) {
         transactionState.value.transactionHistoryList = data

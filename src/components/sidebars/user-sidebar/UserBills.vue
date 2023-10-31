@@ -6,12 +6,16 @@
         <span class="bills__bill-type">Cash</span>
         <span class="bills__bill-money">{{ userStore.userState.user?.cash }},00</span>
       </div>
-      <router-link :to="{ name: 'add-credit-card' }" class="bills__add-bill">
+      <router-link
+        @click="closeSettingOperationMenu"
+        :to="{ name: 'add-credit-card' }"
+        class="bills__add-bill"
+      >
         Credit card
         <font-awesome-icon icon="fa-circle-plus" class="bills-icon" />
       </router-link>
     </div>
-    <div class="balance-control">
+    <div class="balance-control" @click="closeSettingOperationMenu">
       <router-link :to="{ name: 'correct-balance' }" class="balance-control__balance-setting"
         >Correct the balance</router-link
       >
@@ -27,16 +31,26 @@
 
 <script setup lang="ts">
 import { useResize } from '@/hooks/useResize'
+import { useMainStore } from '@/store/mainStore'
 import { useUserStore } from '@/store/userStore'
 import { computed } from 'vue'
 
 const userStore = useUserStore()
+
+const mainStore = useMainStore()
+
 const { resizeWindow } = useResize()
 
 const isTransactionHistoryBtn = computed(() => {
   if (resizeWindow.value < 760) return true
   return false
 })
+
+const closeSettingOperationMenu = () => {
+  if (mainStore.mainState.isSettingOperation) {
+    mainStore.setSettingOperationMenu(false)
+  }
+}
 </script>
 
 <style lang="scss" scoped>

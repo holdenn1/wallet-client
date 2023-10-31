@@ -6,6 +6,7 @@
     <div class="user-sidebar__content">
       <div class="user-sidebar__user-info">
         <div class="user-info">
+          <input class="upload-photo-input" type="file" @change="handleFileInputChange" />
           <img :src="userState.user?.photo ?? preAvatar" alt="" class="user-info__avatar" />
           <h4 class="user-info__full-name">
             {{ userState.user?.firstName }} {{ userState.user?.lastName }}
@@ -28,6 +29,8 @@ import { onBeforeUnmount, onMounted, ref, watchEffect } from 'vue'
 import { useMainStore } from '@/store/mainStore'
 import { storeToRefs } from 'pinia'
 import { useUserStore } from '@/store/userStore'
+import { updateUserDateRequest, uploadAvatar } from '@/api/requests'
+import type { User } from '@/store/types/userStoreTypes'
 
 const mainStore = useMainStore()
 const userStore = useUserStore()
@@ -54,6 +57,24 @@ watchEffect(() => {
     setMenuVisible(true)
   }
 })
+
+const handleFileInputChange = async (event: Event) => {
+  try {
+    const fileInput = event.target as HTMLInputElement
+    const file = fileInput.files && fileInput.files[0]
+
+    if (file) {
+      const { data: avatarLink }: { data: string } = await uploadAvatar(file)
+      const { data: user }: { data: User } = await updateUserDateRequest({ photo: avatarLink })
+      if (!avatarLink && !user) {
+        throw new Error()
+      }
+      userStore.setUser(user)
+    }
+  } catch (e) {
+    console.error(e)
+  }
+}
 </script>
 
 <style lang="scss" scoped>
@@ -96,6 +117,16 @@ watchEffect(() => {
       display: flex;
       align-items: center;
       background-color: hsl(199, 60%, 49%);
+      .upload-photo-input {
+        position: absolute;
+        top: 26px;
+        left: 20px;
+        opacity: 0;
+        width: 80px;
+        height: 80px;
+        border-radius: 100%;
+        cursor: pointer;
+      }
       &__avatar {
         width: 80px;
         height: 80px;

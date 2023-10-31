@@ -41,3 +41,7 @@ export type CorrectBalanceData = {
   bankName: Banks
   correctBalance: string
 }
+
+export type UpdateUserData = Omit<RegistrationUserData, 'photo'> | Partial<RegistrationUserData> | {
+  photo: string
+}

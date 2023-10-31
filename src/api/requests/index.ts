@@ -5,7 +5,8 @@ import type {
   CorrectBalanceData,
   CreateTransactionData,
   LoginUserData,
-  RegistrationUserData
+  RegistrationUserData,
+  UpdateUserData
 } from './types'
 
 /* user's requests */
@@ -53,6 +54,9 @@ export const uploadAvatar = (cover: File) => {
     }
   })
 }
+
+export const updateUserDateRequest = (data: UpdateUserData) =>
+  instance.patch('user/update-user', data)
 
 export const sendMessageForRecoverPassword = (userEmail: { email: string }) =>
   instance.post('auth/send/message/recover-password', userEmail)

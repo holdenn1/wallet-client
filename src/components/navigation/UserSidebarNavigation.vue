@@ -27,12 +27,16 @@ const userStore = useUserStore()
 
 .user-navigation {
   width: 100%;
-  height: calc(100vh - 352px);
+  height: calc(100vh - 360px);
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
   align-items: center;
   padding: 20px;
+  @media screen and (max-width: 760px) {
+  height: calc(100vh - 408px);
+
+  }
   @media screen and (max-width: 340px) {
     padding: 10px;
   }

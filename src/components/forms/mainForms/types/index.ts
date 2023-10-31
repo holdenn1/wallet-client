@@ -1,15 +1,15 @@
 export type InitialValuesSignUpForm = {
-  firstName: ''
-  lastName: ''
-  birthday: ''
-  email: ''
-  password: ''
-  confirmPassword: ''
+  firstName: string
+  lastName: string
+  birthday: string
+  email: string
+  password: string
+  confirmPassword: string
 }
 
 export type InitialValuesSignInForm = {
-  email: ''
-  password: ''
+  email: string
+  password: string
 }
 
 export type RegistrationData = InitialValuesSignUpForm & {

@@ -5,7 +5,8 @@ export const useMainStore = defineStore('main', () => {
   const mainState = ref<{
     isModalVisible: boolean
     isMenuVisible: boolean
-  }>({ isModalVisible: false, isMenuVisible: false })
+    isSettingOperation: boolean
+  }>({ isModalVisible: false, isMenuVisible: false, isSettingOperation: false })
 
   function setModalVisible(visible: boolean) {
     mainState.value.isModalVisible = visible
@@ -15,5 +16,9 @@ export const useMainStore = defineStore('main', () => {
     mainState.value.isMenuVisible = visible
   }
 
-  return { mainState, setModalVisible, setMenuVisible }
+  function setSettingOperationMenu(visible: boolean) {
+    mainState.value.isSettingOperation = visible
+  }
+
+  return { mainState, setModalVisible, setMenuVisible, setSettingOperationMenu }
 })

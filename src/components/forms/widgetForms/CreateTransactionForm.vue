@@ -18,26 +18,29 @@
           @open-setting-operation="setOpenSettingMenu('addition-information')"
         />
       </div>
-      <div v-show="isSettingOperation" :class="{ settings: isSettingOperation }">
+      <div
+        v-show="mainState.isSettingOperation"
+        :class="{ settings: mainState.isSettingOperation }"
+      >
         <Categories
           v-show="currentSettingMenu === 'categories'"
-          @close-category-list="() => (isSettingOperation = false)"
+          @close-category-list="() => (mainState.isSettingOperation = false)"
           :categoryList="categoryList"
         />
         <SelectPaymentMethod
           v-show="currentSettingMenu === 'payment-method'"
           @set-payment-method="
             (data) => {
-              isSettingOperation = false
+              mainStore.setSettingOperationMenu(false)
               paymentMethod = data.paymentMethod
               bankName = data.bankName as Banks
             }
           "
-          @close-select-payment-menu="() => (isSettingOperation = false)"
+          @close-select-payment-menu="() => mainStore.setSettingOperationMenu(false)"
         />
         <AdditionInformation
           v-show="currentSettingMenu === 'addition-information'"
-          @close-setting-operation-menu="() => (isSettingOperation = false)"
+          @close-setting-operation-menu="() => mainStore.setSettingOperationMenu(false)"
           :description-value="values.description"
           :recipient-value="values.recipient"
         />
@@ -64,8 +67,8 @@ import { useTransactionStore } from '@/store/transactionStore'
 import type { OperationTypes, TransactionOptionMenus, PaymentMethodType, Banks } from './types'
 import type { CreateTransactionResponse } from '@/store/types/transactionStoreTypes'
 import { useUserStore } from '@/store/userStore'
-
-const isSettingOperation = ref<boolean>(false)
+import { useMainStore } from '@/store/mainStore'
+import { storeToRefs } from 'pinia'
 
 const categoryList = ref<OperationTypes>('')
 
@@ -77,8 +80,14 @@ const bankName = ref<Banks | null>(null)
 const route = useRoute()
 
 const { toastify } = useToastify()
+
 const transactionState = useTransactionStore()
+
 const userStore = useUserStore()
+
+const mainStore = useMainStore()
+
+const { mainState } = storeToRefs(mainStore)
 
 const { values, handleSubmit } = useForm({
   initialValues: {
@@ -114,22 +123,21 @@ const onSubmit = handleSubmit(async (values, { resetForm }) => {
       subcategory: (route.query.subcategory as string) ?? ''
     })
 
-
     if (!data) {
       throw new Error()
     }
-console.log(data);
+    console.log(data)
 
     transactionState.addTransactionToList(data)
     userStore.correctUserBalance({
-      amount:  data.paymentMethod === 'cash' ?  data.user.cash : data.amount,
+      amount: data.paymentMethod === 'cash' ? data.user.cash : data.amount,
       creditCard: data.creditCard,
       paymentMethod: data.paymentMethod,
       type: data.type
     })
 
     paymentMethod.value = null
-    isSettingOperation.value = false
+    mainStore.setSettingOperationMenu(false)
     categoryList.value = ''
     resetForm()
   } catch (e) {
@@ -143,7 +151,7 @@ console.log(data);
 })
 
 const setOpenSettingMenu = (menu: TransactionOptionMenus) => {
-  isSettingOperation.value = true
+  mainStore.setSettingOperationMenu(true)
   currentSettingMenu.value = menu
 }
 </script>

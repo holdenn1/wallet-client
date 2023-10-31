@@ -24,6 +24,7 @@ import type {
 } from './types/userStoreTypes'
 
 import { PaymentMethodType } from '@/components/forms/widgetForms/types'
+import type { UpdateUserData } from '@/api/requests/types'
 
 export const useUserStore = defineStore('user', () => {
   const router = useRouter()
@@ -167,7 +168,6 @@ export const useUserStore = defineStore('user', () => {
               card.balance = creditCard.balance
             }
           })
-
           break
         }
       }
@@ -195,13 +195,21 @@ export const useUserStore = defineStore('user', () => {
     }
   }
 
+  function setUser(data: User) {
+    if (userState.value.user) {
+      userState.value.user = data
+    }
+  }
+
   return {
     userState,
+    setUser,
     registrationUser,
     loginUser,
     logoutUser,
     checkAuth,
     addUserCreditCard,
-    correctUserBalance, changeBalance
+    correctUserBalance,
+    changeBalance
   }
 })

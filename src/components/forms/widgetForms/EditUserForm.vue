@@ -22,16 +22,43 @@
 
 <script setup lang="ts">
 import { useForm } from 'vee-validate'
+import validationSchema from '@/utils/validate/updateUserDataValidateSchema'
+import { updateUserDateRequest } from '@/api/requests'
+import { AxiosError } from 'axios'
+import { useToastify } from 'vue-toastify-3'
+import type { User } from '@/store/types/userStoreTypes'
+import { useUserStore } from '@/store/userStore'
+
+const { toastify } = useToastify()
+
+const userStore = useUserStore()
 
 const { values, handleSubmit } = useForm({
   initialValues: {
     firstName: '',
     lastName: ''
-  }
+  },
+  validationSchema
 })
 
-const onSubmit = handleSubmit((values, { resetForm }) => {
-  console.log(values)
+const onSubmit = handleSubmit(async ({ firstName, lastName }, { resetForm }) => {
+  try {
+    const { data }: { data: User } = await updateUserDateRequest({ firstName, lastName })
+
+    if (!data) {
+      throw new Error()
+    }
+
+    userStore.setUser(data)
+  } catch (e) {
+    if (e instanceof AxiosError) {
+      toastify('error', e.response?.data?.message || 'An error occurred')
+      console.error(e)
+    } else {
+      console.error(e)
+    }
+  }
+
   resetForm()
 })
 </script>

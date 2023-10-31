@@ -78,7 +78,7 @@ const closeSettingOperationMenu = () => {
     margin-bottom: 14px;
     &__bill {
       @include userSidebarBtn(130px, 40px);
-      background-color: hsl(242, 61%, 48%);
+      background-color: hsl(199, 90%, 47%);
       display: flex;
       flex-direction: column;
       justify-content: center;
@@ -101,7 +101,7 @@ const closeSettingOperationMenu = () => {
         position: absolute;
         top: 9px;
         right: 6px;
-        color: hsl(242, 61%, 48%);
+        color: hsl(199, 90%, 47%);
       }
     }
   }

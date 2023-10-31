@@ -3,13 +3,13 @@
     <router-link :to="{ name: 'user-settings' }" class="user-navigation__settings-link">
       <font-awesome-icon
         icon="fa-sliders"
-        style="color: hsl(242, 61%, 48%); padding-right: 8px"
+        style="color:  hsl(199, 90%, 47%); padding-right: 8px"
       />Settings
     </router-link>
     <button class="user-navigation__logout-btn" type="button" @click="userStore.logoutUser">
       <font-awesome-icon
         icon="fa-arrow-right-from-bracket"
-        style="color: hsl(242, 61%, 48%); padding-right: 8px"
+        style="color:  hsl(199, 90%, 47%); padding-right: 8px"
       />Logout
     </button>
   </div>
@@ -34,8 +34,7 @@ const userStore = useUserStore()
   align-items: center;
   padding: 20px;
   @media screen and (max-width: 760px) {
-  height: calc(100vh - 408px);
-
+    height: calc(100vh - 408px);
   }
   @media screen and (max-width: 340px) {
     padding: 10px;
@@ -55,7 +54,7 @@ const userStore = useUserStore()
     transition: 0.5s;
     &:hover {
       color: white;
-      background-color: hsl(240, 55%, 54%);
+      background-color: hsl(199, 100%, 32%);
     }
   }
 }

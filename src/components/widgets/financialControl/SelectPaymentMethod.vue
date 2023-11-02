@@ -22,7 +22,7 @@
         @click="
           $emit('set-payment-method', {
             paymentMethod: PaymentMethodType.CREDIT_CARD,
-            bankName: bank.bankName
+            bankId: bank.id
           })
         "
         v-for="bank in userStore.userState.user?.creditCard"
@@ -43,14 +43,14 @@ import WidgetBalanceItem from 'components/items/WidgetBalanceItem.vue'
 import WidgetPanelHeader from 'components/headers/WidgetPanelHeader.vue'
 import WidgetPanelContentWrapper from 'ui/wrappers/WidgetPanelContentWrapper.vue'
 
-import { Banks, PaymentMethodType } from '@/components/forms/widgetForms/types'
+import { PaymentMethodType } from '@/components/forms/widgetForms/types'
 import { useUserStore } from '@/store/userStore'
 
 const userStore = useUserStore()
 
 type PaymentMethodData = {
   paymentMethod: PaymentMethodType
-  bankName?: Banks
+  bankId?: number
 }
 defineEmits<{
   (e: 'close-select-payment-menu'): void

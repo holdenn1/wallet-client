@@ -7,7 +7,8 @@ import { useToastify } from 'vue-toastify-3'
 import type {
   GetTransactionsResponse,
   InitialValuesTransactionStore,
-  Transaction
+  Transaction,
+  UpdateTransactionData
 } from './types/transactionStoreTypes'
 
 export const useTransactionStore = defineStore('transaction', () => {
@@ -36,5 +37,19 @@ export const useTransactionStore = defineStore('transaction', () => {
     transactionState.value.transactionHistoryList.unshift(transaction)
   }
 
-  return { transactionState, getTransactionsHistory, addTransactionToList }
+  function updateTransaction (data: UpdateTransactionData){
+    const {amount,createAt, description,recipient} = data
+    transactionState.value.transactionHistoryList.forEach(transaction => {
+      if(transaction.id === data.id){
+        transaction.amount = amount
+        transaction.createAt = createAt
+        transaction.description = description
+        transaction.recipient = recipient
+      }
+    })
+  }
+
+ 
+
+  return { transactionState, getTransactionsHistory, addTransactionToList, updateTransaction }
 })

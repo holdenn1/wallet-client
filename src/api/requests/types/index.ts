@@ -26,8 +26,12 @@ export type CreateTransactionData = {
   category: string
   description?: string
   recipient?: string
-  bankName?: Banks
+  cardId?: number
   subcategory?: string
+}
+
+export type updateTransactionData = Partial<CreateTransactionData> | {
+  createAt: string
 }
 
 export type AddCreditCardData = {
@@ -38,7 +42,7 @@ export type AddCreditCardData = {
 export type CorrectBalanceData = {
   method: string
   balanceType: string
-  bankName: Banks
+  cardId: number | undefined
   correctBalance: string
 }
 

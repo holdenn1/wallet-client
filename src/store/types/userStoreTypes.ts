@@ -70,7 +70,7 @@ export type CorrectUserBalanceData = {
   type: OperationTypes
   paymentMethod: PaymentMethodType
   amount: number
-  creditCard: CreditCard | undefined
+  creditCard: CreditCard | undefined | null
 }
 
 export type AddCreditCardRequestType = {

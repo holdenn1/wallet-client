@@ -60,7 +60,7 @@ const router = createRouter({
                 },
 
                 {
-                  path: 'operation-details',
+                  path: 'operation-details/:operationId',
                   name: 'operation-details',
                   component: OperationDetails
                 },

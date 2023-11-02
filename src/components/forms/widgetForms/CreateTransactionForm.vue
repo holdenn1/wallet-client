@@ -33,7 +33,7 @@
             (data) => {
               mainStore.setSettingOperationMenu(false)
               paymentMethod = data.paymentMethod
-              bankName = data.bankName as Banks
+              bank = data.bankId
             }
           "
           @close-select-payment-menu="() => mainStore.setSettingOperationMenu(false)"
@@ -64,7 +64,7 @@ import { useRoute } from 'vue-router'
 import { createTransactionRequest } from '@/api/requests'
 import { useTransactionStore } from '@/store/transactionStore'
 
-import type { OperationTypes, TransactionOptionMenus, PaymentMethodType, Banks } from './types'
+import type { OperationTypes, TransactionOptionMenus, PaymentMethodType } from './types'
 import type { CreateTransactionResponse } from '@/store/types/transactionStoreTypes'
 import { useUserStore } from '@/store/userStore'
 import { useMainStore } from '@/store/mainStore'
@@ -75,7 +75,7 @@ const categoryList = ref<OperationTypes>('')
 const currentSettingMenu = ref<TransactionOptionMenus>('')
 
 const paymentMethod = ref<PaymentMethodType | null>(null)
-const bankName = ref<Banks | null>(null)
+const bank = ref<number>()
 
 const route = useRoute()
 
@@ -115,7 +115,7 @@ const onSubmit = handleSubmit(async (values, { resetForm }) => {
     const { data }: CreateTransactionResponse = await createTransactionRequest({
       amount: String(values.amount),
       paymentMethod: paymentMethod.value ?? '',
-      bankName: bankName.value ?? undefined,
+      cardId: bank.value ?? undefined,
       description: values.description,
       recipient: values.recipient,
       typeOperation: categoryList.value,

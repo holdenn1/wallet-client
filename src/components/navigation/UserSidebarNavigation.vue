@@ -1,5 +1,5 @@
 <template>
-  <div class="user-navigation">
+  <div class="user-navigation" @click="mainStore.setSettingOperationMenu(false)">
     <router-link :to="{ name: 'user-settings' }" class="user-navigation__settings-link">
       <font-awesome-icon
         icon="fa-sliders"
@@ -16,9 +16,11 @@
 </template>
 
 <script setup lang="ts">
+import { useMainStore } from '@/store/mainStore';
 import { useUserStore } from '@/store/userStore'
 
 const userStore = useUserStore()
+const mainStore = useMainStore()
 </script>
 
 <style lang="scss" scoped>

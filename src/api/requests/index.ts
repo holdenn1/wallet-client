@@ -6,7 +6,8 @@ import type {
   CreateTransactionData,
   LoginUserData,
   RegistrationUserData,
-  UpdateUserData
+  UpdateUserData,
+  updateTransactionData
 } from './types'
 
 /* user's requests */
@@ -64,6 +65,8 @@ export const sendMessageForRecoverPassword = (userEmail: { email: string }) =>
 export const recoverUserPassword = (userData: { token: string; password: string }) =>
   instance.post('auth/recover/user-password', userData)
 
+export const getUserRequest = () => instance.get('user/get-user')
+
 /*Category requests*/
 
 export const getCategories = () => instance.get('categories/get-categories')
@@ -79,6 +82,11 @@ export const getTransactionsRequest = (userId: number) =>
 export const correctBalanceRequest = (data: CorrectBalanceData) =>
   instance.patch('transactions/correct/balance', data)
 
+export const updateTransactionRequest = (transactionId: string, data: updateTransactionData) =>
+  instance.patch(`transactions/update/transaction/${transactionId}`, data)
+
+export const deleteTransactionRequest = (transactionId: string) =>
+  instance.delete(`transactions/delete-transaction/${transactionId}`)
 // credit cards
 
 export const AddCreditCardRequest = (data: AddCreditCardData) =>

@@ -13,7 +13,10 @@
           v-for="transaction in transactionsStore.transactionState.transactionHistoryList"
           :key="transaction.id"
         >
-          <router-link class="costs__link" :to="{ name: 'operation-details' }">
+          <router-link
+            class="costs__link"
+            :to="{ name: 'operation-details', params: { operationId: transaction.id } }"
+          >
             <div
               class="costs__icon-wrapper"
               :style="
@@ -169,6 +172,7 @@ const transactionsStore = useTransactionStore()
   height: 100%;
   @include flexCenter;
   p {
+    text-align: center;
     font-size: 22px;
     font-weight: 500;
   }

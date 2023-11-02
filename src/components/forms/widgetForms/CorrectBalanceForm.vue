@@ -62,6 +62,7 @@ import type { CorrectTheBalanceResponse, Transaction } from '@/store/types/trans
 import { useUserStore } from '@/store/userStore'
 import { useTransactionStore } from '@/store/transactionStore'
 import type { CreditCard, User } from '@/store/types/userStoreTypes'
+import { useRouter } from 'vue-router'
 
 const bankName = ref()
 
@@ -70,6 +71,7 @@ const { toastify } = useToastify()
 const userStore = useUserStore()
 const transactionStore = useTransactionStore()
 
+const router = useRouter()
 const { values, handleSubmit } = useForm({
   initialValues: {
     method: '',
@@ -81,9 +83,10 @@ const { values, handleSubmit } = useForm({
 
 const onSubmit = handleSubmit(async ({ balance, balanceType, method }, { resetForm }) => {
   try {
+    const bank = userStore.userState.user?.creditCard.find(card => card.bankName === bankName.value)
     const { data }: CorrectTheBalanceResponse = await correctBalanceRequest({
       balanceType,
-      bankName: bankName.value,
+      cardId: bank?.id,
       correctBalance: String(balance),
       method
     })
@@ -98,10 +101,15 @@ const onSubmit = handleSubmit(async ({ balance, balanceType, method }, { resetFo
       })
       transactionStore.addTransactionToList(data as Transaction)
       resetForm()
+    router.replace({ name: 'default-widgets' })
+
       return
     }
+    
     userStore.changeBalance(data as User | CreditCard)
     resetForm()
+    router.replace({ name: 'default-widgets' })
+
   } catch (e) {
     if (e instanceof AxiosError) {
       toastify('error', e.response?.data?.message || 'An error occurred')

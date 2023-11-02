@@ -20,6 +20,26 @@ export type Transaction = {
   user: User
 }
 
+export type UpdateTransactionResponse = {
+  id: number
+  type: OperationTypes
+  paymentMethod: PaymentMethodType
+  amount: number
+  recipient: string
+  description: string
+  createAt: Date
+  updateAt: Date
+  creditCard: CreditCard | null | undefined
+}
+
+export type UpdateTransactionData = {
+  id: number
+  amount: number
+  createAt: Date
+  recipient: string
+  description: string
+}
+
 export type GetTransactionsResponse = {
   data: Transaction[]
 }
@@ -32,6 +52,8 @@ export type CorrectTheBalanceResponse = {
   data: User | CorrectCreditCardBalanceResponse | Transaction
 }
 
-type CorrectCreditCardBalanceResponse = CreditCard | {
-  user: User
-}
+type CorrectCreditCardBalanceResponse =
+  | CreditCard
+  | {
+      user: User
+    }

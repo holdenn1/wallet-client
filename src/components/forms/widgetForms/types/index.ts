@@ -12,3 +12,10 @@ export enum Banks {
   PRIVAT_BANK  = 'PrivatBank',
   OSCHADBANK = 'OschadBank'
 }
+
+export type UpdateTransactionFormData = {
+  amount: number | undefined
+  createAt: string | undefined
+  recipient: string | undefined
+  description: string | undefined
+}

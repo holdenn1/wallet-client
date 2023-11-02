@@ -24,7 +24,6 @@ import type {
 } from './types/userStoreTypes'
 
 import { PaymentMethodType } from '@/components/forms/widgetForms/types'
-import type { UpdateUserData } from '@/api/requests/types'
 
 export const useUserStore = defineStore('user', () => {
   const router = useRouter()
@@ -210,6 +209,6 @@ export const useUserStore = defineStore('user', () => {
     checkAuth,
     addUserCreditCard,
     correctUserBalance,
-    changeBalance
+    changeBalance,
   }
 })

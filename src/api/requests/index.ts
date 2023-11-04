@@ -5,6 +5,7 @@ import type {
   CorrectBalanceData,
   CreateTransactionData,
   LoginUserData,
+  Period,
   RegistrationUserData,
   UpdateUserData,
   updateTransactionData
@@ -87,6 +88,9 @@ export const updateTransactionRequest = (transactionId: string, data: updateTran
 
 export const deleteTransactionRequest = (transactionId: string) =>
   instance.delete(`transactions/delete-transaction/${transactionId}`)
+
+export const getTransactionsByPeriod = (period: Period) =>
+  instance.get(`transactions/get-transaction/by-period?period=${period}`)
 // credit cards
 
 export const AddCreditCardRequest = (data: AddCreditCardData) =>

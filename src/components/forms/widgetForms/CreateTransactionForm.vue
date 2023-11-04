@@ -57,10 +57,10 @@ import SelectPaymentMethod from 'components/widgets/financialControl/SelectPayme
 import AdditionInformation from 'components/widgets/financialControl/AdditionInformation.vue'
 
 import { AxiosError } from 'axios'
-import { ref } from 'vue'
+import { ref, watch } from 'vue'
 import { useForm } from 'vee-validate'
 import { useToastify } from 'vue-toastify-3'
-import { useRoute } from 'vue-router'
+import { useRoute, useRouter } from 'vue-router'
 import { createTransactionRequest } from '@/api/requests'
 import { useTransactionStore } from '@/store/transactionStore'
 
@@ -78,6 +78,7 @@ const paymentMethod = ref<PaymentMethodType | null>(null)
 const bank = ref<number>()
 
 const route = useRoute()
+const router = useRouter()
 
 const { toastify } = useToastify()
 
@@ -98,8 +99,10 @@ const { values, handleSubmit } = useForm({
 })
 
 const onSubmit = handleSubmit(async (values, { resetForm }) => {
+  const amountValue = String(values.amount).replace(/[^0-9]/g, '')
+
   try {
-    if (!values.amount) {
+    if (!amountValue) {
       toastify('warning', 'Amount is required field')
       return
     }
@@ -113,7 +116,7 @@ const onSubmit = handleSubmit(async (values, { resetForm }) => {
     }
 
     const { data }: CreateTransactionResponse = await createTransactionRequest({
-      amount: String(values.amount),
+      amount: String(amountValue),
       paymentMethod: paymentMethod.value ?? '',
       cardId: bank.value ?? undefined,
       description: values.description,
@@ -126,7 +129,6 @@ const onSubmit = handleSubmit(async (values, { resetForm }) => {
     if (!data) {
       throw new Error()
     }
-    console.log(data)
 
     transactionState.addTransactionToList(data)
     userStore.correctUserBalance({
@@ -154,6 +156,10 @@ const setOpenSettingMenu = (menu: TransactionOptionMenus) => {
   mainStore.setSettingOperationMenu(true)
   currentSettingMenu.value = menu
 }
+
+watch(categoryList, () => {
+  router.replace({ name: 'default-widgets' })
+})
 </script>
 
 <style lang="scss" scoped>

@@ -11,7 +11,7 @@
           <template #return>
             <button
               type="button"
-              @click="() => router.replace({ name: 'default-widgets' })"
+              @click="() => router.go(-1)"
               class="widget-panel-header__link"
             >
               <font-awesome-icon icon="circle-arrow-left" size="2xl" style="color: white" />

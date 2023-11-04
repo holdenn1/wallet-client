@@ -31,6 +31,7 @@ defineProps<{ incomeColor: string; costColor: string }>()
   font-weight: 600;
   padding: 10px 20px;
   overflow: hidden;
+  width: 100%;
 
   &__progressbar-title {
     @include flex-js-sb-al-ctr;

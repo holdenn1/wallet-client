@@ -30,9 +30,7 @@ export type CreateTransactionData = {
   subcategory?: string
 }
 
-export type updateTransactionData = Partial<CreateTransactionData> | {
-  createAt: string
-}
+export type updateTransactionData = Partial<CreateTransactionData>
 
 export type AddCreditCardData = {
   bankName: Banks
@@ -49,3 +47,5 @@ export type CorrectBalanceData = {
 export type UpdateUserData = Omit<RegistrationUserData, 'photo'> | Partial<RegistrationUserData> | {
   photo: string
 }
+
+export type Period = 'today' | 'week' | 'month' | 'year'

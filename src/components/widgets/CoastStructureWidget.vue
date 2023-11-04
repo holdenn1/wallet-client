@@ -1,7 +1,6 @@
 <template>
   <div @click="() => (isMenu = false)" class="coast-structure-widget">
     <div class="coast-structure-widget__popup-wrapper">
-      <PopupWidgetMenu :is-menu="isMenu" @is-menu="() => (isMenu = !isMenu)" icon-color="white" />
       <div class="widget-switch">
         <font-awesome-icon
           @click="() => (isChart = 'chart')"
@@ -19,7 +18,6 @@
     </div>
     <ChartBar v-if="isChart === 'chart'" />
     <div v-else class="coast-structure-widget__cash-flow">
-      <WidgetTitle title-color="white" />
       <CashFlowBars income-color="green" cost-color="#c20000" />
     </div>
   </div>
@@ -27,9 +25,7 @@
 
 <script setup lang="ts">
 import ChartBar from 'ui/progressbar/ChartBar.vue'
-import PopupWidgetMenu from 'components/menus/PopupWidgetMenu.vue'
 import CashFlowBars from 'ui/progressbar/CashFlowBars.vue'
-import WidgetTitle from 'ui/titles/WidgetTitle.vue'
 
 import { ref, watchEffect } from 'vue'
 import { useResize } from '@/hooks/useResize'

@@ -10,8 +10,10 @@
     <div @click.stop v-show="isMenu" class="popup-widget-menu__content">
       <h3 class="popup-widget-menu__title">Choose a period</h3>
       <ul class="popup-widget-menu__list">
-        <li class="popup-widget-menu__item" v-for="{ id, period } in periods" :key="id">
-          {{ period }}
+        <li class="popup-widget-menu__item" v-for="{ id, period, value } in periods" :key="id">
+          <router-link :to="{ query: { period } }">
+            {{ value }}
+          </router-link>
         </li>
       </ul>
     </div>
@@ -19,17 +21,25 @@
 </template>
 
 <script setup lang="ts">
+import type { Period } from '@/api/requests/types'
+
 defineProps<{ isMenu: boolean; iconColor?: string }>()
 
 defineEmits<{
   (e: 'isMenu'): void
 }>()
 
-const periods = [
-  { id: 1, period: 'Today' },
-  { id: 1, period: 'This week' },
-  { id: 1, period: 'This month' },
-  { id: 1, period: 'This year' }
+type PeriodMenu = {
+  id: number
+  period: Period
+  value: string
+}
+
+const periods: PeriodMenu[] = [
+  { id: 1, value: 'Today', period: 'today' },
+  { id: 2, value: 'This week', period: 'week' },
+  { id: 3, value: 'This month', period: 'month' },
+  { id: 4, value: 'This year', period: 'year' }
 ]
 </script>
 
@@ -70,6 +80,9 @@ const periods = [
     margin-bottom: 10px;
     cursor: pointer;
     font-weight: 500;
+    a{
+      display: block;
+    }
     &::after {
       content: '';
       display: block;

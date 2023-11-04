@@ -14,14 +14,7 @@
           placeholder="The amount"
         />
 
-        <CustomFormInput
-          :value="values.date"
-          name="date"
-          type="datetime-local"
-          label="Edit the date"
-          placeholder="The date"
-        />
-
+    
         <CustomFormInput
           :value="values.recipient"
           name="recipient"
@@ -62,6 +55,7 @@ import { useTransactionStore } from '@/store/transactionStore'
 import type { UpdateTransactionResponse } from '@/store/types/transactionStoreTypes'
 import type { User } from '@/store/types/userStoreTypes'
 import type { UpdateTransactionFormData } from './types'
+
 import { useUserStore } from '@/store/userStore'
 
 const props = defineProps<UpdateTransactionFormData>()
@@ -74,7 +68,6 @@ const { toastify } = useToastify()
 const { values, handleSubmit } = useForm({
   initialValues: {
     amount: props?.amount ?? 0,
-    date: props?.createAt?.replace(/:..(\..*)?Z$/, '') ?? '',
     recipient: props?.recipient ?? '',
     description: props?.description ?? ''
   },
@@ -87,25 +80,34 @@ const router = useRouter()
 const onSubmit = handleSubmit(async (values) => {
   try {
     const operationId = route.params.operationId
-    console.log(operationId)
 
     if (operationId) {
+      const amountValue = String(values.amount).replace(/[^0-9]/g, '')
+
+      if (+amountValue === 0) {
+        await deleteTransactionRequest(String(operationId))
+        const userData: { data: User } = await getUserRequest()
+        userStore.setUser(userData.data)
+        transactionStore.deleteTransaction(+operationId)
+        router.replace({ name: 'default-widgets' })
+        return
+      }
       const { data }: { data: UpdateTransactionResponse } = await updateTransactionRequest(
         operationId as string,
         {
-          amount: String(values.amount),
-          createAt: values.date,
+          amount: String(amountValue),
           description: values.description,
           recipient: values.recipient
         }
       )
-      const { amount, createAt, description, recipient } = data
 
       if (!data) {
         throw new Error()
       }
 
-      transactionStore.updateTransaction({ amount, createAt, description, recipient, id: data.id })
+      const { amount, createAt, description, recipient, id } = data
+
+      transactionStore.updateTransaction({ amount, createAt, description, recipient, id })
 
       const userData: { data: User } = await getUserRequest()
       userStore.setUser(userData.data)
@@ -124,8 +126,12 @@ const onSubmit = handleSubmit(async (values) => {
 const deleteTransaction = async () => {
   const operationId = route.params.operationId
   if (operationId) {
-    const data = await deleteTransactionRequest(String(operationId))
-    console.log(data)
+    await deleteTransactionRequest(String(operationId))
+    transactionStore.deleteTransaction(+operationId)
+
+    const userData: { data: User } = await getUserRequest()
+    userStore.setUser(userData.data)
+    router.replace({ name: 'default-widgets' })
   }
 }
 </script>
@@ -142,7 +148,7 @@ const deleteTransaction = async () => {
 
 .delete-transaction-btn-wrapper {
   width: 100%;
-  height: calc(100vh - 480px);
+  height: calc(100vh - 420px);
   display: flex;
   justify-content: center;
   align-items: flex-end;

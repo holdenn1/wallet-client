@@ -74,13 +74,28 @@
 <script setup lang="ts">
 import PopupWidgetMenu from 'components/menus/PopupWidgetMenu.vue'
 
-import { ref } from 'vue'
+import { ref, watchEffect } from 'vue'
 import WidgetTitle from 'ui/titles/WidgetTitle.vue'
 import { useTransactionStore } from '@/store/transactionStore'
+import { getTransactionsByPeriod } from '@/api/requests'
+import type { Transaction } from '@/store/types/transactionStoreTypes'
+import { useRoute } from 'vue-router'
+import type { Period } from '@/api/requests/types'
 
 const isMenu = ref<boolean>(false)
 
+const route = useRoute()
+
 const transactionsStore = useTransactionStore()
+
+watchEffect(async () => {
+  if (route.query.period) {
+    const { data }: { data: Transaction[] } = await getTransactionsByPeriod(
+      route.query.period as Period
+    )
+    transactionsStore.setTransactions(data)
+  }
+})
 </script>
 
 <style lang="scss" scoped>

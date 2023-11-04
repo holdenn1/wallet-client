@@ -12,7 +12,9 @@ import type {
 } from './types/transactionStoreTypes'
 
 export const useTransactionStore = defineStore('transaction', () => {
-  const transactionState = ref<InitialValuesTransactionStore>({ transactionHistoryList: [] })
+  const transactionState = ref<InitialValuesTransactionStore>({
+    transactionHistoryList: []
+  })
 
   const { toastify } = useToastify()
 
@@ -37,10 +39,10 @@ export const useTransactionStore = defineStore('transaction', () => {
     transactionState.value.transactionHistoryList.unshift(transaction)
   }
 
-  function updateTransaction (data: UpdateTransactionData){
-    const {amount,createAt, description,recipient} = data
-    transactionState.value.transactionHistoryList.forEach(transaction => {
-      if(transaction.id === data.id){
+  function updateTransaction(data: UpdateTransactionData) {
+    const { amount, createAt, description, recipient } = data
+    transactionState.value.transactionHistoryList.forEach((transaction) => {
+      if (transaction.id === data.id) {
         transaction.amount = amount
         transaction.createAt = createAt
         transaction.description = description
@@ -49,7 +51,23 @@ export const useTransactionStore = defineStore('transaction', () => {
     })
   }
 
- 
+  function deleteTransaction(transactionId: number) {
+    transactionState.value.transactionHistoryList =
+      transactionState.value.transactionHistoryList.filter(
+        (transaction) => transaction.id !== transactionId
+      )
+  }
 
-  return { transactionState, getTransactionsHistory, addTransactionToList, updateTransaction }
+  function setTransactions(transactions: Transaction[]) {
+    transactionState.value.transactionHistoryList = transactions
+  }
+
+  return {
+    transactionState,
+    deleteTransaction,
+    getTransactionsHistory,
+    addTransactionToList,
+    updateTransaction,
+    setTransactions
+  }
 })

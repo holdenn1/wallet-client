@@ -51,7 +51,7 @@
             <div class="costs__date-and-sum">
               <span
                 class="costs__sum"
-                :style="{ color: transaction.type === 'income' ? 'rgb(0, 194, 65)' : 'red' }"
+                :style="{ color: transaction.type === 'income' ? 'rgb(0, 194, 65)' : 'rgb(191, 3, 3)' }"
                 >{{ transaction.type === 'income' ? '+' : '-' }}{{ ' '
                 }}{{ transaction.amount }},00</span
               >
@@ -149,6 +149,7 @@ watchEffect(async () => {
     }
     &__category-type,
     .costs__sum {
+      
       font-size: 16px;
       font-weight: 500;
       margin-bottom: 2px;

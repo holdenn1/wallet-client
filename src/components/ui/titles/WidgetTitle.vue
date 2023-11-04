@@ -12,7 +12,6 @@ defineProps<{ titleColor?: 'grey' | 'white';}>()
 const route = useRoute()
 
 const title = computed(() => {
-  console.log(route.query.period);
 
   if (route.query.period === 'today') {
     return 'In a day'

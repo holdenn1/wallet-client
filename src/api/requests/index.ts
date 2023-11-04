@@ -91,6 +91,8 @@ export const deleteTransactionRequest = (transactionId: string) =>
 
 export const getTransactionsByPeriod = (period: Period) =>
   instance.get(`transactions/get-transaction/by-period?period=${period}`)
+
+export const getMonthlySummary = () => instance.get('transactions/monthly-summary')
 // credit cards
 
 export const AddCreditCardRequest = (data: AddCreditCardData) =>

@@ -18,7 +18,11 @@
     </div>
     <ChartBar v-if="isChart === 'chart'" />
     <div v-else class="coast-structure-widget__cash-flow">
-      <CashFlowBars income-color="green" cost-color="#c20000" />
+      <div class="cash-flow-title">
+        <h3 class="cash-flow-title__title">Recent entries</h3>
+        <p class="cash-flow-title__description">PER MONTH</p>
+      </div>
+      <CashFlowBars style="color: white;"/>
     </div>
   </div>
 </template>
@@ -68,19 +72,37 @@ watchEffect(() => {
       .widget-switch-chart {
         color: white;
         position: absolute;
-        top: 72px;
+        top: 52px;
         right: 10px;
       }
       .widget-switch-bar {
         color: white;
         position: absolute;
-        top: 36px;
+        top: 16px;
         right: 10px;
       }
     }
   }
   &__cash-flow {
     width: 100%;
+
+    .cash-flow-title {
+      &__title {
+        color: white;
+        text-align: left;
+        font-size: 20px;
+        font-weight: 600;
+        margin-bottom: 10px;
+      }
+      &__description {
+        font-size: 14px;
+        font-weight: 500;
+        text-align: left;
+        color: white;
+        text-transform: uppercase;
+        margin-bottom: 20px;
+      }
+    }
   }
 }
 </style>

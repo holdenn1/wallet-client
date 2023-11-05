@@ -21,34 +21,29 @@
 
 <script setup lang="ts">
 import BillsWidget from './UserBills.vue'
+import MenuButton from 'ui/buttons/MenuButton.vue'
 import preAvatar from '@/assets/icons/user-avatar.png'
 import UserSidebarNavigation from 'navigation/UserSidebarNavigation.vue'
-import MenuButton from 'ui/buttons/MenuButton.vue'
 
-import { onBeforeUnmount, onMounted, ref, watchEffect } from 'vue'
+import { useResize } from '@/hooks/useResize'
 import { useMainStore } from '@/store/mainStore'
-import { storeToRefs } from 'pinia'
 import { useUserStore } from '@/store/userStore'
 import { updateUserDateRequest, uploadAvatar } from '@/api/requests'
+
+import { watchEffect } from 'vue'
+import { storeToRefs } from 'pinia'
+
 import type { User } from '@/store/types/userStoreTypes'
 
 const mainStore = useMainStore()
 const userStore = useUserStore()
-const resizeWindow = ref(0)
+
+const { resizeWindow } = useResize()
 
 const { mainState } = storeToRefs(mainStore)
 const { userState } = storeToRefs(userStore)
 
 const { setMenuVisible } = mainStore
-const handleResize = () => (resizeWindow.value = window.innerWidth)
-
-onMounted(() => {
-  window.addEventListener('resize', handleResize)
-})
-
-onBeforeUnmount(() => {
-  window.removeEventListener('resize', handleResize)
-})
 
 watchEffect(() => {
   if (resizeWindow.value < 960) {

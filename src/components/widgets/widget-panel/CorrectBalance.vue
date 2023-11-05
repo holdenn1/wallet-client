@@ -1,6 +1,5 @@
 <template>
   <div class="adjust-balance">
-    <!--      <h4 class="adjust-balance__title">Select the correction method</h4>-->
     <CorrectBalanceForm>
       <WidgetPanelHeader header-title-text="Correct the balance">
         <template #return>

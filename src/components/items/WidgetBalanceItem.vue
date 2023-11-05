@@ -1,5 +1,4 @@
 <template>
-
   <WidgetCategoryItem
     :category="{
       text: balance.bankName,
@@ -19,7 +18,10 @@
 import WidgetCategoryItem from './WidgetCategoryItem.vue'
 defineProps<{
   balance: {
-    bankName: string; balance: string | undefined; bankBackgroundColor: string; bankIcon: string;
+    bankName: string
+    balance: string | undefined
+    bankBackgroundColor: string
+    bankIcon: string
   }
 }>()
 </script>

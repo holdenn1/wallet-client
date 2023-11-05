@@ -28,9 +28,8 @@
 </template>
 
 <script setup lang="ts">
-import ChartBar from 'ui/progressbar/ChartBar.vue'
-import CashFlowBars from 'ui/progressbar/CashFlowBars.vue'
-
+import CashFlowBars from 'components/charts/CashFlowBars.vue'
+import ChartBar from 'components/charts/ChartBar.vue'
 import { ref, watchEffect } from 'vue'
 import { useResize } from '@/hooks/useResize'
 

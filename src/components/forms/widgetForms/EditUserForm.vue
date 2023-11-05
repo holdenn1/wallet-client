@@ -21,13 +21,14 @@
 </template>
 
 <script setup lang="ts">
-import { useForm } from 'vee-validate'
 import validationSchema from '@/utils/validate/updateUserDataValidateSchema'
-import { updateUserDateRequest } from '@/api/requests'
-import { AxiosError } from 'axios'
-import { useToastify } from 'vue-toastify-3'
 import type { User } from '@/store/types/userStoreTypes'
+import { updateUserDateRequest } from '@/api/requests'
 import { useUserStore } from '@/store/userStore'
+
+import { AxiosError } from 'axios'
+import { useForm } from 'vee-validate'
+import { useToastify } from 'vue-toastify-3'
 
 const { toastify } = useToastify()
 

@@ -3,23 +3,40 @@
     <div class="cash-flow__income-progress-line-wrapper">
       <div class="cash-flow__progressbar-title">
         <span>Income</span>
-        <span style="color: rgb(0, 194, 65);"> + {{ monthlySummary?.totalIncome }} uah</span>
+        <span style="color: rgb(0, 194, 65)"> + {{ monthlySummary?.totalIncome }} uah</span>
       </div>
-      <ProgressLine bgcolor="rgb(0, 194, 65)" :completed="monthlySummary?.totalIncome / 100 ?? 0" />
+      <div class="progressbar-line">
+        <div
+          class="progressbar-line__filler"
+          :style="`width: ${
+            monthlySummary?.totalIncome / 100 ?? 0
+          }%; background-color: rgb(0, 194, 65)`"
+        >
+          <span class="progressbar-line__label"></span>
+        </div>
+      </div>
     </div>
     <div class="cash-flow__costs-progress-line-wrapper">
       <div class="cash-flow__progressbar-title">
         <span>Costs</span>
-        <span style="color: rgb(191, 3, 3);"> - {{ monthlySummary?.totalCosts }} uah</span>
+        <span style="color: rgb(191, 3, 3)"> - {{ monthlySummary?.totalCosts }} uah</span>
       </div>
-      <ProgressLine bgcolor="rgb(233, 3, 3)" :completed="monthlySummary?.totalCosts / 100 ?? 0" />
+      <div class="progressbar-line">
+        <div
+          class="progressbar-line__filler"
+          :style="`width: ${
+            monthlySummary?.totalCosts / 100 ?? 0
+          }%; background-color: rgb(233, 3, 3)`"
+        >
+          <span class="progressbar-line__label"></span>
+        </div>
+      </div>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
 import { ref, watch } from 'vue'
-import ProgressLine from './ProgressLine.vue'
 import { getMonthlySummary } from '@/api/requests'
 import { useTransactionStore } from '@/store/transactionStore'
 
@@ -72,6 +89,23 @@ watch(
     }
   }
   &__costs-progress-line-wrapper {
+    .progressbar-line {
+      height: 20px;
+      width: 100%;
+      background-color: #cfcfcf;
+      border-radius: 50px;
+
+      &__filler {
+        height: 100%;
+        border-radius: inherit;
+        text-align: right;
+      }
+      &__label {
+        padding: 5px;
+        color: white;
+        font-weight: 500;
+      }
+    }
     span {
       display: block;
       margin-bottom: 12px;

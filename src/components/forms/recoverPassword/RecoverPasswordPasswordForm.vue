@@ -22,9 +22,10 @@
 <script setup lang="ts">
 import SubmitButton from 'ui/buttons/SubmitButton.vue'
 
+import { recoverUserPassword } from '@/api/requests'
+
 import * as yup from 'yup'
 import { useForm } from 'vee-validate'
-import { recoverUserPassword } from '@/api/requests'
 import { useRoute, useRouter } from 'vue-router'
 import { useToastify } from 'vue-toastify-3'
 import { AxiosError } from 'axios'

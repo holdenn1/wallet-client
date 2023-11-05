@@ -15,6 +15,7 @@ import { ref, watch, toRefs } from 'vue'
 import type { VNodeRef } from 'vue'
 
 const props = defineProps<{ activeStep: number }>()
+
 const { activeStep } = toRefs(props)
 
 const progressBarRef = ref<VNodeRef | undefined>(undefined)

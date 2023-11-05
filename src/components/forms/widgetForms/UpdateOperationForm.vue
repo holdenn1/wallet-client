@@ -44,19 +44,20 @@
 import { updateTransactionRequest, getUserRequest, deleteTransactionRequest } from '@/api/requests'
 import WidgetPanelContentWrapper from 'ui/wrappers/WidgetPanelContentWrapper.vue'
 
-import { useForm } from 'vee-validate'
-import { useRoute, useRouter } from 'vue-router'
-import { AxiosError } from 'axios'
-import { useToastify } from 'vue-toastify-3'
-
 import validationSchema from '@/utils/validate/updateTransactionValidateSchema'
 import { useTransactionStore } from '@/store/transactionStore'
+import { useUserStore } from '@/store/userStore'
+
+import { AxiosError } from 'axios'
+import { useForm } from 'vee-validate'
+import { useToastify } from 'vue-toastify-3'
+import { useRoute, useRouter } from 'vue-router'
+
 
 import type { UpdateTransactionResponse } from '@/store/types/transactionStoreTypes'
 import type { User } from '@/store/types/userStoreTypes'
 import type { UpdateTransactionFormData } from './types'
 
-import { useUserStore } from '@/store/userStore'
 
 const props = defineProps<UpdateTransactionFormData>()
 

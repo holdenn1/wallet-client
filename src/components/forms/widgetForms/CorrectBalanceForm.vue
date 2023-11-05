@@ -52,17 +52,18 @@ import WidgetPanelContentWrapper from 'ui/wrappers/WidgetPanelContentWrapper.vue
 import RadioButtonInput from 'ui/inputs/RadioButtonInputGroup.vue'
 
 import validationSchema from '@/utils/validate/correctBalanceValidateSchema'
-
-import { useForm } from 'vee-validate'
-import { ref } from 'vue'
-import { AxiosError } from 'axios'
-import { useToastify } from 'vue-toastify-3'
-import { correctBalanceRequest } from '@/api/requests'
-import type { CorrectTheBalanceResponse, Transaction } from '@/store/types/transactionStoreTypes'
-import { useUserStore } from '@/store/userStore'
-import { useTransactionStore } from '@/store/transactionStore'
 import type { CreditCard, User } from '@/store/types/userStoreTypes'
+import { useTransactionStore } from '@/store/transactionStore'
+import { correctBalanceRequest } from '@/api/requests'
+import { useUserStore } from '@/store/userStore'
+
+import { useToastify } from 'vue-toastify-3'
 import { useRouter } from 'vue-router'
+import { useForm } from 'vee-validate'
+import { AxiosError } from 'axios'
+import { ref } from 'vue'
+
+import type { CorrectTheBalanceResponse, Transaction } from '@/store/types/transactionStoreTypes'
 
 const bankName = ref()
 
@@ -83,7 +84,9 @@ const { values, handleSubmit } = useForm({
 
 const onSubmit = handleSubmit(async ({ balance, balanceType, method }, { resetForm }) => {
   try {
-    const bank = userStore.userState.user?.creditCard.find(card => card.bankName === bankName.value)
+    const bank = userStore.userState.user?.creditCard.find(
+      (card) => card.bankName === bankName.value
+    )
     const { data }: CorrectTheBalanceResponse = await correctBalanceRequest({
       balanceType,
       cardId: bank?.id,
@@ -99,17 +102,17 @@ const onSubmit = handleSubmit(async ({ balance, balanceType, method }, { resetFo
         paymentMethod,
         type
       })
+      
       transactionStore.addTransactionToList(data as Transaction)
       resetForm()
-    router.replace({ name: 'default-widgets' })
+      router.replace({ name: 'default-widgets' })
 
       return
     }
-    
+
     userStore.changeBalance(data as User | CreditCard)
     resetForm()
     router.replace({ name: 'default-widgets' })
-
   } catch (e) {
     if (e instanceof AxiosError) {
       toastify('error', e.response?.data?.message || 'An error occurred')

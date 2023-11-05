@@ -19,10 +19,11 @@
 import SubmitButton from 'ui/buttons/SubmitButton.vue'
 import RecoverPasswordNotice from 'components/notifications/RecoverPasswordNotice.vue'
 
+import { sendMessageForRecoverPassword } from '@/api/requests'
+
 import * as yup from 'yup'
 import { ref, nextTick } from 'vue'
 import { useForm } from 'vee-validate'
-import { sendMessageForRecoverPassword } from '@/api/requests'
 import { useToastify } from 'vue-toastify-3'
 import { AxiosError } from 'axios'
 

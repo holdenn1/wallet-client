@@ -4,12 +4,13 @@
       We have sent a recovery email link to
       <a href="https://mail.google.com/">{{ email }}</a>
     </p>
-    <CustomMainButton type="button" :handle-click="closeRecoverPasswordNotice">Close</CustomMainButton>
+    <CustomMainButton type="button" :handle-click="closeRecoverPasswordNotice"
+      >Close</CustomMainButton
+    >
   </div>
 </template>
 
 <script setup lang="ts">
-
 import { useMainStore } from '@/store/mainStore'
 
 defineProps<{ email: string }>()

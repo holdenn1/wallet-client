@@ -56,19 +56,20 @@ import FinancialOperation from 'components/widgets/financialControl/FinancialOpe
 import SelectPaymentMethod from 'components/widgets/financialControl/SelectPaymentMethod.vue'
 import AdditionInformation from 'components/widgets/financialControl/AdditionInformation.vue'
 
-import { AxiosError } from 'axios'
+import { createTransactionRequest } from '@/api/requests'
+import { useTransactionStore } from '@/store/transactionStore'
+import { useUserStore } from '@/store/userStore'
+import { useMainStore } from '@/store/mainStore'
+
 import { ref, watch } from 'vue'
+import { AxiosError } from 'axios'
+import { storeToRefs } from 'pinia'
 import { useForm } from 'vee-validate'
 import { useToastify } from 'vue-toastify-3'
 import { useRoute, useRouter } from 'vue-router'
-import { createTransactionRequest } from '@/api/requests'
-import { useTransactionStore } from '@/store/transactionStore'
 
 import type { OperationTypes, TransactionOptionMenus, PaymentMethodType } from './types'
 import type { CreateTransactionResponse } from '@/store/types/transactionStoreTypes'
-import { useUserStore } from '@/store/userStore'
-import { useMainStore } from '@/store/mainStore'
-import { storeToRefs } from 'pinia'
 
 const categoryList = ref<OperationTypes>('')
 

@@ -9,7 +9,7 @@
         <div
           class="progressbar-line__filler"
           :style="`width: ${
-            monthlySummary?.totalIncome / 100 ?? 0
+            incomePercentage ?? 0
           }%; background-color: rgb(0, 194, 65)`"
         >
           <span class="progressbar-line__label"></span>
@@ -25,7 +25,7 @@
         <div
           class="progressbar-line__filler"
           :style="`width: ${
-            monthlySummary?.totalCosts / 100 ?? 0
+            costsPercentage?? 0
           }%; background-color: rgb(233, 3, 3)`"
         >
           <span class="progressbar-line__label"></span>
@@ -36,7 +36,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, watch } from 'vue'
+import { computed, ref, watch } from 'vue'
 import { getMonthlySummary } from '@/api/requests'
 import { useTransactionStore } from '@/store/transactionStore'
 
@@ -49,6 +49,20 @@ const transactionStore = useTransactionStore()
 
 const monthlySummary = ref<MonthlySummaryResponse>({ totalCosts: 0, totalIncome: 0 })
 
+
+const incomePercentage = computed(() => {
+  if (monthlySummary.value.totalIncome === 0) {
+    return 0;
+  }
+  return (monthlySummary.value.totalIncome / (monthlySummary.value.totalIncome + monthlySummary.value.totalCosts)) * 100;
+});
+
+const costsPercentage = computed(() => {
+  if (monthlySummary.value.totalCosts === 0) {
+    return 0;
+  }
+  return (monthlySummary.value.totalCosts / (monthlySummary.value.totalIncome + monthlySummary.value.totalCosts)) * 100;
+});
 watch(
   () => transactionStore.transactionState.transactionHistoryList.length,
   async () => {
@@ -89,26 +103,28 @@ watch(
     }
   }
   &__costs-progress-line-wrapper {
-    .progressbar-line {
-      height: 20px;
-      width: 100%;
-      background-color: #cfcfcf;
-      border-radius: 50px;
-
-      &__filler {
-        height: 100%;
-        border-radius: inherit;
-        text-align: right;
-      }
-      &__label {
-        padding: 5px;
-        color: white;
-        font-weight: 500;
-      }
-    }
     span {
       display: block;
       margin-bottom: 12px;
+    }
+  }
+  .progressbar-line {
+    height: 20px;
+    width: 100%;
+    background-color: #cfcfcf;
+    border-radius: 50px;
+    overflow: hidden;
+
+    &__filler {
+      max-width: 100%;
+      height: 100%;
+      border-radius: inherit;
+      text-align: right;
+    }
+    &__label {
+      padding: 5px;
+      color: white;
+      font-weight: 500;
     }
   }
 }

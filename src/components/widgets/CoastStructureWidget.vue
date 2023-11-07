@@ -16,13 +16,13 @@
         />
       </div>
     </div>
-    <ChartBar v-if="isChart === 'chart'" />
+    <ChartBar v-if="isChart === 'chart'" :monthlyCosts="monthlyCosts" />
     <div v-else class="coast-structure-widget__cash-flow">
       <div class="cash-flow-title">
         <h3 class="cash-flow-title__title">Recent entries</h3>
         <p class="cash-flow-title__description">PER MONTH</p>
       </div>
-      <CashFlowBars style="color: white;"/>
+      <CashFlowBars style="color: white" />
     </div>
   </div>
 </template>
@@ -30,8 +30,32 @@
 <script setup lang="ts">
 import CashFlowBars from 'components/charts/CashFlowBars.vue'
 import ChartBar from 'components/charts/ChartBar.vue'
-import { ref, watchEffect } from 'vue'
+import { ref, watch, watchEffect } from 'vue'
 import { useResize } from '@/hooks/useResize'
+import { useTransactionStore } from '@/store/transactionStore'
+import { getMonthlyCostsRequest } from '@/api/requests'
+import { storeToRefs } from 'pinia'
+
+type MonthlyCostsResponse = {
+  category: string
+  amount: number
+  percentage: number
+}
+
+export type CategoriesPercentages = {
+  Food: number | undefined
+  Shopping: number | undefined
+  ['Public transport']: number | undefined
+  ['Personal transport']: number | undefined
+  Home: number | undefined
+  Internet: number | undefined
+  Other: number | undefined
+  withoutValue?: number
+}
+
+const transactionStore = useTransactionStore()
+
+const monthlyCosts = ref<CategoriesPercentages>()
 
 const isMenu = ref<boolean>(false)
 
@@ -39,11 +63,41 @@ const isChart = ref<'chart' | 'progress'>('chart')
 
 const { resizeWindow } = useResize()
 
+const { transactionState } = storeToRefs(transactionStore)
+
 watchEffect(() => {
   if (resizeWindow.value > 640) {
     isChart.value = 'chart'
   }
 })
+
+watch(
+  () => transactionState.value.transactionHistoryList,
+  async () => {
+    try {
+      const { data }: { data: MonthlyCostsResponse[] } = await getMonthlyCostsRequest()
+
+      if (!data) {
+        throw new Error()
+      }
+
+      const costsPercentages = data.reduce((acum, item: MonthlyCostsResponse) => {
+        //@ts-ignore
+        acum[item.category] = item.percentage
+        return acum
+      }, {} as CategoriesPercentages)
+
+      if (Object.values(costsPercentages).length) {
+        monthlyCosts.value = costsPercentages
+      } else {
+        monthlyCosts.value = { withoutValue: 100 } as CategoriesPercentages
+      }
+    } catch (e) {
+      console.error(e)
+    }
+  },
+  { deep: true, immediate: true }
+)
 </script>
 
 <style lang="scss" scoped>

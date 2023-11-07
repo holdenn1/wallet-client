@@ -246,7 +246,7 @@ const costCategories = [
         subcategoryBackgroundColor: 'background-color: rgb(16 59 92);;'
       }
     ],
-    categoryBackgroundColor: 'background-color: rgb(16 59 92);;',
+    categoryBackgroundColor: 'background-color: rgb(16 59 92);',
     categoryText: 'Internet'
   }
 ]

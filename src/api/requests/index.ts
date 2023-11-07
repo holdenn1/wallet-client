@@ -93,6 +93,8 @@ export const getTransactionsByPeriod = (period: Period) =>
   instance.get(`transactions/get-transaction/by-period?period=${period}`)
 
 export const getMonthlySummary = () => instance.get('transactions/monthly-summary')
+
+export const getMonthlyCostsRequest = () => instance.get('transactions/monthly/costs')
 // credit cards
 
 export const AddCreditCardRequest = (data: AddCreditCardData) =>

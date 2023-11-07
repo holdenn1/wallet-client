@@ -15,6 +15,7 @@ import MainLayout from 'components/Layouts/MainLayout.vue'
 import Widgets from 'components/widgets/Widgets.vue'
 import NotFound from 'components/errors/NotFound.vue'
 import { createRouter, createWebHashHistory } from 'vue-router'
+import { useUserStore } from '@/store/userStore'
 
 const router = createRouter({
   history: createWebHashHistory(import.meta.env.BASE_URL),
@@ -26,64 +27,76 @@ const router = createRouter({
         {
           path: '',
           name: 'home',
-          component: MainPageVue
+          component: MainPageVue,
+          meta: { noAuth: true }
         },
         {
           path: 'sign-in',
           name: 'sign-in',
-          component: SignInPageVue
+          component: SignInPageVue,
+          meta: { noAuth: true }
         },
         {
           path: 'sign-up',
           name: 'sign-up',
-          component: SignUpPageVue
+          component: SignUpPageVue,
+          meta: { noAuth: true }
         },
         {
           path: 'recover-password',
           name: 'recover-password',
-          component: RecoverPasswordPage
+          component: RecoverPasswordPage,
+          meta: { noAuth: true , noRedirect: true}
         },
         {
           path: 'wallet',
           name: 'wallet',
           component: WalletPageVue,
+          meta: { noAuth: false },
           children: [
             {
               path: 'widgets',
               name: 'widgets',
               component: Widgets,
+              meta: { noAuth: false },
               children: [
                 {
                   path: '',
                   name: 'default-widgets',
-                  component: DefaultWidgets
+                  component: DefaultWidgets,
+                  meta: { noAuth: false }
                 },
 
                 {
                   path: 'operation-details/:operationId',
                   name: 'operation-details',
-                  component: OperationDetails
+                  component: OperationDetails,
+                  meta: { noAuth: false }
                 },
 
                 {
                   path: 'correct-balance',
                   name: 'correct-balance',
-                  component: CorrectBalance
+                  component: CorrectBalance,
+                  meta: { noAuth: false }
                 },
                 {
                   path: 'add-credit-card',
                   name: 'add-credit-card',
-                  component: AddCreditCard
+                  component: AddCreditCard,
+                  meta: { noAuth: false }
                 },
                 {
                   path: 'operation-history',
                   name: 'operation-history',
-                  component: TransactionHistory
+                  component: TransactionHistory,
+                  meta: { noAuth: false }
                 },
                 {
                   path: 'user-settings',
                   name: 'user-settings',
-                  component: UserSettings
+                  component: UserSettings,
+                  meta: { noAuth: false }
                 }
               ]
             }
@@ -96,6 +109,12 @@ const router = createRouter({
       component: NotFound
     }
   ]
+})
+
+router.beforeEach(async (to) => {
+  if (useUserStore().userState.user === null && !to.meta.noAuth) {
+    return { name: 'home' }
+  }
 })
 
 export default router

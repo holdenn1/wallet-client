@@ -9,7 +9,7 @@ import {
   registrationUserRequest
 } from '@/api/requests'
 
-import { useRouter } from 'vue-router'
+import { useRoute, useRouter } from 'vue-router'
 import { AxiosError } from 'axios'
 
 import type {
@@ -27,6 +27,8 @@ import { PaymentMethodType } from '@/components/forms/widgetForms/types'
 
 export const useUserStore = defineStore('user', () => {
   const router = useRouter()
+
+  const route = useRoute()
   const { toastify } = useToastify()
   const userState = ref<InitialValuesUserStore>({
     user: null
@@ -75,7 +77,7 @@ export const useUserStore = defineStore('user', () => {
         if (user.isEmailConfirmed) {
           localStorage.setItem('accessToken', accessToken)
           localStorage.setItem('refreshToken', refreshToken)
-          router.push({ name: 'wallet' })
+          router.push({ name: 'default-widgets' })
         } else {
           isShowEmailConfirmMessage.value = true
         }
@@ -109,19 +111,22 @@ export const useUserStore = defineStore('user', () => {
 
   async function checkAuth() {
     try {
-      const refreshToken = localStorage.getItem('refreshToken')
-      if (!refreshToken) {
-        throw new Error()
+      if(!location.href.includes('recover-password') ){
+
+        const refreshToken = localStorage.getItem('refreshToken')
+        if (!refreshToken) {
+          throw new Error()
+        }
+  
+        const {
+          data: { user, tokens }
+        }: RefreshTokensLoginResponse = await refreshTokensLogin(refreshToken)
+  
+        localStorage.setItem('accessToken', tokens.accessToken)
+        localStorage.setItem('refreshToken', tokens.refreshToken)
+        userState.value.user = user
+        router.push({ name: 'default-widgets' })
       }
-
-      const {
-        data: { user, tokens }
-      }: RefreshTokensLoginResponse = await refreshTokensLogin(refreshToken)
-
-      localStorage.setItem('accessToken', tokens.accessToken)
-      localStorage.setItem('refreshToken', tokens.refreshToken)
-      userState.value.user = user
-      router.push({ name: 'default-widgets' })
     } catch (e) {
       router.push({ path: '/' })
       console.error(e)
@@ -129,7 +134,10 @@ export const useUserStore = defineStore('user', () => {
   }
 
   function correctUserBalance({ amount, paymentMethod, type, creditCard }: CorrectUserBalanceData) {
-    if (userState.value.user?.cash) {
+
+    console.log(amount, paymentMethod, type, creditCard );
+    
+    if (userState.value.user) {
       switch (type) {
         case 'cost': {
           if (paymentMethod === PaymentMethodType.CASH) {
@@ -180,7 +188,7 @@ export const useUserStore = defineStore('user', () => {
   }
 
   function changeBalance(data: User | CreditCard) {
-    if (userState.value.user?.cash && userState.value.user?.creditCard) {
+    if (userState.value.user) {
       if ((data as CreditCard).balance) {
         const { id, balance } = data as CreditCard
         userState.value.user?.creditCard.forEach((card) => {

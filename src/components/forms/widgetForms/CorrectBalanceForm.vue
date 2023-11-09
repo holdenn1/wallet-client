@@ -94,11 +94,9 @@ const onSubmit = handleSubmit(async ({ balance, balanceType, method }, { resetFo
       method
     })
 
-    console.log(data);
     
 
     if ((data as Transaction).paymentMethod) {
-      console.log(10);
       
       const { amount, creditCard, paymentMethod, type, user } = data as Transaction
       userStore.correctUserBalance({

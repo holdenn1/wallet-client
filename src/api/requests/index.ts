@@ -77,8 +77,6 @@ export const getCategories = () => instance.get('categories/get-categories')
 export const createTransactionRequest = (data: CreateTransactionData) =>
   instance.post('transactions/create', data)
 
-export const getTransactionsRequest = (userId: number) =>
-  instance.get(`transactions/get-transactions/${userId}`)
 
 export const correctBalanceRequest = (data: CorrectBalanceData) =>
   instance.patch('transactions/correct/balance', data)
@@ -89,8 +87,8 @@ export const updateTransactionRequest = (transactionId: string, data: updateTran
 export const deleteTransactionRequest = (transactionId: string) =>
   instance.delete(`transactions/delete-transaction/${transactionId}`)
 
-export const getTransactionsByPeriod = (period: Period) =>
-  instance.get(`transactions/get-transaction/by-period?period=${period}`)
+export const getTransactionsByPeriod = (period: Period, currentPage:string) =>
+  instance.get(`transactions/get-transaction/by-period?period=${period}&page=${currentPage}&pageSize=10`)
 
 export const getMonthlySummary = () => instance.get('transactions/monthly-summary')
 

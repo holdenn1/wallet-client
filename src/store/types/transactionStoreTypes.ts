@@ -4,6 +4,7 @@ import type { CreditCard, User } from './userStoreTypes'
 
 export type InitialValuesTransactionStore = {
   transactionHistoryList: Transaction[]
+  currentPage: number
 }
 
 export type Transaction = {
@@ -40,9 +41,7 @@ export type UpdateTransactionData = {
   description: string
 }
 
-export type GetTransactionsResponse = {
-  data: Transaction[]
-}
+
 
 export type CreateTransactionResponse = {
   data: Transaction

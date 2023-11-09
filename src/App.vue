@@ -6,18 +6,22 @@
 import globalRouter from '@/router/globalRouter'
 import { useUserStore } from '@/store/userStore'
 
-import { useRouter } from 'vue-router'
-import { onMounted } from 'vue'
+import { useRoute, useRouter } from 'vue-router'
+import { onMounted, toRefs, watch } from 'vue'
 
 import type { GoogleParseData } from '@/store/types/userStoreTypes'
+import { useMainStore } from './store/mainStore'
 
 const userStore = useUserStore()
+const mainStore = useMainStore()
 
+const route = useRoute()
 const router = useRouter()
+
+const { name } = toRefs(route)
 globalRouter.router = router
 
 onMounted(() => {
-
   const userData = document.cookie
     ?.split('; ')
     ?.find((row) => row.startsWith('userData='))
@@ -39,6 +43,12 @@ onMounted(() => {
   }
 
   userStore.checkAuth()
+})
+
+watch(name, () => {
+  if (mainStore.mainState.isModalVisible) {
+    mainStore.setModalVisible(false)
+  }
 })
 </script>
 

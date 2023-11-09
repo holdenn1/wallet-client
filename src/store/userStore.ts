@@ -111,17 +111,16 @@ export const useUserStore = defineStore('user', () => {
 
   async function checkAuth() {
     try {
-      if(!location.href.includes('recover-password') ){
-
+      if (!location.href.includes('recover-password')) {
         const refreshToken = localStorage.getItem('refreshToken')
         if (!refreshToken) {
           throw new Error()
         }
-  
+
         const {
           data: { user, tokens }
         }: RefreshTokensLoginResponse = await refreshTokensLogin(refreshToken)
-  
+
         localStorage.setItem('accessToken', tokens.accessToken)
         localStorage.setItem('refreshToken', tokens.refreshToken)
         userState.value.user = user
@@ -134,9 +133,6 @@ export const useUserStore = defineStore('user', () => {
   }
 
   function correctUserBalance({ amount, paymentMethod, type, creditCard }: CorrectUserBalanceData) {
-
-    console.log(amount, paymentMethod, type, creditCard );
-    
     if (userState.value.user) {
       switch (type) {
         case 'cost': {
@@ -217,6 +213,6 @@ export const useUserStore = defineStore('user', () => {
     checkAuth,
     addUserCreditCard,
     correctUserBalance,
-    changeBalance,
+    changeBalance
   }
 })

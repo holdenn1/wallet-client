@@ -1,29 +1,48 @@
 import { defineStore } from 'pinia'
 import { ref } from 'vue'
-import { getTransactionsRequest } from '@/api/requests'
+import { getTransactionsByPeriod } from '@/api/requests'
 import { AxiosError } from 'axios'
 import { useToastify } from 'vue-toastify-3'
 
 import type {
-  GetTransactionsResponse,
   InitialValuesTransactionStore,
   Transaction,
   UpdateTransactionData
 } from './types/transactionStoreTypes'
 
+import type { Period } from '@/api/requests/types'
+
 export const useTransactionStore = defineStore('transaction', () => {
   const transactionState = ref<InitialValuesTransactionStore>({
-    transactionHistoryList: []
+    transactionHistoryList: [],
+    currentPage: 1
   })
 
   const { toastify } = useToastify()
 
-  async function getTransactionsHistory(userId: number) {
+  async function getTransactions(period: Period) {
     try {
-      const { data }: GetTransactionsResponse = await getTransactionsRequest(userId)
 
-      if (data) {
-        transactionState.value.transactionHistoryList = data
+      
+      const { data }: { data: Transaction[] } = await getTransactionsByPeriod(
+        period,
+        String(transactionState.value.currentPage)
+      )
+
+      
+
+      if (data.length) {
+        const oldTransactions = transactionState.value.transactionHistoryList.map(
+          (transaction) => transaction.id
+        )
+        const newTransactions = data.filter(
+          (transaction) => !oldTransactions.includes(transaction.id)
+        )
+        transactionState.value.transactionHistoryList = [
+          ...transactionState.value.transactionHistoryList,
+          ...newTransactions
+        ]
+        transactionState.value.currentPage += 1
       }
     } catch (e) {
       if (e instanceof AxiosError) {
@@ -62,12 +81,17 @@ export const useTransactionStore = defineStore('transaction', () => {
     transactionState.value.transactionHistoryList = transactions
   }
 
+  function setCurrentPage(page: number) {
+    transactionState.value.currentPage = page
+  }
+
   return {
     transactionState,
     deleteTransaction,
-    getTransactionsHistory,
+    getTransactions,
     addTransactionToList,
     updateTransaction,
+    setCurrentPage,
     setTransactions
   }
 })

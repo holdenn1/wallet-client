@@ -4,25 +4,23 @@
 </template>
 
 <script setup lang="ts">
+import type { Period } from '@/api/requests/types'
 import { computed } from 'vue'
-import { useRoute } from 'vue-router';
 
-defineProps<{ titleColor?: 'grey' | 'white';}>()
+const props = defineProps<{ titleColor?: 'grey' | 'white'; period: Period }>()
 
-const route = useRoute()
 
 const title = computed(() => {
-
-  if (route.query.period === 'today') {
+  if (props.period === 'today') {
     return 'In a day'
   }
-  if (route.query.period === 'week') {
+  if (props.period === 'week') {
     return 'In a week'
   }
-  if (route.query.period=== 'month') {
+  if (props.period === 'month') {
     return 'Per month'
   }
-  if (route.query.period === 'year') {
+  if (props.period === 'year') {
     return 'In a year'
   }
   return 'Per month'

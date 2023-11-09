@@ -1,12 +1,13 @@
 <template>
-  <div
-    v-if="transactionsStore.transactionState.transactionHistoryList.length"
-    @click="() => (isMenu = false)"
-    class="cost-widget"
-  >
-    <PopupWidgetMenu :is-menu="isMenu" @is-menu="() => (isMenu = !isMenu)" />
-    <WidgetTitle />
-    <div class="costs">
+  <!--  -->
+  <div @click="() => (isMenu = false)" class="cost-widget">
+    <PopupWidgetMenu
+      :is-menu="isMenu"
+      @is-menu="() => (isMenu = !isMenu)"
+      @period="(data) => (period = data)"
+    />
+    <WidgetTitle :period="period" />
+    <div class="costs" v-show="transactionsStore.transactionState.transactionHistoryList.length">
       <ul class="costs__list">
         <li
           class="costs__item"
@@ -51,7 +52,9 @@
             <div class="costs__date-and-sum">
               <span
                 class="costs__sum"
-                :style="{ color: transaction.type === 'income' ? 'rgb(0, 194, 65)' : 'rgb(191, 3, 3)' }"
+                :style="{
+                  color: transaction.type === 'income' ? 'rgb(0, 194, 65)' : 'rgb(191, 3, 3)'
+                }"
                 >{{ transaction.type === 'income' ? '+' : '-' }}{{ ' '
                 }}{{ transaction.amount }},00</span
               >
@@ -64,36 +67,72 @@
         </li>
       </ul>
     </div>
-  </div>
-
-  <div v-else class="cost-widget-error">
-    <p>No transactions found. Please create the new transaction</p>
+    <div ref="div" class="observer"></div>
+    <div
+      v-if="!transactionsStore.transactionState.transactionHistoryList.length"
+      class="cost-widget-error"
+    >
+      <p>No transactions found. Please create the new transaction</p>
+    </div>
   </div>
 </template>
 
 <script setup lang="ts">
 import PopupWidgetMenu from 'components/menus/PopupWidgetMenu.vue'
 
-import { ref, watchEffect } from 'vue'
+import { onBeforeUnmount, onMounted, ref, watch } from 'vue'
 import WidgetTitle from 'ui/titles/WidgetTitle.vue'
 import { useTransactionStore } from '@/store/transactionStore'
 import { getTransactionsByPeriod } from '@/api/requests'
 import type { Transaction } from '@/store/types/transactionStoreTypes'
-import { useRoute } from 'vue-router'
 import type { Period } from '@/api/requests/types'
 
 const isMenu = ref<boolean>(false)
 
-const route = useRoute()
+const period = ref<Period>('month')
+
+const loading = ref(false)
 
 const transactionsStore = useTransactionStore()
 
-watchEffect(async () => {
-  if (route.query.period) {
+const observer = new IntersectionObserver(async ([entry]) => {
+
+  if (entry.isIntersecting && !loading.value) {
+    loading.value = true
+    await transactionsStore.getTransactions(period.value)
+    loading.value = false
+  }
+})
+
+const div = ref()
+
+onMounted(() => {
+  observer.observe(div.value)
+})
+
+onBeforeUnmount(() => observer.disconnect())
+
+watch(period, async () => {
+  if (loading.value) return
+
+  loading.value = true
+  try {
+    transactionsStore.setCurrentPage(1)
+    
     const { data }: { data: Transaction[] } = await getTransactionsByPeriod(
-      route.query.period as Period
+      period.value,
+      String(transactionsStore.transactionState.currentPage)
     )
-    transactionsStore.setTransactions(data)
+
+    if (data) {
+      transactionsStore.setTransactions(data)
+    transactionsStore.setCurrentPage(transactionsStore.transactionState.currentPage + 1)
+
+    }
+  } catch (e) {
+    console.error(e)
+  } finally {
+    loading.value = false
   }
 })
 </script>
@@ -149,7 +188,6 @@ watchEffect(async () => {
     }
     &__category-type,
     .costs__sum {
-      
       font-size: 16px;
       font-weight: 500;
       margin-bottom: 2px;

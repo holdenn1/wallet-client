@@ -10,10 +10,13 @@
     <div @click.stop v-show="isMenu" class="popup-widget-menu__content">
       <h3 class="popup-widget-menu__title">Choose a period</h3>
       <ul class="popup-widget-menu__list">
-        <li class="popup-widget-menu__item" v-for="{ id, period, value } in periods" :key="id">
-          <router-link :to="{ query: { period } }">
-            {{ value }}
-          </router-link>
+        <li
+          class="popup-widget-menu__item"
+          v-for="{ id, period, value } in periods"
+          :key="id"
+          @click="$emit('period', period)"
+        >
+          {{ value }}
         </li>
       </ul>
     </div>
@@ -27,6 +30,7 @@ defineProps<{ isMenu: boolean; iconColor?: string }>()
 
 defineEmits<{
   (e: 'isMenu'): void
+  (e: 'period', data: Period): void
 }>()
 
 type PeriodMenu = {
@@ -80,7 +84,7 @@ const periods: PeriodMenu[] = [
     margin-bottom: 10px;
     cursor: pointer;
     font-weight: 500;
-    a{
+    a {
       display: block;
     }
     &::after {

@@ -24,6 +24,7 @@ const mainStore = useMainStore()
 const modalBtnTexts = computed(() =>
   modalType.value === 'login' ? 'Sign in with Email' : 'Sign up with Email'
 )
+
 </script>
 
 <style lang="scss" scoped>

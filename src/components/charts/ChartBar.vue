@@ -27,6 +27,7 @@ const data = computed(() => {
         'Public transport',
         'Personal transport',
         'Home',
+        'Leisure',
         'Internet',
         'Other'
       ],
@@ -35,9 +36,10 @@ const data = computed(() => {
           backgroundColor: [
             'rgb(245, 17, 17)',
             'rgb(69 163 2)',
-            'rgb(51 31 215)',
+            'rgb(156 132 255)',
             'rgb(199, 13, 245)',
             'rgb(10 153 163)',
+            'rgb(13, 67, 245)',
             'rgb(16 59 92)',
             '#969696',
             monthlyCosts.value?.withoutValue ? '#ccc' : ''
@@ -49,6 +51,7 @@ const data = computed(() => {
                 monthlyCosts.value?.['Public transport'] ?? 0,
                 monthlyCosts.value?.['Personal transport'] ?? 0,
                 monthlyCosts.value?.Home ?? 0,
+                monthlyCosts.value?.Leisure ?? 0,
                 monthlyCosts.value?.Internet ?? 0,
                 monthlyCosts.value?.Other ?? 0,
                 monthlyCosts.value?.withoutValue ? 100 : 0

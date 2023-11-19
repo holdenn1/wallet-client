@@ -28,7 +28,7 @@ import UserSidebarNavigation from 'navigation/UserSidebarNavigation.vue'
 import { useResize } from '@/hooks/useResize'
 import { useMainStore } from '@/store/mainStore'
 import { useUserStore } from '@/store/userStore'
-import { updateUserDateRequest, uploadAvatar } from '@/api/requests'
+import { updateUserAvatar } from '@/api/requests'
 
 import { watchEffect } from 'vue'
 import { storeToRefs } from 'pinia'
@@ -59,12 +59,12 @@ const handleFileInputChange = async (event: Event) => {
     const file = fileInput.files && fileInput.files[0]
 
     if (file) {
-      const { data: avatarLink }: { data: string } = await uploadAvatar(file)
-      const { data: user }: { data: User } = await updateUserDateRequest({ photo: avatarLink })
-      if (!avatarLink && !user) {
+      const { data }: { data: User } = await updateUserAvatar(file)
+
+      if (!data) {
         throw new Error()
       }
-      userStore.setUser(user)
+      userStore.setUser(data)
     }
   } catch (e) {
     console.error(e)

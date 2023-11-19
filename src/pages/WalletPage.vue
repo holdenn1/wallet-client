@@ -1,7 +1,7 @@
 <template>
-  <!--  <div class="activate-account-notice" v-if="!userStore.userState.user?.isEmailConfirmed">-->
-  <!--    <p>Please confirm your account - <a href="https://mail.google.com/">Click me</a></p>-->
-  <!--  </div>-->
+   <div class="activate-account-notice" v-if="!userStore.userState.user?.isEmailConfirmed">
+     <p>Please confirm your account - <a href="https://mail.google.com/">Click me</a></p>
+   </div>
   <div @click="() => mainStore.setMenuVisible(false)" class="wallet-page-wrapper">
     <UserSidebar />
     <router-view />
@@ -11,10 +11,9 @@
 <script setup lang="ts">
 import UserSidebar from 'components/sidebars/user-sidebar/UserSidebar.vue'
 import { useMainStore } from '@/store/mainStore'
-// import { useMainStore } from '@/store/mainStore'
-// import { useUserStore } from '@/store/userStore'
-//
-// const userStore = useUserStore()
+import { useUserStore } from '@/store/userStore'
+
+const userStore = useUserStore()
 const mainStore = useMainStore()
 </script>
 
@@ -50,7 +49,7 @@ const mainStore = useMainStore()
   width: 100%;
   height: 60px;
   background-color: rgba(235, 175, 12, 0.95);
-  z-index: 1000;
+  z-index: 10000;
   @include flexCenter;
   p {
     font-size: 18px;

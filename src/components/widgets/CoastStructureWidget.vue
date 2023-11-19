@@ -50,6 +50,7 @@ export type CategoriesPercentages = {
   Home: number | undefined
   Internet: number | undefined
   Other: number | undefined
+  Leisure: number | undefined
   withoutValue?: number
 }
 

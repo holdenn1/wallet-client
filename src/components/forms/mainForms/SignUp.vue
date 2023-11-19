@@ -52,6 +52,7 @@
     /></FormStep>
 
     <RegistrationFormNavigate
+      :is-submitting="isSubmitting"
       :go-to-prev="goToPrev"
       :has-previous="hasPrevious"
       :is-last-step="isLastStep"
@@ -91,7 +92,7 @@ const currentSchema = computed(() => {
   return validationSchema[currentStepIdx.value]
 })
 
-const { values, handleSubmit } = useForm<InitialValuesSignUpForm>({
+const { values, handleSubmit, isSubmitting } = useForm<InitialValuesSignUpForm>({
   validationSchema: currentSchema,
   keepValuesOnUnmount: true
 })

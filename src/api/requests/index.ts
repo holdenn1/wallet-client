@@ -46,11 +46,12 @@ export const refreshTokensLogin = (refreshToken: string) =>
     headers: { authorization: `Bearer ${refreshToken}` }
   } as AxiosRequestConfig)
 
-export const uploadAvatar = (cover: File) => {
+export const updateUserAvatar = (cover: File) => {
   const formData = new FormData()
+  
   formData.append('cover', cover)
 
-  return instance.post('user/upload-cover', formData, {
+  return instance.post('user/update-user-avatar', formData, {
     headers: {
       'Content-Type': 'multipart/form-data'
     }

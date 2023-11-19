@@ -52,6 +52,7 @@ export const useUserStore = defineStore('user', () => {
         localStorage.setItem('refreshToken', refreshToken)
         currentStepIdx.value = 0
         uploadedAvatar.value.photo = null
+        
         resetForm()
         isShowEmailConfirmMessage.value = true
       }

@@ -46,6 +46,8 @@ export const useUserStore = defineStore('user', () => {
         data: { user, accessToken, refreshToken }
       }: AuthResponse = await registrationUserRequest(data)
 
+      console.log(user);
+      
       if (user) {
         userState.value.user = user
         localStorage.setItem('accessToken', accessToken)

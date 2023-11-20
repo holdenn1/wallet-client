@@ -23,6 +23,7 @@ const router = createRouter({
     {
       path: '/',
       component: MainLayout,
+      meta: { noAuth: true },
       children: [
         {
           path: '',

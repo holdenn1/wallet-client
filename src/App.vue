@@ -27,6 +27,8 @@ onMounted(() => {
     ?.find((row) => row.startsWith('userData='))
     ?.split('=')[1]
 
+    
+
   if (userData) {
     const decodedData = decodeURIComponent(userData)
     const cleanedData = decodedData.replace(/^j:/, '')

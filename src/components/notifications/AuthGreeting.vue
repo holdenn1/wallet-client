@@ -43,7 +43,7 @@
 import { computed } from 'vue'
 import { useMainStore } from '@/store/mainStore'
 
-const GOOGL_REDIRECT = 'http://localhost:8000/auth/google/'
+const GOOGL_REDIRECT = 'https://wallet-server-production-1631.up.railway.app/auth/google/'
 
 const props = defineProps<{
   authButtonsText: string

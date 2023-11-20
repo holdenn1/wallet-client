@@ -1,5 +1,7 @@
 import instance from '@/api'
 import type { AxiosRequestConfig } from 'axios'
+import axios from 'axios'
+
 import type {
   AddCreditCardData,
   CorrectBalanceData,
@@ -10,6 +12,8 @@ import type {
   UpdateUserData,
   updateTransactionData
 } from './types'
+
+export const BASE_URL = 'http://localhost:8000/'
 
 /* user's requests */
 
@@ -37,7 +41,7 @@ export const logoutUserRequest = (accessToken: string) =>
   })
 
 export const refreshRequest = (refreshToken: string) =>
-  instance.get('auth/token/refresh', {
+  axios.create({ baseURL: BASE_URL }).get('auth/token/refresh', {
     headers: { authorization: `Bearer ${refreshToken}` }
   } as AxiosRequestConfig)
 
@@ -48,7 +52,7 @@ export const refreshTokensLogin = (refreshToken: string) =>
 
 export const updateUserAvatar = (cover: File) => {
   const formData = new FormData()
-  
+
   formData.append('cover', cover)
 
   return instance.post('user/update-user-avatar', formData, {
@@ -59,7 +63,7 @@ export const updateUserAvatar = (cover: File) => {
 }
 
 export const updateUserDateRequest = (data: UpdateUserData) =>
-  instance.patch('user/update-user', data)
+  instance.put('user/update-user', data)
 
 export const sendMessageForRecoverPassword = (userEmail: { email: string }) =>
   instance.post('auth/send/message/recover-password', userEmail)
@@ -78,18 +82,19 @@ export const getCategories = () => instance.get('categories/get-categories')
 export const createTransactionRequest = (data: CreateTransactionData) =>
   instance.post('transactions/create', data)
 
-
 export const correctBalanceRequest = (data: CorrectBalanceData) =>
-  instance.patch('transactions/correct/balance', data)
+  instance.put('transactions/correct/balance', data)
 
 export const updateTransactionRequest = (transactionId: string, data: updateTransactionData) =>
-  instance.patch(`transactions/update/transaction/${transactionId}`, data)
+  instance.put(`transactions/update/transaction/${transactionId}`, data)
 
 export const deleteTransactionRequest = (transactionId: string) =>
   instance.delete(`transactions/delete-transaction/${transactionId}`)
 
-export const getTransactionsByPeriod = (period: Period, currentPage:string) =>
-  instance.get(`transactions/get-transaction/by-period?period=${period}&page=${currentPage}&pageSize=10`)
+export const getTransactionsByPeriod = (period: Period, currentPage: string) =>
+  instance.get(
+    `transactions/get-transaction/by-period?period=${period}&page=${currentPage}&pageSize=10`
+  )
 
 export const getMonthlySummary = () => instance.get('transactions/monthly-summary')
 

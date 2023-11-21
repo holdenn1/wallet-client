@@ -29,7 +29,9 @@ onMounted(() => {
 
   const tokenValue = tokenMatch[1]
 
-  localStorage.setItem('refreshToken', tokenValue as string)
+  if (tokenValue.length) {
+    localStorage.setItem('refreshToken', tokenValue)
+  }
   userStore.checkAuth()
 })
 

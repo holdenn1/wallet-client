@@ -13,6 +13,9 @@ import MainHeader from 'components/headers/MainHeader.vue'
 <style lang="scss" scoped>
 .main-wrapper {
   width: 100vw;
-  height: 100vh;
+  height: calc(100vh - 60px);
+  @media screen and (max-width: 760px) {
+    height: 100vh;
+  }
 }
 </style>

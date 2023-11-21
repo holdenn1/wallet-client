@@ -21,9 +21,8 @@ const mainStore = useMainStore()
 @import '@/styles/mixins/d-flex-ctr.scss';
 .wallet-page-wrapper {
   overflow: hidden;
-  margin-top: 60px;
   width: 100%;
-  height: calc(100vh - 60px);
+  height: 100%;
   display: grid;
   grid-template-columns: 1fr 320px;
   grid-template-rows: 1fr;

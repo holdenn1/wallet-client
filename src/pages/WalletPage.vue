@@ -1,7 +1,7 @@
 <template>
-   <div class="activate-account-notice" v-if="!userStore.userState.user?.isEmailConfirmed">
-     <p>Please confirm your account - <a href="https://mail.google.com/">Click me</a></p>
-   </div>
+  <div class="activate-account-notice" v-if="!userStore.userState.user?.isEmailConfirmed">
+    <p>Please confirm your account - <a href="https://mail.google.com/">Click me</a></p>
+  </div>
   <div @click="() => mainStore.setMenuVisible(false)" class="wallet-page-wrapper">
     <UserSidebar />
     <router-view />
@@ -39,6 +39,11 @@ const mainStore = useMainStore()
     grid-template-areas:
       'wallet-content'
       'wallet-content';
+  }
+
+  @media screen and (max-width: 760px) {
+    margin: 0;
+    height: 100%;
   }
 }
 

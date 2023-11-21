@@ -9,7 +9,6 @@ import { useUserStore } from '@/store/userStore'
 import { useRoute, useRouter } from 'vue-router'
 import { onMounted, toRefs, watch } from 'vue'
 
-import type { GoogleParseData } from '@/store/types/userStoreTypes'
 import { useMainStore } from './store/mainStore'
 
 const userStore = useUserStore()
@@ -22,28 +21,15 @@ const { name } = toRefs(route)
 globalRouter.router = router
 
 onMounted(() => {
-  const userData = document.cookie
-    ?.split('; ')
-    ?.find((row) => row.startsWith('userData='))
-    ?.split('=')[1]
+  const currentURL = window.location.href
 
-    
+  const tokenRegex = /token=([^&]*)/
 
-  if (userData) {
-    const decodedData = decodeURIComponent(userData)
-    const cleanedData = decodedData.replace(/^j:/, '')
+  const tokenMatch = currentURL.match(tokenRegex)!
 
-    const { accessToken, refreshToken }: GoogleParseData = JSON.parse(cleanedData)
+  const tokenValue = tokenMatch[1]
 
-    if (accessToken && refreshToken) {
-      const cookieName = 'userData'
-
-      localStorage.setItem('accessToken', accessToken)
-      localStorage.setItem('refreshToken', refreshToken)
-      document.cookie = cookieName + '=;expires=Thu, 01 Jan 1970 00:00:00 GMT;path=/'
-    }
-  }
-
+  localStorage.setItem('refreshToken', tokenValue as string)
   userStore.checkAuth()
 })
 

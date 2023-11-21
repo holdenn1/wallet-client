@@ -87,6 +87,11 @@ const handleFileInputChange = async (event: Event) => {
     right: -320px;
   }
 
+  @media screen and (max-width: 760px) {
+    top: 60px;
+    border-top: 1px solid hsl(199, 76%, 34%);
+  }
+
   @media screen and (max-width: 340px) {
     width: 290px;
     right: -290px;
@@ -143,5 +148,8 @@ const handleFileInputChange = async (event: Event) => {
   top: 0;
   right: 0;
   transition: 0.3s;
+  @media screen and (max-width: 760px) {
+    top: 60px;
+  }
 }
 </style>

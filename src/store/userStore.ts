@@ -9,7 +9,7 @@ import {
   registrationUserRequest
 } from '@/api/requests'
 
-import { useRoute, useRouter } from 'vue-router'
+import {  useRouter } from 'vue-router'
 import { AxiosError } from 'axios'
 
 import type {
@@ -28,7 +28,6 @@ import { PaymentMethodType } from '@/components/forms/widgetForms/types'
 export const useUserStore = defineStore('user', () => {
   const router = useRouter()
 
-  const route = useRoute()
   const { toastify } = useToastify()
   const userState = ref<InitialValuesUserStore>({
     user: null

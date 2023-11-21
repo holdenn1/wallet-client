@@ -73,6 +73,6 @@ const data = computed(() => {
 
 <style scoped>
 .chart-wrapper{
-  padding: 20px;
+  padding: 0 20px 20px;
 }
 </style>

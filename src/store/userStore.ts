@@ -9,7 +9,7 @@ import {
   registrationUserRequest
 } from '@/api/requests'
 
-import {  useRouter } from 'vue-router'
+import { useRouter } from 'vue-router'
 import { AxiosError } from 'axios'
 
 import type {
@@ -45,15 +45,15 @@ export const useUserStore = defineStore('user', () => {
         data: { user, accessToken, refreshToken }
       }: AuthResponse = await registrationUserRequest(data)
 
-      console.log(user);
-      
+      console.log(user)
+
       if (user) {
         userState.value.user = user
         localStorage.setItem('accessToken', accessToken)
         localStorage.setItem('refreshToken', refreshToken)
         currentStepIdx.value = 0
         uploadedAvatar.value.photo = null
-        
+
         resetForm()
         isShowEmailConfirmMessage.value = true
       }
@@ -118,6 +118,7 @@ export const useUserStore = defineStore('user', () => {
         if (!refreshToken) {
           throw new Error()
         }
+        console.log(refreshToken)
 
         const {
           data: { user, tokens }

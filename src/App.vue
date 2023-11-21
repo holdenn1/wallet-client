@@ -27,11 +27,12 @@ onMounted(() => {
 
   const tokenMatch = currentURL.match(tokenRegex)!
 
-  const tokenValue = tokenMatch[1]
+  const tokenValue = tokenMatch ? tokenMatch[1] : ''
 
   if (tokenValue.length) {
     localStorage.setItem('refreshToken', tokenValue)
   }
+
   userStore.checkAuth()
 })
 

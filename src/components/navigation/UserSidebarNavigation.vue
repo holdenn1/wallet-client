@@ -52,11 +52,13 @@ const mainStore = useMainStore()
   }
   &__logout-btn {
     @include userSidebarBtn(240px, 42px);
-
     transition: 0.5s;
     &:hover {
       color: white;
       background-color: hsl(199, 100%, 32%);
+    }
+    @media screen and (max-width: 760px) {
+      margin-bottom: 60px;
     }
   }
 }

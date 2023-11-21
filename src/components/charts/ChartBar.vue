@@ -1,5 +1,8 @@
 <template>
-  <Doughnut id="my-chart-id" :options="data.chartOptions" :data="data.chartData" />
+  <div class="chart-wrapper">
+
+    <Doughnut id="my-chart-id" :options="data.chartOptions" :data="data.chartData" />
+  </div>
 </template>
 
 <script setup lang="ts">
@@ -25,8 +28,8 @@ const data = computed(() => {
         'Food',
         'Shopping',
         'Public transport',
-        'Personal transport',
         'Home',
+        'Personal transport',
         'Leisure',
         'Internet',
         'Other'
@@ -68,4 +71,8 @@ const data = computed(() => {
 })
 </script>
 
-<style scoped></style>
+<style scoped>
+.chart-wrapper{
+  padding: 20px;
+}
+</style>

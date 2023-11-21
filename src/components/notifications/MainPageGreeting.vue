@@ -67,14 +67,14 @@ const handleRegistrationModal = () => {
       flex-direction: column;
     }
     &__navigate-to-login {
-      @include mainLinkNavigation(  hsl(199, 90%, 47%),   hsl(199, 90%, 47%), rgb(57, 57, 190));
+      @include mainLinkNavigation(  hsl(199, 94%, 40%),  hsl(199, 91%, 43%), rgb(57, 57, 190));
       span {
         padding-left: 10px;
       }
     }
     &__navigate-to-registration {
       @include mainLinkNavigation(
-        hsl(199, 90%, 47%),  hsl(199, 90%, 47%),
+        hsl(199, 94%, 40%),  hsl(199, 91%, 43%),
         hsl(243, 76%, 40%)
       );
       span {

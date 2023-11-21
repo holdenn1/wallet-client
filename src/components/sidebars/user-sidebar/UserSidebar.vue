@@ -95,6 +95,7 @@ const handleFileInputChange = async (event: Event) => {
   @media screen and (max-width: 340px) {
     width: 290px;
     right: -290px;
+    height: 100%;
   }
   .menu-button-wrapper {
     display: none;

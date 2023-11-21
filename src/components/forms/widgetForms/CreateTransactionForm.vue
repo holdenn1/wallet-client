@@ -192,6 +192,7 @@ watch(categoryList, () => {
       @media screen and (max-width: 760px) {
         top: 0;
         left: 0;
+        height: 100vh;
       }
     }
   }

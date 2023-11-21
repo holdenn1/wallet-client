@@ -18,5 +18,8 @@
   @media screen and (max-width: 960px) {
     padding: 12px 40px;
   }
+  @media screen and (max-width: 760px) {
+    height: calc(100vh - 60px);
+  }
 }
 </style>

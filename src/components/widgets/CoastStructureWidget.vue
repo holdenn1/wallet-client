@@ -111,11 +111,15 @@ watch(
   @include flexCenter;
   overflow: hidden;
   position: relative;
+
   &__popup-wrapper {
     position: absolute;
     top: 10px;
-    right: 20px;
+    right: 10px;
     cursor: pointer;
+    @media screen and (max-width: 360px) {
+      right: 2px;
+    }
     .widget-switch {
       position: relative;
       cursor: pointer;
@@ -128,12 +132,16 @@ watch(
         position: absolute;
         top: 52px;
         right: 10px;
+        @media screen and (max-width: 360px) {
+          right: 10;
+        }
       }
       .widget-switch-bar {
         color: white;
         position: absolute;
         top: 16px;
         right: 10px;
+        
       }
     }
   }

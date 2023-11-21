@@ -90,10 +90,10 @@ const navigateLink = computed(() => {
       flex-direction: column;
     }
     &__navigate-to-google {
-      @include mainLinkNavigation(hsl(199, 90%, 47%), hsl(199, 90%, 47%), rgb(57, 57, 190));
+      @include mainLinkNavigation(hsl(199, 94%, 40%), hsl(199, 91%, 43%), rgb(57, 57, 190));
     }
     &__navigate-to-auth {
-      @include mainLinkNavigation(hsl(199, 90%, 47%), hsl(199, 90%, 47%), hsl(243, 76%, 40%));
+      @include mainLinkNavigation(hsl(199, 94%, 40%), hsl(199, 91%, 43%), hsl(243, 76%, 40%));
     }
   }
   .is-has-account {

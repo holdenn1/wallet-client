@@ -1,7 +1,13 @@
 <template>
   <Accordion v-for="{ id, subcategories, ...rest } in category" :key="id">
     <template v-slot:title>
-      <router-link :to="{ query: { type: route.query.type, category: rest.category } }">
+      <router-link
+        @click="
+          (rest.category === 'Other' ||
+            rest.category === 'Transfer') && mainStore.setSettingOperationMenu(false)
+        "
+        :to="{ query: { type: route.query.type, category: rest.category } }"
+      >
         <WidgetCategoryItem
           :category="{
             text: rest.category,
@@ -16,6 +22,7 @@
         <h4 class="subcategory-title">Subcategories</h4>
         <router-link
           v-for="subcategory in subcategories"
+          @click="mainStore.setSettingOperationMenu(false)"
           :key="subcategory.id"
           :to="{
             query: {
@@ -44,12 +51,14 @@ import SubcategoryContentWrapper from 'ui/wrappers/SubcategoryContentWrapper.vue
 import WidgetCategoryItem from 'components/items/WidgetCategoryItem.vue'
 
 import type { Category } from '@/store/types/categoryStoreTypes'
-import { useRoute } from 'vue-router';
+import { useRoute } from 'vue-router'
+import { useMainStore } from '@/store/mainStore'
 
 defineProps<{ category: Category[] | null }>()
 
 const route = useRoute()
 
+const mainStore = useMainStore()
 </script>
 
 <style scoped>

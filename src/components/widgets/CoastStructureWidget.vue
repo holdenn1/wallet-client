@@ -106,7 +106,7 @@ watch(
 
 .coast-structure-widget {
   grid-area: cost-structure;
-  padding: 20px;
+  padding: 0 20px 20px;
   background-color: hsl(199, 60%, 49%);
   @include flexCenter;
   overflow: hidden;

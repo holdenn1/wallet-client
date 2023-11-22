@@ -103,7 +103,7 @@ const onSubmit = handleSubmit(async (values, { resetForm }) => {
   const amountValue = String(values.amount).replace(/[^0-9]/g, '')
 
   try {
-    if (!amountValue) {
+    if (!amountValue.length || amountValue == '0') {
       toastify('warning', 'Amount is required field')
       return
     }

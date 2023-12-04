@@ -13,7 +13,7 @@ import type {
   updateTransactionData
 } from './types'
 
-export const BASE_URL = 'http://localhost:8000/'
+export const BASE_URL = 'https://wallet-server-production-1631.up.railway.app/'
 
 /* user's requests */
 

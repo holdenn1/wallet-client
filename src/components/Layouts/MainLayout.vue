@@ -1,5 +1,6 @@
 <template>
   <Toastify />
+  <HostingWarning v-if="isShowWarning" @close-warning="() => isShowWarning = false"/>
   <MainHeader />
   <div class="main-wrapper">
     <router-view />
@@ -8,6 +9,10 @@
 
 <script setup lang="ts">
 import MainHeader from 'components/headers/MainHeader.vue'
+import HostingWarning from '../errors/HostingWarning.vue';
+import { ref } from 'vue';
+
+const isShowWarning = ref<boolean>(true)
 </script>
 
 <style lang="scss" scoped>

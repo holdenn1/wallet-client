@@ -3,7 +3,8 @@ import type { CreateAxiosDefaults } from 'axios'
 import { refreshRequest } from '@/api/requests'
 import globalRouter from '@/router/globalRouter'
 
-export const BASE_URL = 'https://wallet-server-production-1631.up.railway.app/'
+// export const BASE_URL = 'https://wallet-server-production-1631.up.railway.app/'
+export const BASE_URL = 'https://wallet-server-1357.onrender.com/'
 // export const BASE_URL = 'http://localhost:8000/'
 // export const BASE_URL = 'https://orchestr-8-server.onrender.com/';
 
